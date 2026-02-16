@@ -17,10 +17,10 @@ jobs:
       - name: Checkout profile repo
         uses: actions/checkout@v4
 
-      - name: Install tokei
+      - name: Install scc
         run: |
-          curl -sL https://github.com/XAMPPRocky/tokei/releases/latest/download/tokei-x86_64-unknown-linux-gnu.tar.gz | tar xz
-          sudo mv tokei /usr/local/bin/
+          curl -sL https://github.com/boyter/scc/releases/download/v3.4.0/scc_Linux_x86_64.tar.gz | tar xz
+          sudo mv scc /usr/local/bin/
 
       - name: Clone repos and count LOC
         run: |
@@ -34,7 +34,7 @@ jobs:
           done
 
           cd ..
-          tokei repos --output json > loc-data.json
+          scc repos --format json --no-cocomo > loc-data.json
 
       - name: Generate LOC table
         run: |
@@ -44,27 +44,24 @@ jobs:
           with open("loc-data.json") as f:
               data = json.load(f)
 
-          # Build language stats
+          # scc outputs a list of language objects
           langs = []
           total_code = 0
           total_lines = 0
-          for lang, info in data.items():
-              if lang in ("Total",):
-                  continue
-              code = info.get("code", 0)
-              lines = code + info.get("comments", 0) + info.get("blanks", 0)
+          for entry in data:
+              name = entry.get("Name", "")
+              code = entry.get("Code", 0)
+              lines = entry.get("Lines", 0)
               if code > 0:
-                  langs.append((lang, code, lines))
+                  langs.append((name, code, lines))
                   total_code += code
                   total_lines += lines
 
           langs.sort(key=lambda x: x[1], reverse=True)
 
-          # Format numbers with commas
           def fmt(n):
               return f"{n:,}"
 
-          # Build the table
           lines_out = []
           lines_out.append(f"**{fmt(total_code)}** lines of code across **{fmt(total_lines)}** total lines\n")
           lines_out.append("| Language | Lines of Code | % |")
@@ -75,7 +72,6 @@ jobs:
 
           table = "\n".join(lines_out)
 
-          # Update README
           with open("README.md", "r") as f:
               readme = f.read()
 
