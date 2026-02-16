@@ -4,8 +4,6 @@ on:
   schedule:
     - cron: '0 6 * * 1' # Every Monday at 6 AM UTC
   workflow_dispatch: # Manual trigger
-  push:
-    branches: [main]
 
 jobs:
   count-loc:
@@ -17,10 +15,8 @@ jobs:
       - name: Checkout profile repo
         uses: actions/checkout@v4
 
-      - name: Install scc
-        run: |
-          curl -sL https://github.com/boyter/scc/releases/download/v3.4.0/scc_Linux_x86_64.tar.gz | tar xz
-          sudo mv scc /usr/local/bin/
+      - name: Install cloc
+        run: sudo apt-get install -y cloc
 
       - name: Clone repos and count LOC
         run: |
@@ -34,7 +30,7 @@ jobs:
           done
 
           cd ..
-          scc repos --format json --no-cocomo > loc-data.json
+          cloc repos --json --quiet > loc-data.json
 
       - name: Generate LOC table
         run: |
@@ -44,16 +40,17 @@ jobs:
           with open("loc-data.json") as f:
               data = json.load(f)
 
-          # scc outputs a list of language objects
           langs = []
           total_code = 0
           total_lines = 0
-          for entry in data:
-              name = entry.get("Name", "")
-              code = entry.get("Code", 0)
-              lines = entry.get("Lines", 0)
+
+          for lang, info in data.items():
+              if lang in ("header", "SUM"):
+                  continue
+              code = info.get("code", 0)
+              lines = code + info.get("comment", 0) + info.get("blank", 0)
               if code > 0:
-                  langs.append((name, code, lines))
+                  langs.append((lang, code, lines))
                   total_code += code
                   total_lines += lines
 
@@ -80,13 +77,12 @@ jobs:
 
           if "<!-- LOC_START -->" in readme:
               readme = re.sub(pattern, replacement, readme, flags=re.DOTALL)
+              with open("README.md", "w") as f:
+                  f.write(readme)
+              print(f"Updated: {fmt(total_code)} lines of code")
           else:
-              print("WARNING: LOC markers not found in README.md")
-
-          with open("README.md", "w") as f:
-              f.write(readme)
-
-          print(f"Updated: {fmt(total_code)} lines of code")
+              print("ERROR: LOC markers not found in README.md, skipping update")
+              exit(1)
           SCRIPT
 
       - name: Cleanup
