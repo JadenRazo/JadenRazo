@@ -1,0 +1,106 @@
+name: Update LOC Count
+
+on:
+  schedule:
+    - cron: '0 6 * * 1' # Every Monday at 6 AM UTC
+  workflow_dispatch: # Manual trigger
+  push:
+    branches: [main]
+
+jobs:
+  count-loc:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout profile repo
+        uses: actions/checkout@v4
+
+      - name: Install tokei
+        run: |
+          curl -sL https://github.com/XAMPPRocky/tokei/releases/latest/download/tokei-x86_64-unknown-linux-gnu.tar.gz | tar xz
+          sudo mv tokei /usr/local/bin/
+
+      - name: Clone repos and count LOC
+        run: |
+          mkdir repos && cd repos
+
+          REPOS=$(curl -s "https://api.github.com/users/JadenRazo/repos?per_page=100&type=owner" \
+            | jq -r '.[] | select(.fork == false and .name != "JadenRazo") | .clone_url')
+
+          for url in $REPOS; do
+            git clone --depth 1 -q "$url" 2>/dev/null || true
+          done
+
+          cd ..
+          tokei repos --output json > loc-data.json
+
+      - name: Generate LOC table
+        run: |
+          python3 << 'SCRIPT'
+          import json, re
+
+          with open("loc-data.json") as f:
+              data = json.load(f)
+
+          # Build language stats
+          langs = []
+          total_code = 0
+          total_lines = 0
+          for lang, info in data.items():
+              if lang in ("Total",):
+                  continue
+              code = info.get("code", 0)
+              lines = code + info.get("comments", 0) + info.get("blanks", 0)
+              if code > 0:
+                  langs.append((lang, code, lines))
+                  total_code += code
+                  total_lines += lines
+
+          langs.sort(key=lambda x: x[1], reverse=True)
+
+          # Format numbers with commas
+          def fmt(n):
+              return f"{n:,}"
+
+          # Build the table
+          lines_out = []
+          lines_out.append(f"**{fmt(total_code)}** lines of code across **{fmt(total_lines)}** total lines\n")
+          lines_out.append("| Language | Lines of Code | % |")
+          lines_out.append("|----------|-------------:|--:|")
+          for lang, code, _ in langs[:12]:
+              pct = round(code / total_code * 100, 1)
+              lines_out.append(f"| {lang} | {fmt(code)} | {pct}% |")
+
+          table = "\n".join(lines_out)
+
+          # Update README
+          with open("README.md", "r") as f:
+              readme = f.read()
+
+          pattern = r"(<!-- LOC_START -->).*?(<!-- LOC_END -->)"
+          replacement = f"<!-- LOC_START -->\n{table}\n<!-- LOC_END -->"
+
+          if "<!-- LOC_START -->" in readme:
+              readme = re.sub(pattern, replacement, readme, flags=re.DOTALL)
+          else:
+              print("WARNING: LOC markers not found in README.md")
+
+          with open("README.md", "w") as f:
+              f.write(readme)
+
+          print(f"Updated: {fmt(total_code)} lines of code")
+          SCRIPT
+
+      - name: Cleanup
+        run: rm -rf repos loc-data.json
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add README.md
+          git diff --staged --quiet && echo "No changes" && exit 0
+          git commit -m "Update LOC statistics"
+          git push
