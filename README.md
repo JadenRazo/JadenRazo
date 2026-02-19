@@ -49,7 +49,7 @@ drwxr-xr-x  jaden  staff   projects/
 <!-- DEPLOY_MONITOR_START -->
 ```
 $ ezweb status
-  Waiting for first check...
+  No sites reporting.
 ```
 <!-- DEPLOY_MONITOR_END -->
 
