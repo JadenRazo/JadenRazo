@@ -93,4 +93,4 @@ $ ezweb status
 
 ### `$ uptime`
 
-<img src="https://github-readme-stats.vercel.app/api?username=JadenRazo&show_icons=true&theme=github_dark&hide_border=true&bg_color=0D1117&title_color=39D353&icon_color=39D353&text_color=c9d1d9" alt="GitHub Stats" />
+<img src="https://streak-stats.demolab.com?user=JadenRazo&theme=github-dark-blue&hide_border=true&background=0D1117&ring=39D353&fire=39D353&currStreakLabel=39D353" alt="GitHub Streak" />
