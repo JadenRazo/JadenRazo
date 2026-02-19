@@ -70,7 +70,7 @@ Last check: 2026-02-19T21:20:42Z
 ### `$ cloc --by-language ~/repos/`
 
 <!-- LOC_START -->
-**362,554** lines of code across **455,357** total lines
+**362,569** lines of code across **455,383** total lines
 
 | Language | Lines of Code | % |
 |----------|-------------:|--:|
@@ -82,7 +82,7 @@ Last check: 2026-02-19T21:20:42Z
 | YAML | 17,854 | 4.9% |
 | Markdown | 17,672 | 4.9% |
 | diff | 13,079 | 3.6% |
-| Bourne Shell | 4,018 | 1.1% |
+| Bourne Shell | 4,033 | 1.1% |
 | SQL | 3,409 | 0.9% |
 | JavaScript | 2,678 | 0.7% |
 | CSS | 2,262 | 0.6% |
