@@ -1,0 +1,33 @@
+name: 3D Contribution Graph
+
+on:
+  schedule:
+    - cron: '0 3 * * *' # Daily at 3 AM UTC
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Generate 3D graph
+        uses: yoshi389111/github-profile-3d-contrib@0.7.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          USERNAME: JadenRazo
+
+      - name: Commit generated SVGs
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          mkdir -p profile-3d-contrib
+          mv profile-3d-contrib/*.svg profile-3d-contrib/ 2>/dev/null || true
+          git add profile-3d-contrib/
+          git diff --staged --quiet && echo "No changes" && exit 0
+          git commit -m "Update 3D contribution graph"
+          git push
