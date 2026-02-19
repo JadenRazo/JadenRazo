@@ -61,22 +61,22 @@ $ ezweb status
 ### `$ cloc --by-language ~/repos/`
 
 <!-- LOC_START -->
-**317,527** lines of code across **408,004** total lines
+**362,554** lines of code across **455,357** total lines
 
 | Language | Lines of Code | % |
 |----------|-------------:|--:|
-| Java | 135,061 | 42.5% |
-| Go | 36,648 | 11.5% |
-| JSON | 34,792 | 11.0% |
-| Python | 28,377 | 8.9% |
-| TSX | 28,621 | 9.0% |
-| YAML | 16,657 | 5.2% |
-| TypeScript | 14,907 | 4.7% |
-| Shell | 3,757 | 1.2% |
-| Astro | 3,424 | 1.1% |
-| SQL | 3,185 | 1.0% |
-| XML | 2,343 | 0.7% |
-| JavaScript | 2,488 | 0.8% |
+| Java | 137,769 | 38.0% |
+| TypeScript | 52,014 | 14.3% |
+| Go | 49,115 | 13.5% |
+| JSON | 35,803 | 9.9% |
+| Python | 22,548 | 6.2% |
+| YAML | 17,854 | 4.9% |
+| Markdown | 17,672 | 4.9% |
+| diff | 13,079 | 3.6% |
+| Bourne Shell | 4,018 | 1.1% |
+| SQL | 3,409 | 0.9% |
+| JavaScript | 2,678 | 0.7% |
+| CSS | 2,262 | 0.6% |
 <!-- LOC_END -->
 
 *Updated weekly + on every push via [GitHub Actions](.github/workflows/loc-counter.yml)*
