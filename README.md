@@ -52,14 +52,14 @@ drwxr-xr-x  jaden  staff   projects/
 $ ezweb status
 SITE                           STATE      HTTP   LATENCY    CONTAINER   
 ----------------------------------------------------------------------
-jadenrazo.dev                  running    403    212ms      not_found   
-tickets.jadenrazo.dev          running    403    150ms      not_found   
-client-site-1.example   running    —      —          not_found   
-map.client-site-1.example              running    200    385ms      not_found   
-gitlab.client-site-1.example           running    200    327ms      not_found   
-client-site-4.example             running    —      5004ms     not_found   
+jadenrazo.dev                  running    403    137ms      not_found   
+tickets.jadenrazo.dev          running    403    119ms      not_found   
+client-site-1.example          running    —      —          not_found   
+client-site-2.example          running    200    407ms      not_found   
+client-site-3.example          running    200    523ms      not_found   
+client-site-4.example          running    —      5009ms     not_found   
 
-Last check: 2026-02-19T21:20:42Z
+Last check: 2026-02-19T21:28:45Z
 ```
 <!-- DEPLOY_MONITOR_END -->
 
