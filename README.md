@@ -1,10 +1,64 @@
-## Hi there 👾
-
-I'm Jaden Razo, a full-stack developer with a passion for building robust and scalable applications. I enjoy working with modern technologies and creating solutions that are both functional and user-friendly.
+<a href="https://github.com/JadenRazo">
+  <img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&size=22&duration=3000&pause=1000&color=39D353&background=0D1117&vCenter=true&width=600&lines=jaden%40dev%3A~+%24+whoami;full-stack+developer+%7C+infrastructure+nerd;if+it+runs+in+a+container%2C+i+can+ship+it" alt="Typing SVG" />
+</a>
 
 ---
 
-### 📊 Lines of Code
+### `$ cat about.txt`
+
+```
+Full-stack developer building production systems from frontend to bare metal.
+I design web platforms, deploy containerized services, and maintain custom
+Minecraft server forks. Most of my work lives in Go, Java, TypeScript, and Python.
+```
+
+---
+
+### `$ cat skills.txt`
+
+```
+LANGUAGES       Go · Java · TypeScript · Python · SQL · Shell
+FRONTEND        React · Astro · Tailwind CSS · Redux · HTMX
+BACKEND         Fiber · Node.js · Express · Discord.py · JDA
+DATA            PostgreSQL · MariaDB · SQLite · Redis
+INFRA           Docker · Caddy · Nginx · GitHub Actions · SSH
+MINECRAFT       Paper API · Velocity · ProtocolLib · NMS
+```
+
+---
+
+### `$ ls -la projects/`
+
+```
+drwxr-xr-x  jaden  staff   projects/
+```
+
+| Repository | Description | Stack |
+|:-----------|:------------|:------|
+| [EzWeb](https://github.com/JadenRazo/EzWeb) | Docker site deployment platform with Caddy, health checks, and SSE streaming | Go, Fiber, SQLite, HTMX, Docker |
+| [Project-Website](https://github.com/JadenRazo/Project-Website) | Portfolio with URL shortener, real-time messaging, and dev panel | React, TypeScript, Go |
+| [TicketHacker](https://github.com/JadenRazo/TicketHacker) | Unified helpdesk — Discord, Telegram, email, live chat in one ticketing system | TypeScript, React, Node.js |
+| [SurvivalCore](https://github.com/JadenRazo/SurvivalCore) | Paper 1.21.8 fork with async entity tracking, SIMD math, hopper caching | Java, Paper API |
+| [Showers Auto Detailing](https://github.com/JadenRazo/showersautodetail) | Business site with quote calculator, booking, and Square payments | Astro, React, Node.js, PostgreSQL |
+| [ServerPlugins](https://github.com/JadenRazo/ServerPlugins) | 24 interconnected Minecraft plugins — claims, economy, events, casino, admin | Java 21, Maven, Paper API |
+| [Quiz-Bot](https://github.com/JadenRazo/Quiz-Bot) | Discord bot using LLMs for educational quiz games | Python, Discord.py |
+
+---
+
+### `$ systemctl status ezweb-sites`
+
+<!-- DEPLOY_MONITOR_START -->
+```
+$ ezweb status
+  Waiting for first check...
+```
+<!-- DEPLOY_MONITOR_END -->
+
+*Refreshed every 30 minutes via [GitHub Actions](.github/workflows/deploy-monitor.yml)*
+
+---
+
+### `$ cloc --by-language ~/repos/`
 
 <!-- LOC_START -->
 **317,527** lines of code across **408,004** total lines
@@ -25,32 +79,18 @@ I'm Jaden Razo, a full-stack developer with a passion for building robust and sc
 | JavaScript | 2,488 | 0.8% |
 <!-- LOC_END -->
 
-*Updated weekly via [GitHub Actions](.github/workflows/loc-counter.yml)*
+*Updated weekly + on every push via [GitHub Actions](.github/workflows/loc-counter.yml)*
 
 ---
 
-### 🔭 My Projects
+### `$ git log --oneline --graph`
 
-Here are some of the projects that I've been working on:
+<img src="./profile-3d-contrib/profile-night-green.svg" alt="3D Contribution Graph" width="100%">
 
-*   **[Project-Website](https://github.com/JadenRazo/Project-Website)**: A full-stack portfolio and project showcase application. The frontend is built with React and TypeScript, while the backend is a Go-based system with multiple microservices for URL shortening, real-time messaging, and a developer panel.
-
-*   **[TicketHacker](https://github.com/JadenRazo/TicketHacker)**: A helpdesk platform that unifies customer support across Discord, Telegram, email, and live chat into one ticketing system. Built with TypeScript, React, and a Node.js backend.
-
-*   **[SurvivalCore](https://github.com/JadenRazo/SurvivalCore)**: A custom Minecraft server fork based on Paper 1.21.8, built for multi-core performance on survival servers. Cherry-picks optimizations from Leaf, Gale, Lithium, and Pufferfish into a single maintainable fork with async entity tracking, SIMD-accelerated math, hopper caching, and fully configurable optimization toggles.
-
-*   **[Quiz-Bot](https://github.com/JadenRazo/Quiz-Bot)**: A Discord bot that uses Large Language Models to create educational games. Built with Python and Discord.py.
-
-*   **[Showers Auto Detailing](https://github.com/JadenRazo/showersautodetail)**: A full-stack auto detailing business website built with Astro, React, Node.js, and PostgreSQL. Features an instant quote calculator, booking system, before/after gallery, and Square payment integration.
-
-*   **[ServerPlugins](https://github.com/JadenRazo/ServerPlugins)**: A modular Minecraft plugin ecosystem with 24 interconnected plugins for Paper 1.21.4+ servers. Built with Java 21 and Maven, covering claims, economy, events, casino games, parkour, and administration.
+*Generated daily via [GitHub Actions](.github/workflows/profile-3d.yml)*
 
 ---
 
-### 💻 My Tech Stack:
-*   **Frontend:** React, TypeScript, Astro, Tailwind CSS, Redux, WebSocket
-*   **Backend:** Go, Java, Node.js, Python, PostgreSQL, MariaDB, Redis
-*   **Tools:** Git, Maven, Docker, Nginx, GitHub Actions
-*   **Minecraft:** Paper API, Velocity, JDA, ProtocolLib
+### `$ uptime`
 
----
+<img src="https://github-readme-stats.vercel.app/api?username=JadenRazo&show_icons=true&theme=github_dark&hide_border=true&bg_color=0D1117&title_color=39D353&icon_color=39D353&text_color=c9d1d9" alt="GitHub Stats" />
