@@ -50,7 +50,16 @@ drwxr-xr-x  jaden  staff   projects/
 <!-- DEPLOY_MONITOR_START -->
 ```
 $ ezweb status
-  No sites reporting.
+SITE                           STATE      HTTP   LATENCY    CONTAINER   
+----------------------------------------------------------------------
+jadenrazo.dev                  running    403    212ms      not_found   
+tickets.jadenrazo.dev          running    403    150ms      not_found   
+client-site-1.example   running    —      —          not_found   
+map.client-site-1.example              running    200    385ms      not_found   
+gitlab.client-site-1.example           running    200    327ms      not_found   
+client-site-4.example             running    —      5004ms     not_found   
+
+Last check: 2026-02-19T21:20:42Z
 ```
 <!-- DEPLOY_MONITOR_END -->
 
