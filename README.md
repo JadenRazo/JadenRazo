@@ -70,22 +70,22 @@ Last check: 2026-02-19T21:28:45Z
 ### `$ cloc --by-language ~/repos/`
 
 <!-- LOC_START -->
-**379,954** lines of code across **476,990** total lines
+**384,057** lines of code across **481,491** total lines
 
 | Language | Lines of Code | % |
 |----------|-------------:|--:|
-| Java | 137,769 | 36.3% |
-| TypeScript | 61,405 | 16.2% |
-| Go | 55,062 | 14.5% |
-| JSON | 29,122 | 7.7% |
+| Java | 137,769 | 35.9% |
+| TypeScript | 63,179 | 16.5% |
+| Go | 55,539 | 14.5% |
+| JSON | 30,667 | 8.0% |
 | Python | 22,548 | 5.9% |
-| YAML | 18,343 | 4.8% |
-| Markdown | 17,726 | 4.7% |
+| YAML | 18,347 | 4.8% |
+| Markdown | 18,004 | 4.7% |
 | diff | 13,079 | 3.4% |
 | Vuejs Component | 6,111 | 1.6% |
 | Bourne Shell | 4,449 | 1.2% |
-| SQL | 3,485 | 0.9% |
-| CSS | 3,006 | 0.8% |
+| SQL | 3,515 | 0.9% |
+| CSS | 3,001 | 0.8% |
 <!-- LOC_END -->
 
 *Updated weekly + on every push via [GitHub Actions](.github/workflows/loc-counter.yml)*
