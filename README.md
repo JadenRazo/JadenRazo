@@ -70,12 +70,12 @@ Last check: 2026-02-19T21:28:45Z
 ### `$ cloc --by-language ~/repos/`
 
 <!-- LOC_START -->
-**384,057** lines of code across **481,491** total lines
+**384,096** lines of code across **481,547** total lines
 
 | Language | Lines of Code | % |
 |----------|-------------:|--:|
 | Java | 137,769 | 35.9% |
-| TypeScript | 63,179 | 16.5% |
+| TypeScript | 63,272 | 16.5% |
 | Go | 55,539 | 14.5% |
 | JSON | 30,667 | 8.0% |
 | Python | 22,548 | 5.9% |
