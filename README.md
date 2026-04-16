@@ -48,28 +48,6 @@ drwxr-xr-x  jaden  staff   projects/
 
 ---
 
-### `$ systemctl status ezweb-sites`
-
-<!-- DEPLOY_MONITOR_START -->
-```
-$ ezweb status
-SITE                           STATE      HTTP   LATENCY    CONTAINER   
-----------------------------------------------------------------------
-jadenrazo.dev                  running    403    137ms      not_found   
-tickets.jadenrazo.dev          running    403    119ms      not_found   
-client-site-1.example          running    —      —          not_found   
-client-site-2.example          running    200    407ms      not_found   
-client-site-3.example          running    200    523ms      not_found   
-client-site-4.example          running    —      5009ms     not_found   
-
-Last check: 2026-02-19T21:28:45Z
-```
-<!-- DEPLOY_MONITOR_END -->
-
-*Refreshed every 30 minutes via [GitHub Actions](.github/workflows/deploy-monitor.yml)*
-
----
-
 ### `$ cloc --by-language ~/repos/`
 
 <!-- LOC_START -->
