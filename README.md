@@ -51,21 +51,21 @@ drwxr-xr-x  jaden  staff   projects/
 ### `$ cloc --by-language ~/repos/`
 
 <!-- LOC_START -->
-**434,207** lines of code across **544,196** total lines
+**442,715** lines of code across **554,956** total lines
 
 | Language | Lines of Code | % |
 |----------|-------------:|--:|
-| Java | 137,769 | 31.7% |
-| TypeScript | 95,732 | 22.0% |
-| Go | 65,682 | 15.1% |
-| JSON | 35,392 | 8.2% |
-| Python | 22,570 | 5.2% |
-| Markdown | 19,523 | 4.5% |
-| YAML | 18,966 | 4.4% |
+| Java | 137,769 | 31.1% |
+| TypeScript | 100,963 | 22.8% |
+| Go | 67,667 | 15.3% |
+| JSON | 35,891 | 8.1% |
+| Python | 22,570 | 5.1% |
+| Markdown | 19,919 | 4.5% |
+| YAML | 19,295 | 4.4% |
 | diff | 13,079 | 3.0% |
 | Vuejs Component | 6,111 | 1.4% |
-| Bourne Shell | 5,030 | 1.2% |
-| SQL | 3,697 | 0.9% |
+| Bourne Shell | 5,030 | 1.1% |
+| SQL | 3,729 | 0.8% |
 | CSS | 3,519 | 0.8% |
 <!-- LOC_END -->
 
