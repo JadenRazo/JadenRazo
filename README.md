@@ -80,6 +80,18 @@ drwxr-xr-x  jaden  staff   projects/
 
 ---
 
+### `$ deploy status`
+
+<!-- DEPLOY_MONITOR_START -->
+```
+$ deploy status
+  Waiting for first dispatch from raizhost-infra…
+```
+<!-- DEPLOY_MONITOR_END -->
+
+
+---
+
 ### `$ uptime`
 
 <img src="https://streak-stats.demolab.com?user=JadenRazo&theme=github-dark-blue&hide_border=true&background=0D1117&ring=39D353&fire=39D353&currStreakLabel=39D353" alt="GitHub Streak" />
