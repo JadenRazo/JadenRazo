@@ -85,7 +85,7 @@ drwxr-xr-x  jaden  staff   projects/
 <!-- DEPLOY_MONITOR_START -->
 ```
 $ deploy status
-  Waiting for first dispatch from raizhost-infra…
+  No sites reporting.
 ```
 <!-- DEPLOY_MONITOR_END -->
 
