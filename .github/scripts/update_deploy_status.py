@@ -12,10 +12,10 @@ END_MARKER = "<!-- DEPLOY_MONITOR_END -->"
 
 def format_status(sites: list) -> str:
     if not sites:
-        return "```\n$ ezweb status\n  No sites reporting.\n```"
+        return "```\n$ raizhost-infra status\n  No sites reporting.\n```"
 
     lines = ["```"]
-    lines.append("$ ezweb status")
+    lines.append("$ raizhost-infra status")
     lines.append(
         f"{'SITE':<30} {'STATE':<10} {'HTTP':<6} {'LATENCY':<10} {'CONTAINER':<12}"
     )
