@@ -100,7 +100,7 @@ Last check: 2026-04-24T22:17:59Z
 ```
 <!-- DEPLOY_MONITOR_END -->
 
-*Dispatched every 30 min from [raizhost-infra](https://github.com/JadenRazo/raizhost-infra/blob/main/.github/workflows/dispatch-profile-status.yaml), rendered by [this repo](.github/workflows/deploy-monitor.yml).*
+*Probed every 30 min by a cron on USW-32GB-MAIN running [raizhost-infra/scripts/probe-profile-status.sh](https://github.com/JadenRazo/raizhost-infra/blob/main/scripts/probe-profile-status.sh); dispatched to this repo and rendered by [deploy-monitor.yml](.github/workflows/deploy-monitor.yml).*
 
 ---
 
