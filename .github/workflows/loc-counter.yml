@@ -15,17 +15,22 @@ jobs:
 
     steps:
       - name: Checkout profile repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Install cloc
         run: sudo apt-get install -y cloc
 
       - name: Clone repos and count LOC
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          set -euo pipefail
           mkdir repos && cd repos
 
-          REPOS=$(curl -s "https://api.github.com/users/JadenRazo/repos?per_page=100&type=owner" \
-            | jq -r '.[] | select(.fork == false and .name != "JadenRazo") | .clone_url')
+          REPOS=$(curl -sS -H "Authorization: token ${GH_TOKEN}" \
+            -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/users/JadenRazo/repos?per_page=100&type=owner" \
+            | jq -r '.[] | select(.fork == false and .archived == false and .name != "JadenRazo") | .clone_url')
 
           for url in $REPOS; do
             git clone --depth 1 -q "$url" 2>/dev/null || true

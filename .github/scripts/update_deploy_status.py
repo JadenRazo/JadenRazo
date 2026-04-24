@@ -17,21 +17,20 @@ def format_status(sites: list) -> str:
     lines = ["```"]
     lines.append("$ raizhost-infra status")
     lines.append(
-        f"{'SITE':<30} {'STATE':<10} {'HTTP':<6} {'LATENCY':<10} {'CONTAINER':<12}"
+        f"{'SITE':<30} {'STATE':<10} {'HTTP':<6} {'LATENCY':<10}"
     )
-    lines.append("-" * 70)
+    lines.append("-" * 58)
 
     for s in sites:
         domain = s.get("domain", "unknown")[:28]
-        status = s.get("status", "—")
+        state = s.get("status", "—")
         http_code = s.get("http_status", 0)
         http_str = str(http_code) if http_code else "—"
         latency = s.get("latency_ms", 0)
         latency_str = f"{latency}ms" if latency else "—"
-        container = s.get("container_status", "—") or "—"
 
         lines.append(
-            f"{domain:<30} {status:<10} {http_str:<6} {latency_str:<10} {container:<12}"
+            f"{domain:<30} {state:<10} {http_str:<6} {latency_str:<10}"
         )
 
     checked = sites[0].get("checked_at", "") if sites else ""

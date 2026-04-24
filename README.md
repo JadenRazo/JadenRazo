@@ -36,8 +36,10 @@ drwxr-xr-x  jaden  staff   projects/
 
 | Repository | Description | Stack |
 |:-----------|:------------|:------|
+| [raizhost-infra](https://github.com/JadenRazo/raizhost-infra) | GitOps source of truth for the RaizHost k3s platform — every ArgoCD app, ingress, and policy lives here | k3s, ArgoCD, Kustomize, OPA |
 | [CloudCostMCP](https://github.com/JadenRazo/CloudCostMCP) | MCP server for multi-cloud Terraform cost analysis across AWS, Azure, and GCP | TypeScript, Node.js, SQLite |
-| [EzWeb](https://github.com/JadenRazo/EzWeb) | Docker site deployment platform with Caddy, health checks, and SSE streaming | Go, Fiber, SQLite, HTMX, Docker |
+| [llmenv](https://github.com/JadenRazo/llmenv) | Claude-Code-first context engineering platform — layered YAML environments → deterministic LLM context | Go, YAML |
+| [job-scanner](https://github.com/JadenRazo/job-scanner) | 24/7 ATS job scanner with Claude-based scoring and cover-letter drafting | TypeScript, Node.js, Python, Redis |
 | [Project-Website](https://github.com/JadenRazo/Project-Website) | Portfolio with URL shortener, real-time messaging, and dev panel | React, TypeScript, Go |
 | [TicketHacker](https://github.com/JadenRazo/TicketHacker) | Unified helpdesk — Discord, Telegram, email, live chat in one ticketing system | TypeScript, React, Node.js |
 | [SurvivalCore](https://github.com/JadenRazo/SurvivalCore) | Paper 1.21.8 fork with async entity tracking, SIMD math, hopper caching | Java, Paper API |
@@ -94,7 +96,7 @@ Last check: 2026-04-24T21:40:00Z
 ```
 <!-- DEPLOY_MONITOR_END -->
 
-*Pushed from [raizhost-infra](https://github.com/JadenRazo/raizhost-infra) via [GitHub Actions](.github/workflows/deploy-monitor.yml)*
+*Dispatched every 30 min from [raizhost-infra](https://github.com/JadenRazo/raizhost-infra/blob/main/.github/workflows/dispatch-profile-status.yaml), rendered by [this repo](.github/workflows/deploy-monitor.yml).*
 
 ---
 
