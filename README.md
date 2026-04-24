@@ -85,7 +85,11 @@ drwxr-xr-x  jaden  staff   projects/
 <!-- DEPLOY_MONITOR_START -->
 ```
 $ deploy status
-  No sites reporting.
+SITE                           STATE      HTTP   LATENCY    CONTAINER   
+----------------------------------------------------------------------
+test.raizhost.com              up         200    42ms       —           
+
+Last check: 2026-04-24T21:40:00Z
 ```
 <!-- DEPLOY_MONITOR_END -->
 
