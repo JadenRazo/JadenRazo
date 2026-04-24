@@ -81,6 +81,19 @@ drwxr-xr-x  jaden  staff   projects/
 
 ---
 
+### `$ raizhost-infra status`
+
+<!-- DEPLOY_MONITOR_START -->
+```
+$ raizhost-infra status
+  Waiting for first dispatch from raizhost-infra…
+```
+<!-- DEPLOY_MONITOR_END -->
+
+*Pushed from [raizhost-infra](https://github.com/JadenRazo/raizhost-infra) via [GitHub Actions](.github/workflows/deploy-monitor.yml)*
+
+---
+
 ### `$ uptime`
 
 <img src="https://streak-stats.demolab.com?user=JadenRazo&theme=github-dark-blue&hide_border=true&background=0D1117&ring=39D353&fire=39D353&currStreakLabel=39D353" alt="GitHub Streak" />
