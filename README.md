@@ -78,14 +78,9 @@ drwxr-xr-x  jaden  staff   projects/
 ### `$ git log --oneline --graph`
 
 <img src="./profile-3d-contrib/profile-night-green.svg" alt="3D Contribution Graph" width="720">
+<img src="https://streak-stats.demolab.com?user=JadenRazo&theme=github-dark-blue&hide_border=true&background=0D1117&ring=39D353&fire=39D353&currStreakLabel=39D353" alt="GitHub Streak" />
 
 *Generated daily via [GitHub Actions](.github/workflows/profile-3d.yml)*
-
----
-
-### `$ uptime`
-
-<img src="https://streak-stats.demolab.com?user=JadenRazo&theme=github-dark-blue&hide_border=true&background=0D1117&ring=39D353&fire=39D353&currStreakLabel=39D353" alt="GitHub Streak" />
 
 ---
 
