@@ -38,7 +38,6 @@ drwxr-xr-x  jaden  staff   projects/
 |:-----------|:------------|:------|
 | [raizhost-infra](https://github.com/JadenRazo/raizhost-infra) | GitOps source of truth for the RaizHost k3s platform — every ArgoCD app, ingress, and policy lives here | k3s, ArgoCD, Kustomize, OPA |
 | [CloudCostMCP](https://github.com/JadenRazo/CloudCostMCP) | MCP server for multi-cloud Terraform cost analysis across AWS, Azure, and GCP | TypeScript, Node.js, SQLite |
-| [llmenv](https://github.com/JadenRazo/llmenv) | Claude-Code-first context engineering platform — layered YAML environments → deterministic LLM context | Go, YAML |
 | [job-scanner](https://github.com/JadenRazo/job-scanner) | 24/7 ATS job scanner with Claude-based scoring and cover-letter drafting | TypeScript, Node.js, Python, Redis |
 | [Project-Website](https://github.com/JadenRazo/Project-Website) | Portfolio with URL shortener, real-time messaging, and dev panel | React, TypeScript, Go |
 | [TicketHacker](https://github.com/JadenRazo/TicketHacker) | Unified helpdesk — Discord, Telegram, email, live chat in one ticketing system | TypeScript, React, Node.js |
