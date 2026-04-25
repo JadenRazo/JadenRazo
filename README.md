@@ -80,6 +80,12 @@ drwxr-xr-x  jaden  staff   projects/
 
 ---
 
+### `$ uptime`
+
+<img src="https://streak-stats.demolab.com?user=JadenRazo&theme=github-dark-blue&hide_border=true&background=0D1117&ring=39D353&fire=39D353&currStreakLabel=39D353" alt="GitHub Streak" />
+
+---
+
 ### `$ deploy status`
 
 <!-- DEPLOY_MONITOR_START -->
@@ -97,9 +103,3 @@ Last check: 2026-04-25T18:30:01Z
 ```
 <!-- DEPLOY_MONITOR_END -->
 
-
----
-
-### `$ uptime`
-
-<img src="https://streak-stats.demolab.com?user=JadenRazo&theme=github-dark-blue&hide_border=true&background=0D1117&ring=39D353&fire=39D353&currStreakLabel=39D353" alt="GitHub Streak" />
