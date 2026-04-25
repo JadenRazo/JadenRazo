@@ -83,6 +83,12 @@ drwxr-xr-x  jaden  staff   projects/
 
 ---
 
+### `$ uptime`
+
+<img src="https://streak-stats.demolab.com?user=JadenRazo&theme=github-dark-blue&hide_border=true&background=0D1117&ring=39D353&fire=39D353&currStreakLabel=39D353" alt="GitHub Streak" />
+
+---
+
 ### `$ raizhost-infra status`
 
 <!-- DEPLOY_MONITOR_START -->
@@ -101,9 +107,3 @@ Last check: 2026-04-25T18:30:01Z
 <!-- DEPLOY_MONITOR_END -->
 
 *Probed every 30 min by a cron on USW-32GB-MAIN running [raizhost-infra/scripts/probe-profile-status.sh](https://github.com/JadenRazo/raizhost-infra/blob/main/scripts/probe-profile-status.sh); dispatched to this repo and rendered by [deploy-monitor.yml](.github/workflows/deploy-monitor.yml).*
-
----
-
-### `$ uptime`
-
-<img src="https://streak-stats.demolab.com?user=JadenRazo&theme=github-dark-blue&hide_border=true&background=0D1117&ring=39D353&fire=39D353&currStreakLabel=39D353" alt="GitHub Streak" />
