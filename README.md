@@ -90,13 +90,13 @@ drwxr-xr-x  jaden  staff   projects/
 $ raizhost-infra status
 SITE                           STATE      HTTP   LATENCY   
 ----------------------------------------------------------
-raizhost.com                   up         200    41ms      
-app.raizhost.com               up         307    38ms      
-jadenrazo.dev                  up         200    37ms      
-claude.raizhost.com            up         200    92ms      
-showersautodetail.com          up         200    42ms      
+raizhost.com                   up         200    44ms      
+app.raizhost.com               up         307    110ms     
+jadenrazo.dev                  up         200    33ms      
+claude.raizhost.com            up         200    78ms      
+showersautodetail.com          up         200    51ms      
 
-Last check: 2026-04-27T04:00:01Z
+Last check: 2026-04-27T04:30:01Z
 ```
 <!-- DEPLOY_MONITOR_END -->
 
