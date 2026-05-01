@@ -70,7 +70,7 @@ drwxr-xr-x  jaden  staff   projects/
 | CSS | 3,519 | 0.8% |
 <!-- LOC_END -->
 
-*Updated weekly + on every push via [GitHub Actions](.github/workflows/loc-counter.yml)*
+*Updated daily via [GitHub Actions](.github/workflows/loc-counter.yml)*
 
 ---
 
