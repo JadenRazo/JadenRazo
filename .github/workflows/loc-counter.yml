@@ -20,6 +20,19 @@ jobs:
       - name: Install cloc
         run: sudo apt-get install -y cloc
 
+      - name: Verify PAT secret is set
+        env:
+          GH_TOKEN: ${{ secrets.LOC_COUNTER_PAT }}
+        run: |
+          if [ -z "${GH_TOKEN:-}" ]; then
+            echo "::error::LOC_COUNTER_PAT secret is missing or empty."
+            echo "::error::Add a fine-grained PAT (Contents: Read-only on all repos under JadenRazo)"
+            echo "::error::at https://github.com/JadenRazo/JadenRazo/settings/secrets/actions/new"
+            echo "::error::Secret name MUST be exactly: LOC_COUNTER_PAT"
+            exit 1
+          fi
+          echo "PAT secret is present (length: ${#GH_TOKEN})"
+
       - name: Clone repos and count LOC
         env:
           GH_TOKEN: ${{ secrets.LOC_COUNTER_PAT }}
