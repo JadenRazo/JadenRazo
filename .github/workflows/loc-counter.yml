@@ -2,7 +2,7 @@ name: Update LOC Count
 
 on:
   schedule:
-    - cron: '0 6 * * 1' # Every Monday at 6 AM UTC
+    - cron: '0 6 * * *' # Daily at 6 AM UTC
   workflow_dispatch: # Manual trigger
   repository_dispatch:
     types: [loc-update]
@@ -22,18 +22,26 @@ jobs:
 
       - name: Clone repos and count LOC
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.LOC_COUNTER_PAT }}
         run: |
           set -euo pipefail
           mkdir repos && cd repos
 
-          REPOS=$(curl -sS -H "Authorization: token ${GH_TOKEN}" \
-            -H "Accept: application/vnd.github+json" \
-            "https://api.github.com/users/JadenRazo/repos?per_page=100&type=owner" \
-            | jq -r '.[] | select(.fork == false and .archived == false and .name != "JadenRazo") | .clone_url')
+          REPOS=$(gh repo list JadenRazo \
+            --limit 500 \
+            --no-archived \
+            --source \
+            --json nameWithOwner,isFork \
+            --jq '.[] | select(.isFork == false and .nameWithOwner != "JadenRazo/JadenRazo") | .nameWithOwner')
 
-          for url in $REPOS; do
-            git clone --depth 1 -q "$url" 2>/dev/null || true
+          if [ -z "$REPOS" ]; then
+            echo "::error::No repos returned by gh repo list — check LOC_COUNTER_PAT scopes or rate limit"
+            exit 1
+          fi
+          echo "Will count LOC across $(echo "$REPOS" | wc -l) repos"
+
+          for repo in $REPOS; do
+            gh repo clone "$repo" -- --depth 1 --quiet || echo "::warning::clone failed for $repo"
           done
 
           cd ..
