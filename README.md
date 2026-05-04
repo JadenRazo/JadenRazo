@@ -91,12 +91,12 @@ $ raizhost-infra status
 SITE                           STATE      HTTP   LATENCY   
 ----------------------------------------------------------
 raizhost.com                   up         200    36ms      
-app.raizhost.com               up         307    42ms      
-jadenrazo.dev                  up         200    28ms      
-claude.raizhost.com            up         200    162ms     
-showersautodetail.com          up         200    39ms      
+app.raizhost.com               up         307    34ms      
+jadenrazo.dev                  up         200    38ms      
+claude.raizhost.com            up         200    568ms     
+showersautodetail.com          up         200    50ms      
 
-Last check: 2026-05-04T08:30:01Z
+Last check: 2026-05-04T09:00:01Z
 ```
 <!-- DEPLOY_MONITOR_END -->
 
