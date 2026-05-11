@@ -28,22 +28,60 @@ MINECRAFT       Paper API · Velocity · ProtocolLib · NMS
 
 ---
 
-### `$ ls -la projects/`
+### `$ tree projects/ -L 1`
 
+```text
+projects/
+├── cloud-sre-infra/      # AWS, Terraform, observability, GitOps
+├── dev-tooling/          # CLIs, MCP servers, automation
+├── web-and-apps/         # Sites, dashboards, products
+├── minecraft-and-bots/   # Game servers and Discord bots
+└── labs/                 # Homelab experiments
 ```
-drwxr-xr-x  jaden  staff   projects/
-```
+
+#### `cloud-sre-infra/`
 
 | Repository | Description | Stack |
 |:-----------|:------------|:------|
-| [CloudCostMCP](https://github.com/JadenRazo/CloudCostMCP) | MCP server for multi-cloud Terraform cost analysis across AWS, Azure, and GCP | TypeScript, Node.js, SQLite |
-| [job-scanner](https://github.com/JadenRazo/job-scanner) | 24/7 ATS job scanner with Claude-based scoring and cover-letter drafting | TypeScript, Node.js, Python, Redis |
-| [Project-Website](https://github.com/JadenRazo/Project-Website) | Portfolio with URL shortener, real-time messaging, and dev panel | React, TypeScript, Go |
+| [sre-reference-app](https://github.com/JadenRazo/sre-reference-app) | ECS Fargate reference — ALB, SLO burn-rate alarms, AWS FIS chaos, GHA OIDC CI/CD | Terraform, AWS, GitHub Actions |
+| [sre-landing-zone](https://github.com/JadenRazo/sre-landing-zone) | Day-2 multi-account AWS landing zone — 5 accounts, Pilot Light DR, edge stack | Terraform, AWS Organizations |
+| [aws-supply-chain-security](https://github.com/JadenRazo/aws-supply-chain-security) | Container supply chain — syft SBOM, grype scan, keyless cosign via GHA OIDC | Terraform, ECR, cosign |
+| [aws-todo-api](https://github.com/JadenRazo/aws-todo-api) | Serverless reading list — API GW + Lambda + DynamoDB + Cognito + WAF + X-Ray | AWS SAM, Lambda, DynamoDB |
+| [azure-hub-spoke-network](https://github.com/JadenRazo/azure-hub-spoke-network) | Azure hub-spoke topology with VNets, peering, and NSGs | Terraform, Azure |
+| [EzWeb](https://github.com/JadenRazo/EzWeb) *(retired)* | Lightweight Docker site manager with web dashboard | Go, Docker |
+
+#### `dev-tooling/`
+
+| Repository | Description | Stack |
+|:-----------|:------------|:------|
+| [llm-lint](https://github.com/JadenRazo/llm-lint) | Catch LLM-generated artifacts (`CLAUDE.md`, Co-authored-by trailers, `.cursorrules`) in CI | Go, pre-commit, SARIF |
+| [CloudCostMCP](https://github.com/JadenRazo/CloudCostMCP) | MCP server for multi-cloud Terraform cost analysis across AWS, Azure, GCP | TypeScript, MCP, SQLite |
+| [dependabot-automation](https://github.com/JadenRazo/dependabot-automation) | Reusable GHA workflow that auto-merges Dependabot PRs after an OSV.dev CVE diff | GitHub Actions, OSV |
+
+#### `web-and-apps/`
+
+| Repository | Description | Stack |
+|:-----------|:------------|:------|
+| [Project-Website](https://github.com/JadenRazo/Project-Website) | Portfolio with URL shortener, real-time messaging, and dev panel | Go (Fiber), React, TypeScript |
 | [TicketHacker](https://github.com/JadenRazo/TicketHacker) | Unified helpdesk — Discord, Telegram, email, live chat in one ticketing system | TypeScript, React, Node.js |
-| [SurvivalCore](https://github.com/JadenRazo/SurvivalCore) | Paper 1.21.8 fork with async entity tracking, SIMD math, hopper caching | Java, Paper API |
-| [ServerPlugins](https://github.com/JadenRazo/ServerPlugins) | 24 interconnected Minecraft plugins — claims, economy, events, casino, admin | Java 21, Maven, Paper API |
-| [initializing-ad](https://github.com/JadenRazo/initializing-ad) | Active Directory lab — domain controller, DNS, group policy, and enterprise onboarding | Windows Server 2022, VirtualBox |
-| [Quiz-Bot](https://github.com/JadenRazo/Quiz-Bot) | Discord bot using LLMs for educational quiz games | Python, Discord.py |
+| [tts-raizhost](https://github.com/JadenRazo/tts-raizhost) | Self-hosted PDF reader-aloud with Kokoro v1.0 TTS, GPU/CPU dual-backend on k3s | Next.js, Kokoro, k3s |
+| [job-scanner](https://github.com/JadenRazo/job-scanner) | 24/7 ATS scanner with Claude-based scoring and cover-letter drafting | TypeScript, Node.js, Redis |
+
+#### `minecraft-and-bots/`
+
+| Repository | Description | Stack |
+|:-----------|:------------|:------|
+| [ServerPlugins](https://github.com/JadenRazo/ServerPlugins) | 24 interconnected Paper plugins — claims, economy, events, casino, arcade, admin | Java 21, Paper API, Maven |
+| [SurvivalCore](https://github.com/JadenRazo/SurvivalCore) | Paper 1.21.8 fork — async entity tracking, SIMD math, hopper caching | Java, Paper |
+| [Quiz-Bot](https://github.com/JadenRazo/Quiz-Bot) | Discord bot using LLMs to run educational quiz games | Python, discord.py |
+
+#### `labs/`
+
+| Repository | Description | Stack |
+|:-----------|:------------|:------|
+| [initializing-ad](https://github.com/JadenRazo/initializing-ad) | Active Directory homelab — DC, DNS, group policy, and enterprise onboarding flow | Windows Server 2022, VirtualBox |
+
+*Filter by language or domain via topics on the [repositories tab](https://github.com/JadenRazo?tab=repositories).*
 
 ---
 
