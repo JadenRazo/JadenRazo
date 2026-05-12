@@ -128,11 +128,11 @@ SITE                           STATE      HTTP   LATENCY
 ----------------------------------------------------------
 raizhost.com                   up         200    35ms      
 app.raizhost.com               up         307    35ms      
-jadenrazo.dev                  up         200    32ms      
-claude.raizhost.com            up         200    86ms      
-showersautodetail.com          up         200    44ms      
+jadenrazo.dev                  up         200    41ms      
+claude.raizhost.com            up         200    316ms     
+showersautodetail.com          up         200    41ms      
 
-Last check: 2026-05-12T06:00:01Z
+Last check: 2026-05-12T06:30:01Z
 ```
 <!-- DEPLOY_MONITOR_END -->
 
