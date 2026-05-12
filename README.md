@@ -43,43 +43,43 @@ projects/
 
 | Repository | Description | Stack |
 |:-----------|:------------|:------|
-| [sre-reference-app](https://github.com/JadenRazo/sre-reference-app) | ECS Fargate reference — ALB, SLO burn-rate alarms, AWS FIS chaos, GHA OIDC CI/CD | Terraform, AWS, GitHub Actions |
-| [sre-landing-zone](https://github.com/JadenRazo/sre-landing-zone) | Day-2 multi-account AWS landing zone — 5 accounts, Pilot Light DR, edge stack | Terraform, AWS Organizations |
-| [aws-supply-chain-security](https://github.com/JadenRazo/aws-supply-chain-security) | Container supply chain — syft SBOM, grype scan, keyless cosign via GHA OIDC | Terraform, ECR, cosign |
-| [aws-todo-api](https://github.com/JadenRazo/aws-todo-api) | Serverless reading list — API GW + Lambda + DynamoDB + Cognito + WAF + X-Ray | AWS SAM, Lambda, DynamoDB |
-| [azure-hub-spoke-network](https://github.com/JadenRazo/azure-hub-spoke-network) | Azure hub-spoke topology with VNets, peering, and NSGs | Terraform, Azure |
-| [EzWeb](https://github.com/JadenRazo/EzWeb) *(retired)* | Lightweight Docker site manager with web dashboard | Go, Docker |
+| [sre-reference-app](https://github.com/JadenRazo/sre-reference-app) | Production ECS Fargate blueprint with SLO burn-rate alarms, FIS chaos drills, and OIDC-authed GitHub Actions. | Terraform, AWS, GitHub Actions |
+| [sre-landing-zone](https://github.com/JadenRazo/sre-landing-zone) | Five-account AWS landing zone with Pilot Light DR and a CloudFront/WAF/Cognito edge, all on a $120 credit budget. | Terraform, AWS Organizations |
+| [aws-supply-chain-security](https://github.com/JadenRazo/aws-supply-chain-security) | Container supply-chain stack on AWS: syft SBOMs, grype scans, keyless cosign signing via GitHub OIDC. | Terraform, ECR, cosign |
+| [aws-todo-api](https://github.com/JadenRazo/aws-todo-api) | Live serverless reading list on API Gateway, Lambda, DynamoDB, Cognito, WAF, and X-Ray. | AWS SAM, Lambda, DynamoDB |
+| [azure-hub-spoke-network](https://github.com/JadenRazo/azure-hub-spoke-network) | Azure hub-and-spoke topology with VNets, peering, and NSGs, all in Terraform. | Terraform, Azure |
+| [EzWeb](https://github.com/JadenRazo/EzWeb) *(retired)* | Lightweight Docker site manager with a web dashboard. | Go, Docker |
 
 #### `dev-tooling/`
 
 | Repository | Description | Stack |
 |:-----------|:------------|:------|
-| [llm-lint](https://github.com/JadenRazo/llm-lint) | Catch LLM-generated artifacts (`CLAUDE.md`, Co-authored-by trailers, `.cursorrules`) in CI | Go, pre-commit, SARIF |
-| [CloudCostMCP](https://github.com/JadenRazo/CloudCostMCP) | MCP server for multi-cloud Terraform cost analysis across AWS, Azure, GCP | TypeScript, MCP, SQLite |
-| [dependabot-automation](https://github.com/JadenRazo/dependabot-automation) | Reusable GHA workflow that auto-merges Dependabot PRs after an OSV.dev CVE diff | GitHub Actions, OSV |
+| [llm-lint](https://github.com/JadenRazo/llm-lint) | CI gate that catches LLM artifacts: stray `CLAUDE.md`, `Co-authored-by` trailers, `.cursorrules`, and friends. Emits SARIF. | Go, pre-commit, SARIF |
+| [CloudCostMCP](https://github.com/JadenRazo/CloudCostMCP) | MCP server that prices Terraform plans across AWS, Azure, and GCP. | TypeScript, MCP, SQLite |
+| [dependabot-automation](https://github.com/JadenRazo/dependabot-automation) | Drop-in GitHub Actions workflow that auto-merges Dependabot PRs after an OSV.dev CVE diff. | GitHub Actions, OSV |
 
 #### `web-and-apps/`
 
 | Repository | Description | Stack |
 |:-----------|:------------|:------|
-| [Project-Website](https://github.com/JadenRazo/Project-Website) | Portfolio with URL shortener, real-time messaging, and dev panel | Go (Fiber), React, TypeScript |
-| [TicketHacker](https://github.com/JadenRazo/TicketHacker) | Unified helpdesk — Discord, Telegram, email, live chat in one ticketing system | TypeScript, React, Node.js |
-| [tts-raizhost](https://github.com/JadenRazo/tts-raizhost) | Self-hosted PDF reader-aloud with Kokoro v1.0 TTS, GPU/CPU dual-backend on k3s | Next.js, Kokoro, k3s |
-| [job-scanner](https://github.com/JadenRazo/job-scanner) | 24/7 ATS scanner with Claude-based scoring and cover-letter drafting | TypeScript, Node.js, Redis |
+| [Project-Website](https://github.com/JadenRazo/Project-Website) | Portfolio with a URL shortener, real-time messaging, and a hidden dev panel. | Go (Fiber), React, TypeScript |
+| [TicketHacker](https://github.com/JadenRazo/TicketHacker) | One ticketing system that unifies Discord, Telegram, email, and live chat. | TypeScript, React, Node.js |
+| [tts-raizhost](https://github.com/JadenRazo/tts-raizhost) | Self-hosted PDF reader-aloud powered by Kokoro v1.0 with a GPU/CPU dual-backend on k3s and circuit-breaker fallback. | Next.js, Kokoro, k3s |
+| [job-scanner](https://github.com/JadenRazo/job-scanner) | 24/7 ATS scanner that scores postings with Claude and drafts cover letters. | TypeScript, Node.js, Redis |
 
 #### `minecraft-and-bots/`
 
 | Repository | Description | Stack |
 |:-----------|:------------|:------|
-| [ServerPlugins](https://github.com/JadenRazo/ServerPlugins) | 24 interconnected Paper plugins — claims, economy, events, casino, arcade, admin | Java 21, Paper API, Maven |
-| [SurvivalCore](https://github.com/JadenRazo/SurvivalCore) | Paper 1.21.8 fork — async entity tracking, SIMD math, hopper caching | Java, Paper |
-| [Quiz-Bot](https://github.com/JadenRazo/Quiz-Bot) | Discord bot using LLMs to run educational quiz games | Python, discord.py |
+| [ServerPlugins](https://github.com/JadenRazo/ServerPlugins) | 24 interconnected Paper plugins covering claims, economy, events, arcade games, and admin. | Java 21, Paper API, Maven |
+| [SurvivalCore](https://github.com/JadenRazo/SurvivalCore) | Paper 1.21.8 fork with async entity tracking, SIMD math, and hopper caching. | Java, Paper |
+| [Quiz-Bot](https://github.com/JadenRazo/Quiz-Bot) | Discord bot that runs LLM-generated educational quiz games. | Python, discord.py |
 
 #### `labs/`
 
 | Repository | Description | Stack |
 |:-----------|:------------|:------|
-| [initializing-ad](https://github.com/JadenRazo/initializing-ad) | Active Directory homelab — DC, DNS, group policy, and enterprise onboarding flow | Windows Server 2022, VirtualBox |
+| [initializing-ad](https://github.com/JadenRazo/initializing-ad) | Active Directory homelab covering a domain controller, DNS, group policy, and a full enterprise onboarding flow. | Windows Server 2022, VirtualBox |
 
 *Filter by language or domain via topics on the [repositories tab](https://github.com/JadenRazo?tab=repositories).*
 
