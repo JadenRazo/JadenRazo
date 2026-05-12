@@ -5,9 +5,13 @@ on:
     types: [deploy-status]
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   update-status:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     permissions:
       contents: write
 
