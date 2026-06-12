@@ -126,13 +126,13 @@ projects/
 $ deploy status
 SITE                           STATE      HTTP   LATENCY   
 ----------------------------------------------------------
-raizhost.com                   up         200    33ms      
-app.raizhost.com               up         307    283ms     
-jadenrazo.dev                  up         200    29ms      
-claude.raizhost.com            up         301    39ms      
-showersautodetail.com          up         200    22ms      
+raizhost.com                   up         200    65ms      
+app.raizhost.com               up         307    361ms     
+jadenrazo.dev                  up         200    60ms      
+claude.raizhost.com            up         301    49ms      
+showersautodetail.com          up         200    23ms      
 
-Last check: 2026-06-12T21:30:01Z
+Last check: 2026-06-12T22:00:01Z
 ```
 <!-- DEPLOY_MONITOR_END -->
 
