@@ -88,18 +88,18 @@ projects/
 ### `$ cloc --by-language ~/repos/`
 
 <!-- LOC_START -->
-**959,956** lines of code across **1,172,391** total lines
+**965,875** lines of code across **1,180,303** total lines
 
 | Language | Lines of Code | % |
 |----------|-------------:|--:|
-| Java | 233,674 | 24.3% |
-| TypeScript | 170,218 | 17.7% |
-| JSON | 125,944 | 13.1% |
-| Go | 123,835 | 12.9% |
-| HTML | 73,380 | 7.6% |
-| Markdown | 65,878 | 6.9% |
-| YAML | 37,567 | 3.9% |
-| Python | 27,570 | 2.9% |
+| Java | 233,674 | 24.2% |
+| TypeScript | 170,218 | 17.6% |
+| JSON | 126,371 | 13.1% |
+| Go | 123,835 | 12.8% |
+| HTML | 73,501 | 7.6% |
+| Markdown | 69,422 | 7.2% |
+| YAML | 37,619 | 3.9% |
+| Python | 28,943 | 3.0% |
 | JavaScript | 16,469 | 1.7% |
 | Text | 13,839 | 1.4% |
 | HCL | 13,286 | 1.4% |
