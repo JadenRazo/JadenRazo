@@ -1,91 +1,116 @@
-<a href="https://github.com/JadenRazo">
-  <img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&size=22&duration=3000&pause=1000&color=39D353&background=0D1117&vCenter=true&width=600&lines=jaden%40dev%3A~+%24+whoami;full-stack+developer+%7C+infrastructure+nerd;if+it+runs+in+a+container%2C+i+can+ship+it" alt="Typing SVG" />
-</a>
+<div align="center">
 
----
+# Jaden Razo
 
-### `$ cat about.txt`
+**Software engineer building developer tools and cloud infrastructure — founder of [RaizHost](https://raizhost.com), a web agency shipping client sites and a client portal.**
 
-```
-Full-stack developer building production systems from frontend to bare metal.
-I design web platforms, deploy containerized services, and maintain custom
-Minecraft server forks. Most of my work lives in Go, Java, TypeScript, and Python.
-```
+[![Website](https://img.shields.io/badge/jadenrazo.dev-portfolio-2ea043?style=flat-square&logo=googlechrome&logoColor=white)](https://jadenrazo.dev/)
+[![RaizHost](https://img.shields.io/badge/raizhost.com-agency-2ea043?style=flat-square&logo=rocket&logoColor=white)](https://raizhost.com)
+[![Email](https://img.shields.io/badge/email-jrazo17%40wgu.edu-555555?style=flat-square&logo=gmail&logoColor=white)](mailto:jrazo17@wgu.edu)
 
----
+</div>
 
-### `$ cat skills.txt`
+## What I'm building
 
-```
-LANGUAGES       Go · Java · TypeScript · Python · SQL · Shell
-FRONTEND        React · Astro · Tailwind CSS · Redux · HTMX
-BACKEND         Fiber · Node.js · Express · Discord.py · JDA
-DATA            PostgreSQL · MariaDB · SQLite · Redis
-INFRA           Docker · Caddy · Nginx · GitHub Actions · SSH · Terraform
-CLOUD           AWS · Azure · GCP · Active Directory · Windows Server
-MINECRAFT       Paper API · Velocity · ProtocolLib · NMS
-```
+| Project | What it does | Stack |
+|:--------|:-------------|:------|
+| **[llm-lint](https://github.com/JadenRazo/llm-lint)**<br>[![CI](https://img.shields.io/github/actions/workflow/status/JadenRazo/llm-lint/ci.yml?branch=main&style=flat-square&label=CI)](https://github.com/JadenRazo/llm-lint/actions/workflows/ci.yml) [![Release](https://img.shields.io/github/v/release/JadenRazo/llm-lint?style=flat-square&color=2ea043)](https://github.com/JadenRazo/llm-lint/releases) [![npm](https://img.shields.io/npm/v/%40jadenrazo%2Fllm-lint?style=flat-square&color=2ea043)](https://www.npmjs.com/package/@jadenrazo/llm-lint) | CI gate that catches LLM-generated artifacts — stray `CLAUDE.md`, `Co-authored-by` trailers, `.cursorrules`, and friends. Emits SARIF, ships native Go binaries through npm with zero postinstall scripts. Try it: `npx @jadenrazo/llm-lint scan` | Go, SARIF, pre-commit |
+| **[CloudCostMCP](https://github.com/JadenRazo/CloudCostMCP)**<br>[![CI](https://img.shields.io/github/actions/workflow/status/JadenRazo/CloudCostMCP/ci.yml?branch=main&style=flat-square&label=CI)](https://github.com/JadenRazo/CloudCostMCP/actions/workflows/ci.yml) [![npm](https://img.shields.io/npm/v/%40jadenrazo%2Fcloudcost-mcp?style=flat-square&color=2ea043)](https://www.npmjs.com/package/@jadenrazo/cloudcost-mcp) | MCP server that prices Terraform plans before you apply them — multi-cloud cost analysis across AWS, Azure, and GCP. | TypeScript, MCP, SQLite |
+| **[sre-reference-app](https://github.com/JadenRazo/sre-reference-app)** | Production ECS Fargate blueprint: SLO burn-rate alarms, AWS FIS chaos drills, and OIDC-authenticated GitHub Actions deploys. | Terraform, AWS, GitHub Actions |
+| **[tts-raizhost](https://github.com/JadenRazo/tts-raizhost)** | Self-hosted PDF reader-aloud on Kokoro TTS with a GPU/CPU dual-backend on k3s and circuit-breaker fallback. | Next.js, Kokoro, k3s |
 
----
+<details>
+<summary><strong>Full project directory</strong> — cloud &amp; SRE, tooling, web, game servers</summary>
+<br>
 
-### `$ tree projects/ -L 1`
+**Cloud & SRE**
 
-```text
-projects/
-├── cloud-sre-infra/      # AWS, Terraform, observability, GitOps
-├── dev-tooling/          # CLIs, MCP servers, automation
-├── web-and-apps/         # Sites, dashboards, products
-├── minecraft-and-bots/   # Game servers and Discord bots
-└── labs/                 # Homelab experiments
-```
+| Repository | Description |
+|:-----------|:------------|
+| [sre-landing-zone](https://github.com/JadenRazo/sre-landing-zone) | Five-account AWS landing zone with Pilot Light DR and a CloudFront/WAF/Cognito edge, built on a $120 credit budget. |
+| [aws-supply-chain-security](https://github.com/JadenRazo/aws-supply-chain-security) | Container supply-chain stack: syft SBOMs, grype scans, keyless cosign signing via GitHub OIDC. |
+| [aws-todo-api](https://github.com/JadenRazo/aws-todo-api) | Serverless reading list on API Gateway, Lambda, DynamoDB, Cognito, WAF, and X-Ray. |
+| [azure-hub-spoke-network](https://github.com/JadenRazo/azure-hub-spoke-network) | Azure hub-and-spoke topology with VNets, peering, and NSGs, all in Terraform. |
+| [initializing-ad](https://github.com/JadenRazo/initializing-ad) | Active Directory homelab: domain controller, DNS, group policy, and a full enterprise onboarding flow. |
 
-#### `cloud-sre-infra/`
+**Developer tooling**
 
-| Repository | Description | Stack |
-|:-----------|:------------|:------|
-| [sre-reference-app](https://github.com/JadenRazo/sre-reference-app) | Production ECS Fargate blueprint with SLO burn-rate alarms, FIS chaos drills, and OIDC-authed GitHub Actions. | Terraform, AWS, GitHub Actions |
-| [sre-landing-zone](https://github.com/JadenRazo/sre-landing-zone) | Five-account AWS landing zone with Pilot Light DR and a CloudFront/WAF/Cognito edge, all on a $120 credit budget. | Terraform, AWS Organizations |
-| [aws-supply-chain-security](https://github.com/JadenRazo/aws-supply-chain-security) | Container supply-chain stack on AWS: syft SBOMs, grype scans, keyless cosign signing via GitHub OIDC. | Terraform, ECR, cosign |
-| [aws-todo-api](https://github.com/JadenRazo/aws-todo-api) | Live serverless reading list on API Gateway, Lambda, DynamoDB, Cognito, WAF, and X-Ray. | AWS SAM, Lambda, DynamoDB |
-| [azure-hub-spoke-network](https://github.com/JadenRazo/azure-hub-spoke-network) | Azure hub-and-spoke topology with VNets, peering, and NSGs, all in Terraform. | Terraform, Azure |
-| [EzWeb](https://github.com/JadenRazo/EzWeb) *(retired)* | Lightweight Docker site manager with a web dashboard. | Go, Docker |
+| Repository | Description |
+|:-----------|:------------|
+| [job-scanner](https://github.com/JadenRazo/job-scanner) | 24/7 ATS scanner that scores postings with Claude and drafts cover letters. |
 
-#### `dev-tooling/`
+**Web & apps**
 
-| Repository | Description | Stack |
-|:-----------|:------------|:------|
-| [llm-lint](https://github.com/JadenRazo/llm-lint) | CI gate that catches LLM artifacts: stray `CLAUDE.md`, `Co-authored-by` trailers, `.cursorrules`, and friends. Emits SARIF. | Go, pre-commit, SARIF |
-| [CloudCostMCP](https://github.com/JadenRazo/CloudCostMCP) | MCP server that prices Terraform plans across AWS, Azure, and GCP. | TypeScript, MCP, SQLite |
-| [dependabot-automation](https://github.com/JadenRazo/dependabot-automation) | Drop-in GitHub Actions workflow that auto-merges Dependabot PRs after an OSV.dev CVE diff. | GitHub Actions, OSV |
+| Repository | Description |
+|:-----------|:------------|
+| [Project-Website](https://github.com/JadenRazo/Project-Website) | Portfolio behind [jadenrazo.dev](https://jadenrazo.dev/) with a URL shortener, real-time messaging, and a hidden dev panel. |
+| [TicketHacker](https://github.com/JadenRazo/TicketHacker) | Helpdesk platform unifying Discord, Telegram, email, and live chat into one ticketing system. |
+| [EzWeb](https://github.com/JadenRazo/EzWeb) | Lightweight Docker site manager with a web dashboard (retired). |
 
-#### `web-and-apps/`
+**Game servers & bots**
 
-| Repository | Description | Stack |
-|:-----------|:------------|:------|
-| [Project-Website](https://github.com/JadenRazo/Project-Website) | Portfolio with a URL shortener, real-time messaging, and a hidden dev panel. | Go (Fiber), React, TypeScript |
-| [TicketHacker](https://github.com/JadenRazo/TicketHacker) | One ticketing system that unifies Discord, Telegram, email, and live chat. | TypeScript, React, Node.js |
-| [tts-raizhost](https://github.com/JadenRazo/tts-raizhost) | Self-hosted PDF reader-aloud powered by Kokoro v1.0 with a GPU/CPU dual-backend on k3s and circuit-breaker fallback. | Next.js, Kokoro, k3s |
-| [job-scanner](https://github.com/JadenRazo/job-scanner) | 24/7 ATS scanner that scores postings with Claude and drafts cover letters. | TypeScript, Node.js, Redis |
+| Repository | Description |
+|:-----------|:------------|
+| [ServerPlugins](https://github.com/JadenRazo/ServerPlugins) | 24 interconnected Paper plugins covering claims, economy, events, arcade games, and admin. |
+| [SurvivalCore](https://github.com/JadenRazo/SurvivalCore) | Paper 1.21.8 fork with async entity tracking, SIMD math, and hopper caching. |
+| [Quiz-Bot](https://github.com/JadenRazo/Quiz-Bot) | Discord bot that runs LLM-generated educational quiz games. |
 
-#### `minecraft-and-bots/`
+</details>
 
-| Repository | Description | Stack |
-|:-----------|:------------|:------|
-| [ServerPlugins](https://github.com/JadenRazo/ServerPlugins) | 24 interconnected Paper plugins covering claims, economy, events, arcade games, and admin. | Java 21, Paper API, Maven |
-| [SurvivalCore](https://github.com/JadenRazo/SurvivalCore) | Paper 1.21.8 fork with async entity tracking, SIMD math, and hopper caching. | Java, Paper |
-| [Quiz-Bot](https://github.com/JadenRazo/Quiz-Bot) | Discord bot that runs LLM-generated educational quiz games. | Python, discord.py |
+## Tech stack
 
-#### `labs/`
+**Languages**
 
-| Repository | Description | Stack |
-|:-----------|:------------|:------|
-| [initializing-ad](https://github.com/JadenRazo/initializing-ad) | Active Directory homelab covering a domain controller, DNS, group policy, and a full enterprise onboarding flow. | Windows Server 2022, VirtualBox |
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=go,ts,py,java,bash&theme=dark">
+  <source media="(prefers-color-scheme: light)" srcset="https://skillicons.dev/icons?i=go,ts,py,java,bash&theme=light">
+  <img alt="Go, TypeScript, Python, Java, Bash" src="https://skillicons.dev/icons?i=go,ts,py,java,bash">
+</picture>
 
-*Filter by language or domain via topics on the [repositories tab](https://github.com/JadenRazo?tab=repositories).*
+**Cloud & infrastructure**
 
----
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=aws,azure,terraform,docker,kubernetes,githubactions&theme=dark">
+  <source media="(prefers-color-scheme: light)" srcset="https://skillicons.dev/icons?i=aws,azure,terraform,docker,kubernetes,githubactions&theme=light">
+  <img alt="AWS, Azure, Terraform, Docker, Kubernetes, GitHub Actions" src="https://skillicons.dev/icons?i=aws,azure,terraform,docker,kubernetes,githubactions">
+</picture>
 
-### `$ cloc --by-language ~/repos/`
+**Data & web**
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=postgres,redis,react,nextjs,nodejs&theme=dark">
+  <source media="(prefers-color-scheme: light)" srcset="https://skillicons.dev/icons?i=postgres,redis,react,nextjs,nodejs&theme=light">
+  <img alt="PostgreSQL, Redis, React, Next.js, Node.js" src="https://skillicons.dev/icons?i=postgres,redis,react,nextjs,nodejs">
+</picture>
+
+## Stats
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://github-readme-stats.hackclub.dev/api?username=JadenRazo&show_icons=true&hide_border=true&theme=github_dark&bg_color=00000000">
+  <source media="(prefers-color-scheme: light)" srcset="https://github-readme-stats.hackclub.dev/api?username=JadenRazo&show_icons=true&hide_border=true&bg_color=00000000">
+  <img alt="GitHub stats for JadenRazo" src="https://github-readme-stats.hackclub.dev/api?username=JadenRazo&show_icons=true&hide_border=true" height="165">
+</picture>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://github-readme-stats.hackclub.dev/api/top-langs/?username=JadenRazo&layout=compact&hide_border=true&theme=github_dark&bg_color=00000000">
+  <source media="(prefers-color-scheme: light)" srcset="https://github-readme-stats.hackclub.dev/api/top-langs/?username=JadenRazo&layout=compact&hide_border=true&bg_color=00000000">
+  <img alt="Most used languages" src="https://github-readme-stats.hackclub.dev/api/top-langs/?username=JadenRazo&layout=compact&hide_border=true" height="165">
+</picture>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://streak-stats.demolab.com?user=JadenRazo&hide_border=true&background=00000000&theme=github-dark-blue&ring=39D353&fire=39D353&currStreakLabel=39D353">
+  <source media="(prefers-color-scheme: light)" srcset="https://streak-stats.demolab.com?user=JadenRazo&hide_border=true&background=00000000&ring=1A7F37&fire=1A7F37&currStreakLabel=1A7F37">
+  <img alt="GitHub contribution streak" src="https://streak-stats.demolab.com?user=JadenRazo&hide_border=true" height="165">
+</picture>
+
+<details>
+<summary><strong>More stats</strong> — 3D contribution graph and lines of code across all repos</summary>
+<br>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/profile-3d-contrib/profile-night-green.svg">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/profile-3d-contrib/profile-green.svg">
+  <img alt="3D contribution graph" src="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/profile-3d-contrib/profile-green.svg" width="720">
+</picture>
 
 <!-- LOC_START -->
 **1,010,402** lines of code across **1,238,741** total lines
@@ -106,20 +131,27 @@ projects/
 | diff | 13,079 | 1.3% |
 <!-- LOC_END -->
 
-*Updated daily via [GitHub Actions](.github/workflows/loc-counter.yml)*
+*Counted daily across all source repos via [GitHub Actions](.github/workflows/loc-counter.yml).*
 
----
+</details>
 
-### `$ git log --oneline --graph`
+## Recent activity
 
-<img src="./profile-3d-contrib/profile-night-green.svg" alt="3D Contribution Graph" width="720">
-<img src="https://streak-stats.demolab.com?user=JadenRazo&theme=github-dark-blue&hide_border=true&background=0D1117&ring=39D353&fire=39D353&currStreakLabel=39D353" alt="GitHub Streak" />
+<!--START_SECTION:activity-->
+*Refreshed daily by [GitHub Actions](.github/workflows/recent-activity.yml) — check back after the next run.*
+<!--END_SECTION:activity-->
 
-*Generated daily via [GitHub Actions](.github/workflows/profile-3d.yml)*
+## Contributions
 
----
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/JadenRazo/JadenRazo/output/github-snake-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/JadenRazo/JadenRazo/output/github-snake.svg">
+  <img alt="Contribution snake animation" src="https://raw.githubusercontent.com/JadenRazo/JadenRazo/output/github-snake.svg">
+</picture>
 
-### `$ deploy status`
+## Production status
+
+Live uptime for the sites I run, pushed to this README by a monitor on my own infrastructure.
 
 <!-- DEPLOY_MONITOR_START -->
 ```
@@ -135,4 +167,3 @@ showersautodetail.com          up         200    27ms
 Last check: 2026-06-25T09:30:01Z
 ```
 <!-- DEPLOY_MONITOR_END -->
-
