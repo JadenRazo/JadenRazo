@@ -1,13 +1,25 @@
 name: Deploy Monitor
 
+# Self-contained uptime check. The previous version only listened for
+# repository_dispatch events from an external sender (retired VPS), which
+# went silent on 2026-06-25 and left stale data in the README. This version
+# probes the sites directly on a schedule; repository_dispatch is kept for
+# manual pushes from infrastructure if ever wanted again.
 on:
+  schedule:
+    - cron: "*/30 * * * *"
   repository_dispatch:
     types: [deploy-status]
   workflow_dispatch:
 
+concurrency:
+  group: deploy-monitor
+  cancel-in-progress: true
+
 jobs:
   update-status:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     permissions:
       contents: write
 
@@ -15,25 +27,58 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v5
 
-      - name: Set status from dispatch payload
+      - name: Probe sites
         run: |
-          if [ -n '${{ toJson(github.event.client_payload.status) }}' ] && [ '${{ toJson(github.event.client_payload.status) }}' != 'null' ]; then
-            echo "STATUS_JSON<<STATUSEOF" >> "$GITHUB_ENV"
-            echo '${{ toJson(github.event.client_payload.status) }}' >> "$GITHUB_ENV"
-            echo "STATUSEOF" >> "$GITHUB_ENV"
-          else
-            echo "STATUS_JSON=[]" >> "$GITHUB_ENV"
-          fi
+          SITES="raizhost.com app.raizhost.com jadenrazo.dev llm.raizhost.com showersautodetail.com"
+          {
+            echo '```'
+            echo '$ deploy status'
+            printf '%-30s %-10s %-6s %-10s\n' "SITE" "STATE" "HTTP" "LATENCY"
+            echo '----------------------------------------------------------'
+            for site in $SITES; do
+              # First-hop response: redirects (3xx) count as up, like the old monitor.
+              out=$(curl -s -o /dev/null -w '%{http_code} %{time_total}' -m 15 "https://$site" || echo "000 0")
+              code=${out% *}
+              secs=${out#* }
+              ms=$(awk -v t="$secs" 'BEGIN { printf "%dms", t * 1000 }')
+              state="up"
+              case "$code" in
+                2*|3*) state="up" ;;
+                000)   state="down"; ms="-" ;;
+                *)     state="degraded" ;;
+              esac
+              printf '%-30s %-10s %-6s %-10s\n' "$site" "$state" "$code" "$ms"
+            done
+            echo ""
+            echo "Last check: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+            echo '```'
+          } > /tmp/status-block.txt
+          cat /tmp/status-block.txt
 
-      - name: Update README
-        run: python3 .github/scripts/update_deploy_status.py
+      - name: Update README block
+        run: |
+          python3 - <<'PYEOF'
+          import re
+          block = open("/tmp/status-block.txt").read().rstrip("\n")
+          readme = open("README.md").read()
+          new = re.sub(
+              r"(<!-- DEPLOY_MONITOR_START -->\n).*?(\n<!-- DEPLOY_MONITOR_END -->)",
+              lambda m: m.group(1) + block + m.group(2),
+              readme,
+              flags=re.S,
+          )
+          open("README.md", "w").write(new)
+          PYEOF
 
       - name: Commit and push
         run: |
+          if git diff --quiet README.md; then
+            echo "No change"
+            exit 0
+          fi
           git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add README.md
-          git diff --staged --quiet && echo "No changes" && exit 0
-          git commit -m "Update deploy monitor status"
+          git commit -m "chore: update production status"
           git pull --rebase origin main
           git push

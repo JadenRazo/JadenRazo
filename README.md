@@ -151,7 +151,7 @@
 
 ## Production status
 
-Live uptime for the sites I run, pushed to this README by a monitor on my own infrastructure.
+Live uptime for the sites I run, checked every 30 minutes.
 
 <!-- DEPLOY_MONITOR_START -->
 ```
