@@ -1,0 +1,63 @@
+name: Stats Cards
+
+# Self-hosted github-readme-stats: renders the stats + top-languages cards
+# to static SVGs in this repo using the upstream project's own renderer,
+# authenticated with the workflow's built-in GITHUB_TOKEN. No hosted
+# instance, no PAT to manage.
+on:
+  schedule:
+    - cron: "17 5 * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: stats-cards
+  cancel-in-progress: true
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout profile repo
+        uses: actions/checkout@v5
+
+      - name: Checkout github-readme-stats (pinned)
+        uses: actions/checkout@v5
+        with:
+          repository: anuraghazra/github-readme-stats
+          ref: 54a7985aeefda00d5eadb55b80c17c7f976c37d2 # master 2026-06-30
+          path: .grs
+
+      - name: Setup Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22
+
+      - name: Install renderer dependencies
+        working-directory: .grs
+        run: npm install --omit=dev --no-audit --no-fund
+
+      - name: Generate card SVGs
+        env:
+          PAT_1: ${{ secrets.GITHUB_TOKEN }}
+          GRS_DIR: ${{ github.workspace }}/.grs
+          OUT_DIR: generated
+          STATS_USER: JadenRazo
+        run: node .github/scripts/generate-stats-cards.mjs
+
+      - name: Commit if changed
+        run: |
+          rm -rf .grs
+          if git diff --quiet generated/ 2>/dev/null && [ -z "$(git status --porcelain generated/)" ]; then
+            echo "No change"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add generated/
+          git commit -m "chore: refresh stats cards"
+          git pull --rebase origin main
+          git push

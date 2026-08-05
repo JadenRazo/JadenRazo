@@ -86,14 +86,14 @@
 ## Stats
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://github-readme-stats.hackclub.dev/api?username=JadenRazo&show_icons=true&hide_border=true&theme=github_dark&bg_color=00000000">
-  <source media="(prefers-color-scheme: light)" srcset="https://github-readme-stats.hackclub.dev/api?username=JadenRazo&show_icons=true&hide_border=true&bg_color=00000000">
-  <img alt="GitHub stats for JadenRazo" src="https://github-readme-stats.hackclub.dev/api?username=JadenRazo&show_icons=true&hide_border=true" height="165">
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/generated/stats-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/generated/stats-light.svg">
+  <img alt="GitHub stats for JadenRazo" src="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/generated/stats-light.svg" height="165">
 </picture>
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://github-readme-stats.hackclub.dev/api/top-langs/?username=JadenRazo&layout=compact&hide_border=true&theme=github_dark&bg_color=00000000">
-  <source media="(prefers-color-scheme: light)" srcset="https://github-readme-stats.hackclub.dev/api/top-langs/?username=JadenRazo&layout=compact&hide_border=true&bg_color=00000000">
-  <img alt="Most used languages" src="https://github-readme-stats.hackclub.dev/api/top-langs/?username=JadenRazo&layout=compact&hide_border=true" height="165">
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/generated/top-langs-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/generated/top-langs-light.svg">
+  <img alt="Most used languages" src="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/generated/top-langs-light.svg" height="165">
 </picture>
 
 <picture>
