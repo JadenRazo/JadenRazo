@@ -138,7 +138,7 @@
 ## Recent activity
 
 <!--START_SECTION:activity-->
-*Refreshed daily by [GitHub Actions](.github/workflows/recent-activity.yml) — check back after the next run.*
+1. 🎉 Merged PR [#6](https://github.com/JadenRazo/JadenRazo/pull/6) in [JadenRazo/JadenRazo](https://github.com/JadenRazo/JadenRazo)
 <!--END_SECTION:activity-->
 
 ## Contributions
