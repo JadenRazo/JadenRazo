@@ -42,7 +42,9 @@ jobs:
 
       - name: Generate card SVGs
         env:
-          PAT_1: ${{ secrets.GITHUB_TOKEN }}
+          # Needs a user token: the built-in GITHUB_TOKEN is an installation
+          # token and cannot read user contribution data.
+          PAT_1: ${{ secrets.PAT_1 }}
           GRS_DIR: ${{ github.workspace }}/.grs
           OUT_DIR: generated
           STATS_USER: JadenRazo

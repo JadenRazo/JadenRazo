@@ -30,27 +30,44 @@ jobs:
       - name: Probe sites
         run: |
           SITES="raizhost.com app.raizhost.com jadenrazo.dev llm.raizhost.com showersautodetail.com"
+          # Three timed probes per site, averaged. A single sample punishes a
+          # site for one cold TLS handshake or CDN cache miss; the average of
+          # three real requests is an honest steady-state number.
           {
             echo '```'
             echo '$ deploy status'
-            printf '%-30s %-10s %-6s %-10s\n' "SITE" "STATE" "HTTP" "LATENCY"
-            echo '----------------------------------------------------------'
+            printf '%-30s %-10s %-6s %-12s\n' "SITE" "STATE" "HTTP" "AVG LATENCY"
+            echo '------------------------------------------------------------'
+            total_ms=0; up_count=0; site_count=0
             for site in $SITES; do
-              # First-hop response: redirects (3xx) count as up, like the old monitor.
-              out=$(curl -s -o /dev/null -w '%{http_code} %{time_total}' -m 15 "https://$site" || echo "000 0")
-              code=${out% *}
-              secs=${out#* }
-              ms=$(awk -v t="$secs" 'BEGIN { printf "%dms", t * 1000 }')
-              state="up"
-              case "$code" in
-                2*|3*) state="up" ;;
-                000)   state="down"; ms="-" ;;
-                *)     state="degraded" ;;
-              esac
-              printf '%-30s %-10s %-6s %-10s\n' "$site" "$state" "$code" "$ms"
+              site_count=$((site_count + 1))
+              sum=0; code="000"; ok=0
+              for i in 1 2 3; do
+                out=$(curl -s -o /dev/null -w '%{http_code} %{time_total}' -m 15 "https://$site" || echo "000 0")
+                c=${out% *}
+                secs=${out#* }
+                case "$c" in 2*|3*) ok=$((ok + 1)); code=$c;; *) [ "$code" = "000" ] && code=$c;; esac
+                sum=$(awk -v a="$sum" -v t="$secs" 'BEGIN { printf "%.6f", a + t }')
+              done
+              if [ "$ok" -gt 0 ]; then
+                state="up"
+                ms=$(awk -v s="$sum" 'BEGIN { printf "%d", (s / 3) * 1000 }')
+                total_ms=$((total_ms + ms)); up_count=$((up_count + 1))
+                lat="${ms}ms"
+              elif [ "$code" = "000" ]; then
+                state="down"; lat="-"
+              else
+                state="degraded"; lat="-"
+              fi
+              printf '%-30s %-10s %-6s %-12s\n' "$site" "$state" "$code" "$lat"
             done
+            echo '------------------------------------------------------------'
+            if [ "$up_count" -gt 0 ]; then
+              fleet=$(awk -v t="$total_ms" -v n="$up_count" 'BEGIN { printf "%d", t / n }')
+              printf '%-30s %-10s %-6s %-12s\n' "fleet average" "" "" "${fleet}ms"
+            fi
             echo ""
-            echo "Last check: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+            echo "Last check: $(date -u +%Y-%m-%dT%H:%M:%SZ) (3 probes per site, averaged)"
             echo '```'
           } > /tmp/status-block.txt
           cat /tmp/status-block.txt
