@@ -50,6 +50,36 @@ jobs:
           STATS_USER: JadenRazo
         run: node .github/scripts/generate-stats-cards.mjs
 
+      - name: Checkout streak-stats (pinned)
+        uses: actions/checkout@v5
+        with:
+          repository: DenverCoder1/github-readme-streak-stats
+          ref: v1.7.0
+          path: .streak
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.3"
+          extensions: curl
+          tools: composer
+
+      - name: Generate streak SVGs
+        env:
+          TOKEN: ${{ secrets.PAT_1 }}
+        run: |
+          cd .streak
+          composer install --no-dev --quiet
+          php -S 127.0.0.1:8471 -t src >/tmp/streak-php.log 2>&1 &
+          for i in $(seq 1 20); do curl -sf -o /dev/null "http://127.0.0.1:8471/?user=JadenRazo" && break; sleep 1; done
+          curl -sf "http://127.0.0.1:8471/?user=JadenRazo&hide_border=true&background=00000000&theme=github-dark-blue&ring=39D353&fire=39D353&currStreakLabel=39D353" -o ../generated/streak-dark.svg
+          curl -sf "http://127.0.0.1:8471/?user=JadenRazo&hide_border=true&background=00000000&ring=1A7F37&fire=1A7F37&currStreakLabel=1A7F37" -o ../generated/streak-light.svg
+          kill %1 || true
+          cd ..
+          # Refuse to commit an error frame: a real card contains "Current Streak".
+          grep -q "Current Streak" generated/streak-dark.svg
+          grep -q "Current Streak" generated/streak-light.svg
+
       - name: Commit if changed
         run: |
           rm -rf .grs

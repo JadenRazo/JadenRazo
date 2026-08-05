@@ -97,9 +97,9 @@
 </picture>
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://streak-stats.demolab.com?user=JadenRazo&hide_border=true&background=00000000&theme=github-dark-blue&ring=39D353&fire=39D353&currStreakLabel=39D353">
-  <source media="(prefers-color-scheme: light)" srcset="https://streak-stats.demolab.com?user=JadenRazo&hide_border=true&background=00000000&ring=1A7F37&fire=1A7F37&currStreakLabel=1A7F37">
-  <img alt="GitHub contribution streak" src="https://streak-stats.demolab.com?user=JadenRazo&hide_border=true" height="165">
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/generated/streak-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/generated/streak-light.svg">
+  <img alt="GitHub contribution streak" src="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/generated/streak-light.svg" height="165">
 </picture>
 
 <details>
