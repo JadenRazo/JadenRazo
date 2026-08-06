@@ -229,9 +229,12 @@ const buildCss = (events, dur, ce, lastOffset) => {
     `.kd{font-family:${FONT};font-weight:600;font-size:15px;fill:var(--kt);font-variant-numeric:tabular-nums}` +
     `.kp{font-family:${FONT};font-weight:700;font-size:17px;fill:var(--c4);text-anchor:end}` +
     // snk's base styles already paint the complete calendar, so freezing every
-    // animation yields a sensible static frame: full year + final total.
+    // animation yields a sensible static frame: full year + final total. The
+    // progress bars need an explicit end state — their base is scale(0,1), so
+    // simply stopping the animation would erase them.
     `@media (prefers-reduced-motion:reduce){` +
     `.c,.s,.u,.kk,.kf{animation:none}` +
+    `.u{transform:scale(1,1)}` +
     `.kk{transform:translateY(-${lastOffset}px)}` +
     `.kf{opacity:0}}`
   );
