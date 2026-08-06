@@ -39,6 +39,16 @@ const WINDOW_H = ROW_PITCH;
 const BASELINE_IN_WINDOW = 32; // leaves ~25px of ascent and room for a comma
 const BAND_TOP = 44; // extra canvas above the artwork
 const BAND_BOTTOM = 30; // extra canvas below the artwork
+/**
+ * Bites closer together than this are treated as one burst: the badge shows the
+ * burst's running sum (+3, then +8) instead of a fresh badge per bite. The
+ * snake eats on consecutive animation steps for long stretches — the median gap
+ * is around one step — so without this the badge strobes several times a second
+ * and is unreadable.
+ */
+const BURST_GAP_MS = 500;
+const BADGE_HOLD_MS = 500; // linger after a burst ends, so the total can be read
+const BADGE_FADE_MS = 400;
 const FONT = `-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif`;
 const MONTHS = "Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec".split(" ");
 
@@ -120,7 +130,7 @@ const parseSvg = (svg) => {
   const style = svg.slice(styleStart, styleEnd);
 
   // Duration is derived by snk from the route length, so it changes every run.
-  const dur = /\.c\{[^}]*?(\d+)ms/.exec(style)?.[1];
+  const dur = Number(/\.c\{[^}]*?(\d+)ms/.exec(style)?.[1]);
   if (!dur) bail("could not determine animation duration");
 
   const cellSize = Number(/\.c\{[^}]*?width:([\d.]+)px/.exec(style)?.[1]);
@@ -167,6 +177,27 @@ const parseSvg = (svg) => {
   return { root, rootEnd, vx, vy, vw, vh, dur, ce, rightEdge, styleEnd, placed };
 };
 
+/**
+ * Chain bites separated by less than BURST_GAP_MS into a burst, and give each
+ * event the burst-cumulative figure the badge should display at that moment.
+ * Returns the bursts so the badge keyframe can hold one badge across each.
+ */
+const buildBursts = (events, dur) => {
+  const gapPct = (BURST_GAP_MS / dur) * 100;
+  const bursts = [];
+  let start = 0;
+  for (let i = 0; i < events.length; i++) {
+    const isLast = i === events.length - 1;
+    // sum from the burst's first bite up to and including this one
+    events[i].burst = events[i].count + (i > start ? events[i - 1].burst : 0);
+    if (isLast || events[i + 1].n - events[i].n > gapPct) {
+      bursts.push({ start, end: i });
+      start = i + 1;
+    }
+  }
+  return bursts;
+};
+
 const buildEvents = (placed, cells) => {
   const byPos = new Map(cells.map((c) => [`${c.x},${c.y}`, c]));
 
@@ -189,7 +220,7 @@ const buildEvents = (placed, cells) => {
   return events;
 };
 
-const buildCss = (events, dur, ce, lastOffset) => {
+const buildCss = (events, bursts, dur, ce, lastOffset) => {
   const dark = luminance(ce) < 0.5;
   const muted = dark ? "#8b949e" : "#57606a";
 
@@ -201,17 +232,30 @@ const buildCss = (events, dur, ce, lastOffset) => {
     `100%{transform:translateY(-${lastOffset}px)}`,
   ].join("");
 
-  // The floating "+N" badge. Windows are sized from the gap to the next bite so
-  // the stops stay strictly increasing even where bites are 0.2% apart.
+  // The floating "+N" badge: one badge per burst, held from the burst's first
+  // bite to its last so the figure visibly accumulates rather than restarting.
+  // It only floats away once the burst is over. Windows are derived from the
+  // gap to the next burst, so the stops stay strictly increasing however
+  // tightly packed the bites are.
+  const holdPct = (BADGE_HOLD_MS / dur) * 100;
+  const fadePct = (BADGE_FADE_MS / dur) * 100;
   const stops = [{ o: 0, v: "opacity:0;transform:translateY(0px)" }];
-  events.forEach((e, i) => {
-    const next = i + 1 < events.length ? events[i + 1].n : 100;
-    const gap = next - e.n;
-    const fade = Math.min(1.2, gap * 0.5);
-    const pre = Math.min(0.01, gap * 0.1);
-    stops.push({ o: e.n - pre, v: "opacity:0;transform:translateY(0px)" });
-    stops.push({ o: e.n, v: "opacity:1;transform:translateY(0px)" });
-    stops.push({ o: e.n + fade, v: "opacity:0;transform:translateY(-10px)" });
+  let prevEnd = 0;
+  bursts.forEach((b, bi) => {
+    const first = events[b.start].n;
+    const last = events[b.end].n;
+    const next = bi + 1 < bursts.length ? events[bursts[bi + 1].start].n : 100;
+    const gap = next - last;
+    // hold + fade together stay inside 70% of the gap, leaving clear air before
+    // the next burst appears
+    const hold = Math.min(holdPct, gap * 0.35);
+    const fade = Math.min(fadePct, gap * 0.35);
+    const pre = Math.min(0.01, (first - prevEnd) * 0.25);
+    stops.push({ o: first - pre, v: "opacity:0;transform:translateY(0px)" });
+    stops.push({ o: first, v: "opacity:1;transform:translateY(0px)" });
+    stops.push({ o: last + hold, v: "opacity:1;transform:translateY(0px)" });
+    prevEnd = last + hold + fade;
+    stops.push({ o: prevEnd, v: "opacity:0;transform:translateY(-10px)" });
   });
   stops.push({ o: 100, v: "opacity:0;transform:translateY(-10px)" });
   for (let i = 1; i < stops.length; i++)
@@ -241,10 +285,12 @@ const buildCss = (events, dur, ce, lastOffset) => {
 };
 
 const buildElements = (events, total, rightEdge, vx, vw, top, bottom) => {
+  // delta is the burst-cumulative figure, so a run of quick bites reads as one
+  // badge climbing (+3 then +8) rather than a new badge flashing per bite.
   const rows = [{ value: 0, date: "", delta: 0 }, ...events.map((e) => ({
     value: e.running,
     date: e.date,
-    delta: e.count,
+    delta: e.burst,
   }))];
 
   const baseline = top + BASELINE_IN_WINDOW; // clear of the snake's runway
@@ -301,6 +347,7 @@ const process1 = async (file, cellsPromise) => {
 
   const cells = await cellsPromise;
   const events = buildEvents(p.placed, cells);
+  const bursts = buildBursts(events, p.dur);
   const total = events[events.length - 1].running;
   const lastOffset = events.length * ROW_PITCH;
 
@@ -312,7 +359,7 @@ const process1 = async (file, cellsPromise) => {
     .replace(/viewBox="[^"]*"/, `viewBox="${p.vx} ${top} ${p.vw} ${height}"`)
     .replace(/height="[^"]*"/, `height="${height}"`);
 
-  const css = buildCss(events, p.dur, p.ce, lastOffset);
+  const css = buildCss(events, bursts, p.dur, p.ce, lastOffset);
   const els = buildElements(events, total, p.rightEdge, p.vx, p.vw, top, bottom);
 
   const closeAt = original.lastIndexOf("</svg>");
