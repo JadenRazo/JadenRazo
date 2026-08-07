@@ -138,7 +138,7 @@
 ## Recent activity
 
 <!--START_SECTION:activity-->
-1. 🎉 Merged PR [#6](https://github.com/JadenRazo/JadenRazo/pull/6) in [JadenRazo/JadenRazo](https://github.com/JadenRazo/JadenRazo)
+1. 🎉 Merged PR [#39](https://github.com/JadenRazo/llm-lint/pull/39) in [JadenRazo/llm-lint](https://github.com/JadenRazo/llm-lint)
 <!--END_SECTION:activity-->
 
 ## Contributions
