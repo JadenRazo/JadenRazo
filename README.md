@@ -143,10 +143,13 @@
 
 ## Contributions
 
+A snake eats my contribution graph, counting up my real contributions as it goes. It takes a
+different route every couple of hours.
+
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/JadenRazo/JadenRazo/output/github-snake-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/JadenRazo/JadenRazo/output/github-snake.svg">
-  <img alt="Contribution snake animation" src="https://raw.githubusercontent.com/JadenRazo/JadenRazo/output/github-snake.svg">
+  <img alt="A snake eating my GitHub contribution graph, with a running counter of contributions consumed over the past year" src="https://raw.githubusercontent.com/JadenRazo/JadenRazo/output/github-snake.svg">
 </picture>
 
 ## Production status
