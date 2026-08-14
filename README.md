@@ -138,7 +138,6 @@
 ## Recent activity
 
 <!--START_SECTION:activity-->
-1. 🚀 Published release [v1.2.1 — the cloudcost CLI actually starts now](https://github.com/JadenRazo/CloudCostMCP/releases/tag/v1.2.1) in [JadenRazo/CloudCostMCP](https://github.com/JadenRazo/CloudCostMCP)
 <!--END_SECTION:activity-->
 
 ## Contributions

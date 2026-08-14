@@ -22,6 +22,7 @@ jobs:
         uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
 
       - name: Update recent activity section
+        id: activity
         uses: jamesgeorge007/github-activity-readme@4aefbfa1c222d70537dc6a02f0519266aab2b1ea # v0.5.0
         # No-op instead of a red X when there are no recent public events
         # (the action exits non-zero if it finds nothing to write).
@@ -35,3 +36,9 @@ jobs:
           EMPTY_COMMIT_MSG: 'chore: no new activity'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # continue-on-error above means core.setFailed() never reaches the run's
+      # status. Surface it as a warning so a broken action is not invisible.
+      - name: Report a swallowed activity failure
+        if: steps.activity.outcome != 'success'
+        run: echo "::warning::github-activity-readme failed — the activity section may be stale"

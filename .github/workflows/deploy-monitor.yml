@@ -28,6 +28,7 @@ jobs:
         uses: actions/checkout@v5
 
       - name: Probe sites
+        id: probe
         run: |
           SITES="raizhost.com app.raizhost.com jadenrazo.dev llm.raizhost.com showersautodetail.com"
           # Three timed probes per site, averaged. A single sample punishes a
@@ -71,8 +72,16 @@ jobs:
             echo '```'
           } > /tmp/status-block.txt
           cat /tmp/status-block.txt
+          # A group command does not fork, so up_count survives the redirect.
+          # If the runner lost egress every site reads "down"; that is a probe
+          # failure, not an outage, and must not reach the profile.
+          echo "up_count=$up_count" >> "$GITHUB_OUTPUT"
+          if [ "$up_count" -eq 0 ]; then
+            echo "::warning::no site was reachable — skipping publish rather than reporting a fleet outage"
+          fi
 
       - name: Update README block
+        if: steps.probe.outputs.up_count != '0'
         run: |
           python3 - <<'PYEOF'
           import re
@@ -84,10 +93,13 @@ jobs:
               readme,
               flags=re.S,
           )
+          if new == readme:
+              raise SystemExit("::error::DEPLOY_MONITOR markers not found or unchanged in README.md")
           open("README.md", "w").write(new)
           PYEOF
 
       - name: Commit and push
+        if: steps.probe.outputs.up_count != '0'
         run: |
           if git diff --quiet README.md; then
             echo "No change"
@@ -97,5 +109,16 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add README.md
           git commit -m "chore: update production status"
-          git pull --rebase origin main
-          git push
+          # Four scheduled workflows commit to main and their crons overlap, so
+          # another run can land between the rebase and the push. Retry the
+          # whole rebase-and-push instead of failing the job on a lost race.
+          for attempt in 1 2 3 4 5; do
+            if git pull --rebase origin main && git push; then
+              exit 0
+            fi
+            git rebase --abort 2>/dev/null || true
+            echo "::warning::rebase/push lost a race (attempt $attempt/5), retrying"
+            sleep $((attempt * 5))
+          done
+          echo "::error::could not push after 5 attempts"
+          exit 1

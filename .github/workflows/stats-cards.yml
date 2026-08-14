@@ -70,7 +70,13 @@ jobs:
           extensions: curl, intl, mbstring
           tools: composer
 
+      # The stats and top-langs cards are already rendered by this point.
+      # continue-on-error lets them be committed even when the streak half
+      # breaks; the run is still failed at the end so it stays visible.
+      # Without this, a streak-side outage froze all six cards for 9 days.
       - name: Generate streak SVGs
+        id: streak
+        continue-on-error: true
         env:
           TOKEN: ${{ secrets.PAT_1 }}
         run: |
@@ -138,5 +144,22 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add generated/
           git commit -m "chore: refresh stats cards"
-          git pull --rebase origin main
-          git push
+          # Four scheduled workflows commit to main and their crons overlap, so
+          # another run can land between the rebase and the push. Retry the
+          # whole rebase-and-push instead of failing the job on a lost race.
+          for attempt in 1 2 3 4 5; do
+            if git pull --rebase origin main && git push; then
+              exit 0
+            fi
+            git rebase --abort 2>/dev/null || true
+            echo "::warning::rebase/push lost a race (attempt $attempt/5), retrying"
+            sleep $((attempt * 5))
+          done
+          echo "::error::could not push after 5 attempts"
+          exit 1
+
+      - name: Fail the run if the streak cards did not refresh
+        if: steps.streak.outcome != 'success'
+        run: |
+          echo "::error::streak card generation failed; the stats and top-langs cards were still committed"
+          exit 1
