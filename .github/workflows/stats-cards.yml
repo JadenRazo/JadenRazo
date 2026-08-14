@@ -13,6 +13,9 @@ concurrency:
   group: stats-cards
   cancel-in-progress: true
 
+env:
+  STATS_USER: JadenRazo
+
 jobs:
   generate:
     runs-on: ubuntu-latest
@@ -47,7 +50,6 @@ jobs:
           PAT_1: ${{ secrets.PAT_1 }}
           GRS_DIR: ${{ github.workspace }}/.grs
           OUT_DIR: generated
-          STATS_USER: JadenRazo
         run: node .github/scripts/generate-stats-cards.mjs
 
       - name: Checkout streak-stats (pinned)
@@ -57,32 +59,77 @@ jobs:
           ref: v1.7.0
           path: .streak
 
+      # intl is not part of setup-php's default extension set, but streak-stats
+      # declares ext-intl in composer.json (card.php builds dates with
+      # IntlDateFormatter). Without it `composer install` aborts during
+      # dependency resolution before anything is rendered.
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: "8.3"
-          extensions: curl
+          extensions: curl, intl, mbstring
           tools: composer
 
       - name: Generate streak SVGs
         env:
           TOKEN: ${{ secrets.PAT_1 }}
         run: |
+          set -euo pipefail
           cd .streak
-          composer install --no-dev --quiet
+
+          # src/index.php reads the token from $_SERVER["TOKEN"], which only
+          # picks up the process environment when variables_order contains "E".
+          # Writing the .env the app already expects makes it independent of
+          # whichever php.ini setup-php installed.
+          umask 077
+          printf 'TOKEN=%s\n' "$TOKEN" > .env
+
+          composer install --no-dev --no-interaction --no-progress --prefer-dist
+
           php -S 127.0.0.1:8471 -t src >/tmp/streak-php.log 2>&1 &
-          for i in $(seq 1 20); do curl -sf -o /dev/null "http://127.0.0.1:8471/?user=JadenRazo" && break; sleep 1; done
-          curl -sf "http://127.0.0.1:8471/?user=JadenRazo&hide_border=true&background=00000000&theme=github-dark-blue&ring=39D353&fire=39D353&currStreakLabel=39D353" -o ../generated/streak-dark.svg
-          curl -sf "http://127.0.0.1:8471/?user=JadenRazo&hide_border=true&background=00000000&ring=1A7F37&fire=1A7F37&currStreakLabel=1A7F37" -o ../generated/streak-light.svg
-          kill %1 || true
-          cd ..
+          php_pid=$!
+          trap 'kill "$php_pid" 2>/dev/null || true' EXIT
+
+          for i in $(seq 1 30); do
+            if curl -sf -o /dev/null "http://127.0.0.1:8471/?user=$STATS_USER"; then
+              ready=1
+              break
+            fi
+            sleep 1
+          done
+          if [ -z "${ready:-}" ]; then
+            echo "::error::streak server never served a successful response"
+            cat /tmp/streak-php.log
+            exit 1
+          fi
+
+          # Render to a staging path so a failed run never leaves a half-written
+          # card sitting in generated/.
+          fetch() {
+            curl -sS --fail-with-body --retry 3 --retry-delay 5 --retry-all-errors \
+              "http://127.0.0.1:8471/?user=$STATS_USER&$1" -o "$2"
+          }
+          fetch "hide_border=true&background=00000000&theme=github-dark-blue&ring=39D353&fire=39D353&currStreakLabel=39D353" /tmp/streak-dark.svg
+          fetch "hide_border=true&background=00000000&ring=1A7F37&fire=1A7F37&currStreakLabel=1A7F37" /tmp/streak-light.svg
+
           # Refuse to commit an error frame: a real card contains "Current Streak".
-          grep -q "Current Streak" generated/streak-dark.svg
-          grep -q "Current Streak" generated/streak-light.svg
+          for f in /tmp/streak-dark.svg /tmp/streak-light.svg; do
+            if ! grep -q "Current Streak" "$f"; then
+              echo "::error::$f is an error frame, not a streak card"
+              head -c 2000 "$f"; echo
+              cat /tmp/streak-php.log
+              exit 1
+            fi
+          done
+
+          mv /tmp/streak-dark.svg ../generated/streak-dark.svg
+          mv /tmp/streak-light.svg ../generated/streak-light.svg
 
       - name: Commit if changed
         run: |
-          rm -rf .grs
+          # .streak holds a .env containing the PAT; neither checkout belongs in
+          # the tree when git runs.
+          rm -rf .grs .streak
           if git diff --quiet generated/ 2>/dev/null && [ -z "$(git status --porcelain generated/)" ]; then
             echo "No change"
             exit 0

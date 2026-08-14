@@ -46,12 +46,30 @@ jobs:
 
       # --ignore-scripts skips gifsicle's native build, which is only needed for
       # GIF output and fails on some architectures.
+      #
+      # bun intermittently dies with `Fail extracting tarball for "wrangler"` —
+      # a dependency of snk's web workspace that this job never touches. Retry
+      # on a clean cache, and treat a persistent failure as a reason to use the
+      # stock action below rather than as a reason to fail the run.
       - name: Install snk dependencies
+        id: deps
+        continue-on-error: true
         working-directory: .snk
-        run: bun install --frozen-lockfile --ignore-scripts
+        run: |
+          for attempt in 1 2 3; do
+            if bun install --frozen-lockfile --ignore-scripts; then
+              exit 0
+            fi
+            echo "::warning::bun install failed (attempt $attempt/3), retrying on a clean cache"
+            rm -rf node_modules
+            bun pm cache rm || true
+            sleep 10
+          done
+          exit 1
 
       - name: Generate snake SVGs with a randomized route
         id: gen
+        if: steps.deps.outcome == 'success'
         continue-on-error: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -64,15 +82,17 @@ jobs:
 
       # A failed generator may have left a partial dist/ behind, including a
       # snake-meta.json that no longer describes the SVGs the fallback writes.
+      # `!= 'success'` rather than `== 'failure'` so a generator that was skipped
+      # because the install never completed also reaches the fallback.
       - name: Discard partial output before falling back
-        if: steps.gen.outcome == 'failure'
+        if: steps.gen.outcome != 'success'
         run: rm -rf dist
 
       # snk's internals are not a stability contract, so if the vendored
       # generator ever breaks the stock action still produces a working (if
       # deterministic) snake. The profile never shows a broken image.
       - name: Fall back to the stock snk action
-        if: steps.gen.outcome == 'failure'
+        if: steps.gen.outcome != 'success'
         uses: Platane/snk/svg-only@d8f6715049803e982ee5ff501b6b9b7d5deeb09b # v3.5.0
         with:
           github_user_name: ${{ env.SNAKE_USER }}
