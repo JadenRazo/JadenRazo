@@ -138,11 +138,11 @@
 ## Recent activity
 
 <!--START_SECTION:activity-->
-1. 🚀 Published release [v1.2.1 — the cloudcost CLI actually starts now](https://github.com/JadenRazo/CloudCostMCP/releases/tag/v1.2.1) in [JadenRazo/CloudCostMCP](https://github.com/JadenRazo/CloudCostMCP)
-2. 🎉 Merged PR [#40](https://github.com/JadenRazo/llm-lint/pull/40) in [JadenRazo/llm-lint](https://github.com/JadenRazo/llm-lint)
-3. 🎉 Merged PR [#35](https://github.com/JadenRazo/CloudCostMCP/pull/35) in [JadenRazo/CloudCostMCP](https://github.com/JadenRazo/CloudCostMCP)
-4. 💪 Opened PR [#40](https://github.com/JadenRazo/llm-lint/pull/40) in [JadenRazo/llm-lint](https://github.com/JadenRazo/llm-lint)
-5. 💪 Opened PR [#35](https://github.com/JadenRazo/CloudCostMCP/pull/35) in [JadenRazo/CloudCostMCP](https://github.com/JadenRazo/CloudCostMCP)
+1. 💪 Opened PR [#44](https://github.com/JadenRazo/llm-lint/pull/44) in [JadenRazo/llm-lint](https://github.com/JadenRazo/llm-lint)
+2. 🎉 Merged PR [#43](https://github.com/JadenRazo/llm-lint/pull/43) in [JadenRazo/llm-lint](https://github.com/JadenRazo/llm-lint)
+3. 💪 Opened PR [#43](https://github.com/JadenRazo/llm-lint/pull/43) in [JadenRazo/llm-lint](https://github.com/JadenRazo/llm-lint)
+4. 🎉 Merged PR [#41](https://github.com/JadenRazo/llm-lint/pull/41) in [JadenRazo/llm-lint](https://github.com/JadenRazo/llm-lint)
+5. 🎉 Merged PR [#37](https://github.com/JadenRazo/CloudCostMCP/pull/37) in [JadenRazo/CloudCostMCP](https://github.com/JadenRazo/CloudCostMCP)
 <!--END_SECTION:activity-->
 
 ## Contributions
