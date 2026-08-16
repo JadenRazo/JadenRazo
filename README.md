@@ -156,6 +156,26 @@ different route every couple of hours.
   <img alt="A snake eating my GitHub contribution graph, with a running counter of contributions consumed over the past year" src="https://raw.githubusercontent.com/JadenRazo/JadenRazo/output/github-snake.svg">
 </picture>
 
+## Release status
+
+What each published project actually ships: CI on `main`, the latest GitHub
+release, and the version npm installs. The badges above each answer one of these
+in isolation; this line compares them, so a release that reached GitHub but not
+npm shows up as `SKEW` instead of as two badges that quietly disagree.
+
+<!-- RELEASE_STATUS_START -->
+```
+$ release status
+PROJECT          CI        GITHUB      NPM         STATE
+---------------------------------------------------------------
+llm-lint         passing   v0.4.1      0.4.1       in sync
+CloudCostMCP     passing   v1.2.1      1.2.1       in sync
+---------------------------------------------------------------
+
+Last check: pending first run
+```
+<!-- RELEASE_STATUS_END -->
+
 ## Production status
 
 Live uptime for the sites I run, checked every 30 minutes.
