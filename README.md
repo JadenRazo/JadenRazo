@@ -138,11 +138,11 @@
 ## Recent activity
 
 <!--START_SECTION:activity-->
-1. 💪 Opened PR [#44](https://github.com/JadenRazo/llm-lint/pull/44) in [JadenRazo/llm-lint](https://github.com/JadenRazo/llm-lint)
-2. 🎉 Merged PR [#43](https://github.com/JadenRazo/llm-lint/pull/43) in [JadenRazo/llm-lint](https://github.com/JadenRazo/llm-lint)
-3. 💪 Opened PR [#43](https://github.com/JadenRazo/llm-lint/pull/43) in [JadenRazo/llm-lint](https://github.com/JadenRazo/llm-lint)
-4. 🎉 Merged PR [#41](https://github.com/JadenRazo/llm-lint/pull/41) in [JadenRazo/llm-lint](https://github.com/JadenRazo/llm-lint)
-5. 🎉 Merged PR [#37](https://github.com/JadenRazo/CloudCostMCP/pull/37) in [JadenRazo/CloudCostMCP](https://github.com/JadenRazo/CloudCostMCP)
+1. 💪 Opened PR [#8](https://github.com/JadenRazo/JadenRazo/pull/8) in [JadenRazo/JadenRazo](https://github.com/JadenRazo/JadenRazo)
+2. 💪 Opened PR [#49](https://github.com/JadenRazo/llm-lint/pull/49) in [JadenRazo/llm-lint](https://github.com/JadenRazo/llm-lint)
+3. 🎉 Merged PR [#48](https://github.com/JadenRazo/llm-lint/pull/48) in [JadenRazo/llm-lint](https://github.com/JadenRazo/llm-lint)
+4. 💪 Opened PR [#48](https://github.com/JadenRazo/llm-lint/pull/48) in [JadenRazo/llm-lint](https://github.com/JadenRazo/llm-lint)
+5. 🎉 Merged PR [#47](https://github.com/JadenRazo/llm-lint/pull/47) in [JadenRazo/llm-lint](https://github.com/JadenRazo/llm-lint)
 <!--END_SECTION:activity-->
 
 ## Contributions
