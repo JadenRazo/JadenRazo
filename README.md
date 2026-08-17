@@ -165,14 +165,14 @@ Live uptime for the sites I run, checked every 30 minutes.
 $ deploy status
 SITE                           STATE      HTTP   AVG LATENCY 
 ------------------------------------------------------------
-raizhost.com                   up         200    117ms       
-app.raizhost.com               up         307    182ms       
-jadenrazo.dev                  up         200    141ms       
-llm.raizhost.com               up         200    93ms        
-showersautodetail.com          up         200    58ms        
+raizhost.com                   up         200    252ms       
+app.raizhost.com               up         307    135ms       
+jadenrazo.dev                  up         200    139ms       
+llm.raizhost.com               up         200    146ms       
+showersautodetail.com          up         200    167ms       
 ------------------------------------------------------------
-fleet average                                    118ms       
+fleet average                                    167ms       
 
-Last check: 2026-08-17T05:10:28Z (3 probes per site, averaged)
+Last check: 2026-08-17T06:01:55Z (3 probes per site, averaged)
 ```
 <!-- DEPLOY_MONITOR_END -->
