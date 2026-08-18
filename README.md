@@ -113,22 +113,22 @@
 </picture>
 
 <!-- LOC_START -->
-**1,033,034** lines of code across **1,268,233** total lines
+**1,037,652** lines of code across **1,273,591** total lines
 
 | Language | Lines of Code | % |
 |----------|-------------:|--:|
-| Java | 278,127 | 26.9% |
-| TypeScript | 180,897 | 17.5% |
-| JSON | 124,818 | 12.1% |
+| Java | 278,127 | 26.8% |
+| TypeScript | 183,791 | 17.7% |
+| JSON | 125,808 | 12.1% |
 | Go | 124,234 | 12.0% |
-| HTML | 74,975 | 7.3% |
-| Markdown | 71,840 | 7.0% |
-| YAML | 38,461 | 3.7% |
+| HTML | 75,029 | 7.2% |
+| Markdown | 71,996 | 6.9% |
+| YAML | 38,702 | 3.7% |
 | Python | 30,188 | 2.9% |
-| JavaScript | 19,287 | 1.9% |
-| Text | 13,839 | 1.3% |
+| JavaScript | 19,373 | 1.9% |
+| Text | 13,840 | 1.3% |
+| Bourne Shell | 13,332 | 1.3% |
 | HCL | 13,286 | 1.3% |
-| Bourne Shell | 13,236 | 1.3% |
 <!-- LOC_END -->
 
 *Counted daily across all source repos via [GitHub Actions](.github/workflows/loc-counter.yml).*
