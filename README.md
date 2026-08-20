@@ -17,7 +17,7 @@
 | **[llm-lint](https://github.com/JadenRazo/llm-lint)**<br>[![CI](https://img.shields.io/github/actions/workflow/status/JadenRazo/llm-lint/ci.yml?branch=main&style=flat-square&label=CI)](https://github.com/JadenRazo/llm-lint/actions/workflows/ci.yml) [![Release](https://img.shields.io/github/v/release/JadenRazo/llm-lint?style=flat-square&color=2ea043)](https://github.com/JadenRazo/llm-lint/releases) [![npm](https://img.shields.io/npm/v/%40jadenrazo%2Fllm-lint?style=flat-square&color=2ea043)](https://www.npmjs.com/package/@jadenrazo/llm-lint) | CI gate that catches LLM-generated artifacts — stray `CLAUDE.md`, `Co-authored-by` trailers, `.cursorrules`, and friends. Emits SARIF, ships native Go binaries through npm with zero postinstall scripts. Try it: `npx @jadenrazo/llm-lint scan` | Go, SARIF, pre-commit |
 | **[CloudCostMCP](https://github.com/JadenRazo/CloudCostMCP)**<br>[![CI](https://img.shields.io/github/actions/workflow/status/JadenRazo/CloudCostMCP/ci.yml?branch=main&style=flat-square&label=CI)](https://github.com/JadenRazo/CloudCostMCP/actions/workflows/ci.yml) [![npm](https://img.shields.io/npm/v/%40jadenrazo%2Fcloudcost-mcp?style=flat-square&color=2ea043)](https://www.npmjs.com/package/@jadenrazo/cloudcost-mcp) | MCP server that prices Terraform plans before you apply them — multi-cloud cost analysis across AWS, Azure, and GCP. | TypeScript, MCP, SQLite |
 | **[sre-reference-app](https://github.com/JadenRazo/sre-reference-app)** | Production ECS Fargate blueprint: SLO burn-rate alarms, AWS FIS chaos drills, and OIDC-authenticated GitHub Actions deploys. | Terraform, AWS, GitHub Actions |
-| **[tts-raizhost](https://github.com/JadenRazo/tts-raizhost)** | Self-hosted PDF reader-aloud on Kokoro TTS with a GPU/CPU dual-backend on k3s and circuit-breaker fallback. | Next.js, Kokoro, k3s |
+| **[llm-tracker](https://github.com/JadenRazo/llm-tracker)**<br>[![CI](https://img.shields.io/github/actions/workflow/status/JadenRazo/llm-tracker/ci.yml?branch=main&style=flat-square&label=CI)](https://github.com/JadenRazo/llm-tracker/actions/workflows/ci.yml) [![Live](https://img.shields.io/badge/llm.raizhost.com-live-2ea043?style=flat-square&logo=amazonaws&logoColor=white)](https://llm.raizhost.com) | Tracks what's shipping across Claude, OpenAI and Gemini — release feeds, model catalogs with context windows and per-token pricing, CLI version timelines, and provider status. Polls npm, GitHub, provider APIs and docs on a tiered schedule. | Next.js 15, Postgres, AWS Lambda |
 
 <details>
 <summary><strong>Full project directory</strong> — cloud &amp; SRE, tooling, web, game servers</summary>
@@ -45,6 +45,7 @@
 |:-----------|:------------|
 | [Project-Website](https://github.com/JadenRazo/Project-Website) | Portfolio behind [jadenrazo.dev](https://jadenrazo.dev/) with a URL shortener, real-time messaging, and a hidden dev panel. |
 | [TicketHacker](https://github.com/JadenRazo/TicketHacker) | Helpdesk platform unifying Discord, Telegram, email, and live chat into one ticketing system. |
+| [tts-raizhost](https://github.com/JadenRazo/tts-raizhost) | Self-hosted PDF reader-aloud on Kokoro TTS with a GPU/CPU dual-backend on k3s and circuit-breaker fallback. |
 | [EzWeb](https://github.com/JadenRazo/EzWeb) | Lightweight Docker site manager with a web dashboard (retired). |
 
 **Game servers & bots**
