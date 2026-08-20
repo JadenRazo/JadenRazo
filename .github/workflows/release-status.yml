@@ -1,0 +1,147 @@
+name: Release Status
+
+# Keeps the README honest about what is actually shipped.
+#
+# The badges on this page are live, but each one answers a different question in
+# isolation and nothing compares them. On 2026-08-07 llm-lint's release badge
+# started reading v0.4.0 while its npm badge read 0.3.1 - the publish had failed
+# on an expired token - and the two sat side by side, both correct, for nine days
+# with nothing saying they disagreed. CloudCostMCP's CI badge separately read
+# "failing" for six days because the newest run on main was a scheduled job that
+# checked the calendar rather than the code.
+#
+# Neither was visible as a problem, because a badge cannot say "these two facts
+# are inconsistent". This job does exactly that, in one line per project.
+#
+# Deliberately a PULL on a schedule rather than a push from each repo. The two
+# workflows that pushed here (EzWeb and TicketHacker's notify-profile) both
+# depended on a PROFILE_DISPATCH_TOKEN that never existed: one failed on every
+# push for three months, the other was quietly edited to succeed while doing
+# nothing. Polling needs no cross-repo credential, so it cannot fail that way.
+
+on:
+  schedule:
+    # Every 6 hours, offset off the hour to avoid the top-of-hour queue.
+    - cron: "23 */6 * * *"
+  repository_dispatch:
+    types: [release-status]
+  workflow_dispatch:
+
+concurrency:
+  group: release-status
+  cancel-in-progress: true
+
+jobs:
+  update-status:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Collect release status
+        id: collect
+        env:
+          # Prefer the PAT (it can read Actions runs on every repo); fall back to
+          # the job token, which is enough for public release and npm data.
+          GH_TOKEN: ${{ secrets.LOC_COUNTER_PAT || github.token }}
+        run: |
+          set -uo pipefail
+
+          # repo:npm-package pairs. Add a line when a repo starts publishing.
+          PROJECTS="llm-lint:@jadenrazo/llm-lint CloudCostMCP:@jadenrazo/cloudcost-mcp"
+
+          skew=0
+          {
+            echo '```'
+            echo '$ release status'
+            printf '%-16s %-9s %-11s %-11s %s\n' "PROJECT" "CI" "GITHUB" "NPM" "STATE"
+            echo '---------------------------------------------------------------'
+
+            for entry in $PROJECTS; do
+              repo="${entry%%:*}"
+              pkg="${entry#*:}"
+
+              ci=$(gh run list --repo "JadenRazo/$repo" --workflow ci.yml --branch main \
+                     --limit 1 --json conclusion --jq '.[0].conclusion // "unknown"' 2>/dev/null || echo "unknown")
+              case "$ci" in
+                success) ci="passing" ;;
+                failure) ci="FAILING" ;;
+                "")      ci="unknown" ;;
+              esac
+
+              gh_tag=$(gh release view --repo "JadenRazo/$repo" --json tagName --jq .tagName 2>/dev/null || echo "-")
+              npm_v=$(npm view "$pkg" version 2>/dev/null || echo "-")
+
+              # Compare the release tag to the published version, ignoring the v.
+              gh_num="${gh_tag#v}"
+              if [ "$gh_num" = "$npm_v" ] && [ "$npm_v" != "-" ]; then
+                state="in sync"
+              elif [ "$npm_v" = "-" ] || [ "$gh_tag" = "-" ]; then
+                state="unknown"
+              else
+                state="SKEW"
+                skew=1
+              fi
+              [ "$ci" = "FAILING" ] && skew=1
+
+              printf '%-16s %-9s %-11s %-11s %s\n' "$repo" "$ci" "$gh_tag" "$npm_v" "$state"
+            done
+
+            echo '---------------------------------------------------------------'
+            if [ "$skew" = "1" ]; then
+              echo 'SKEW means the latest GitHub release is not what npm installs.'
+            fi
+            echo ''
+            echo "Last check: $(date -u '+%Y-%m-%dT%H:%M:%SZ')"
+            echo '```'
+          } > status.txt
+
+          cat status.txt
+
+      - name: Update README
+        run: |
+          python3 - <<'PY'
+          import re, pathlib, sys
+
+          block = pathlib.Path("status.txt").read_text().rstrip("\n")
+          readme = pathlib.Path("README.md")
+          text = readme.read_text()
+
+          new, n = re.subn(
+              r"(<!-- RELEASE_STATUS_START -->\n).*?(\n<!-- RELEASE_STATUS_END -->)",
+              lambda m: m.group(1) + block + m.group(2),
+              text,
+              flags=re.S,
+          )
+          if n != 1:
+              raise SystemExit("::error::RELEASE_STATUS markers not found in README.md")
+          if new == text:
+              print("no change")
+              sys.exit(0)
+          readme.write_text(new)
+          print("README updated")
+          PY
+
+      - name: Commit
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- README.md; then
+            echo "nothing to commit"
+            exit 0
+          fi
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add README.md
+          git commit -m "chore: update release status"
+          for i in 1 2 3; do
+            if git pull --rebase origin main && git push; then
+              exit 0
+            fi
+            sleep 5
+          done
+          echo "::error::could not push the release status update"
+          exit 1
