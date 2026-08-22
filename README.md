@@ -139,11 +139,11 @@
 ## Recent activity
 
 <!--START_SECTION:activity-->
-1. 💪 Opened PR [#40](https://github.com/JadenRazo/CloudCostMCP/pull/40) in [JadenRazo/CloudCostMCP](https://github.com/JadenRazo/CloudCostMCP)
-2. 💪 Opened PR [#8](https://github.com/JadenRazo/JadenRazo/pull/8) in [JadenRazo/JadenRazo](https://github.com/JadenRazo/JadenRazo)
-3. 💪 Opened PR [#49](https://github.com/JadenRazo/llm-lint/pull/49) in [JadenRazo/llm-lint](https://github.com/JadenRazo/llm-lint)
-4. 🎉 Merged PR [#48](https://github.com/JadenRazo/llm-lint/pull/48) in [JadenRazo/llm-lint](https://github.com/JadenRazo/llm-lint)
-5. 💪 Opened PR [#48](https://github.com/JadenRazo/llm-lint/pull/48) in [JadenRazo/llm-lint](https://github.com/JadenRazo/llm-lint)
+1. ℹ️ Assigned issue [#41](https://github.com/JadenRazo/CloudCostMCP/issues/41) in [JadenRazo/CloudCostMCP](https://github.com/JadenRazo/CloudCostMCP)
+2. ℹ️ Labeled issue [#41](https://github.com/JadenRazo/CloudCostMCP/issues/41) in [JadenRazo/CloudCostMCP](https://github.com/JadenRazo/CloudCostMCP)
+3. ❗ Opened issue [#41](https://github.com/JadenRazo/CloudCostMCP/issues/41) in [JadenRazo/CloudCostMCP](https://github.com/JadenRazo/CloudCostMCP)
+4. 🗣 Commented on [#38](https://github.com/JadenRazo/CloudCostMCP/pull/38#issuecomment-5372063209) in [JadenRazo/CloudCostMCP](https://github.com/JadenRazo/CloudCostMCP)
+5. ❌ Closed PR [#38](https://github.com/JadenRazo/CloudCostMCP/pull/38) in [JadenRazo/CloudCostMCP](https://github.com/JadenRazo/CloudCostMCP)
 <!--END_SECTION:activity-->
 
 ## Contributions
