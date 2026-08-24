@@ -167,13 +167,13 @@ $ deploy status
 SITE                           STATE      HTTP   AVG LATENCY 
 ------------------------------------------------------------
 raizhost.com                   up         200    95ms        
-app.raizhost.com               up         307    124ms       
-jadenrazo.dev                  up         200    77ms        
-llm.raizhost.com               up         200    163ms       
-showersautodetail.com          up         200    103ms       
+app.raizhost.com               up         307    70ms        
+jadenrazo.dev                  up         200    82ms        
+llm.raizhost.com               up         200    322ms       
+showersautodetail.com          up         200    68ms        
 ------------------------------------------------------------
-fleet average                                    112ms       
+fleet average                                    127ms       
 
-Last check: 2026-08-24T17:07:15Z (3 probes per site, averaged)
+Last check: 2026-08-24T17:59:48Z (3 probes per site, averaged)
 ```
 <!-- DEPLOY_MONITOR_END -->
