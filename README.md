@@ -114,19 +114,19 @@
 </picture>
 
 <!-- LOC_START -->
-**1,127,970** lines of code across **1,367,416** total lines
+**1,132,396** lines of code across **1,371,699** total lines
 
 | Language | Lines of Code | % |
 |----------|-------------:|--:|
-| Java | 277,609 | 24.6% |
-| TypeScript | 191,435 | 17.0% |
-| JSON | 189,399 | 16.8% |
+| Java | 278,128 | 24.6% |
+| TypeScript | 193,215 | 17.1% |
+| JSON | 189,452 | 16.7% |
 | Go | 124,234 | 11.0% |
-| HTML | 84,471 | 7.5% |
-| Markdown | 75,178 | 6.7% |
-| YAML | 38,834 | 3.4% |
+| HTML | 84,482 | 7.5% |
+| Markdown | 75,403 | 6.7% |
+| YAML | 38,882 | 3.4% |
 | Python | 30,188 | 2.7% |
-| JavaScript | 23,689 | 2.1% |
+| JavaScript | 25,457 | 2.2% |
 | Text | 15,689 | 1.4% |
 | Bourne Shell | 13,878 | 1.2% |
 | HCL | 13,286 | 1.2% |
