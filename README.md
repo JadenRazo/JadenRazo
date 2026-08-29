@@ -64,33 +64,33 @@
 **Languages**
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=go,ts,js,py,java,bash,html,css,swift,lua&theme=dark">
-  <source media="(prefers-color-scheme: light)" srcset="https://skillicons.dev/icons?i=go,ts,js,py,java,bash,html,css,swift,lua&theme=light">
-  <img alt="Go, TypeScript, JavaScript, Python, Java, Bash, HTML, CSS, Swift, Lua" src="https://skillicons.dev/icons?i=go,ts,js,py,java,bash,html,css,swift,lua">
+  <source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=go,py,ts,java,js,bash,powershell,html,css,swift,lua,md&theme=dark">
+  <source media="(prefers-color-scheme: light)" srcset="https://skillicons.dev/icons?i=go,py,ts,java,js,bash,powershell,html,css,swift,lua,md&theme=light">
+  <img alt="Go, Python, TypeScript, Java, JavaScript, Bash, PowerShell, HTML, CSS, Swift, Lua, Markdown" src="https://skillicons.dev/icons?i=go,py,ts,java,js,bash,powershell,html,css,swift,lua,md">
 </picture>
 
 **Cloud & infrastructure**
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=aws,azure,gcp,cloudflare,terraform,docker,kubernetes,githubactions,linux&theme=dark">
-  <source media="(prefers-color-scheme: light)" srcset="https://skillicons.dev/icons?i=aws,azure,gcp,cloudflare,terraform,docker,kubernetes,githubactions,linux&theme=light">
-  <img alt="AWS, Azure, Google Cloud, Cloudflare, Terraform, Docker, Kubernetes, GitHub Actions, Linux" src="https://skillicons.dev/icons?i=aws,azure,gcp,cloudflare,terraform,docker,kubernetes,githubactions,linux">
+  <source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=aws,terraform,docker,kubernetes,githubactions,linux,azure,gcp,cloudflare&theme=dark">
+  <source media="(prefers-color-scheme: light)" srcset="https://skillicons.dev/icons?i=aws,terraform,docker,kubernetes,githubactions,linux,azure,gcp,cloudflare&theme=light">
+  <img alt="AWS, Terraform, Docker, Kubernetes, GitHub Actions, Linux, Azure, Google Cloud, Cloudflare" src="https://skillicons.dev/icons?i=aws,terraform,docker,kubernetes,githubactions,linux,azure,gcp,cloudflare">
 </picture>
 
-**Data & storage**
+**Data & web**
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=postgres,redis,sqlite,dynamodb&theme=dark">
-  <source media="(prefers-color-scheme: light)" srcset="https://skillicons.dev/icons?i=postgres,redis,sqlite,dynamodb&theme=light">
-  <img alt="PostgreSQL, Redis, SQLite, DynamoDB" src="https://skillicons.dev/icons?i=postgres,redis,sqlite,dynamodb">
+  <source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=postgres,redis,sqlite,dynamodb,react,nextjs,nodejs,astro,vue,express,vite,tailwind&theme=dark">
+  <source media="(prefers-color-scheme: light)" srcset="https://skillicons.dev/icons?i=postgres,redis,sqlite,dynamodb,react,nextjs,nodejs,astro,vue,express,vite,tailwind&theme=light">
+  <img alt="PostgreSQL, Redis, SQLite, DynamoDB, React, Next.js, Node.js, Astro, Vue, Express, Vite, Tailwind CSS" src="https://skillicons.dev/icons?i=postgres,redis,sqlite,dynamodb,react,nextjs,nodejs,astro,vue,express,vite,tailwind">
 </picture>
 
-**Web & frameworks**
+**Tooling**
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=react,nextjs,nodejs,astro,express,vite,tailwind&theme=dark">
-  <source media="(prefers-color-scheme: light)" srcset="https://skillicons.dev/icons?i=react,nextjs,nodejs,astro,express,vite,tailwind&theme=light">
-  <img alt="React, Next.js, Node.js, Astro, Express, Vite, Tailwind CSS" src="https://skillicons.dev/icons?i=react,nextjs,nodejs,astro,express,vite,tailwind">
+  <source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=git,github,npm,vscode&theme=dark">
+  <source media="(prefers-color-scheme: light)" srcset="https://skillicons.dev/icons?i=git,github,npm,vscode&theme=light">
+  <img alt="Git, GitHub, npm, VS Code" src="https://skillicons.dev/icons?i=git,github,npm,vscode">
 </picture>
 
 ## Stats
