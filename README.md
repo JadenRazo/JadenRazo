@@ -2,7 +2,7 @@
 
 # Jaden Razo
 
-**Software engineer building developer tools and cloud infrastructure — founder of [RaizHost](https://raizhost.com), a web agency shipping client sites and a client portal.**
+**Software engineer building developer tools and cloud infrastructure. Founder of [RaizHost](https://raizhost.com), a web agency that ships fast, accessible client sites and the portal owners use to edit them.**
 
 [![Website](https://img.shields.io/badge/jadenrazo.dev-portfolio-2ea043?style=flat-square&logo=googlechrome&logoColor=white)](https://jadenrazo.dev/)
 [![RaizHost](https://img.shields.io/badge/raizhost.com-agency-2ea043?style=flat-square&logo=rocket&logoColor=white)](https://raizhost.com)
@@ -14,14 +14,14 @@
 
 | Project | What it does | Stack |
 |:--------|:-------------|:------|
-| **[llm-lint](https://github.com/JadenRazo/llm-lint)**<br>[![CI](https://img.shields.io/github/actions/workflow/status/JadenRazo/llm-lint/ci.yml?branch=main&style=flat-square&label=CI)](https://github.com/JadenRazo/llm-lint/actions/workflows/ci.yml) [![Release](https://img.shields.io/github/v/release/JadenRazo/llm-lint?style=flat-square&color=2ea043)](https://github.com/JadenRazo/llm-lint/releases) [![npm](https://img.shields.io/npm/v/%40jadenrazo%2Fllm-lint?style=flat-square&color=2ea043)](https://www.npmjs.com/package/@jadenrazo/llm-lint) | CI gate that catches LLM-generated artifacts — stray `CLAUDE.md`, `Co-authored-by` trailers, `.cursorrules`, and friends. Emits SARIF, ships native Go binaries through npm with zero postinstall scripts. Try it: `npx @jadenrazo/llm-lint scan` | Go, SARIF, pre-commit |
-| **[CloudCostMCP](https://github.com/JadenRazo/CloudCostMCP)**<br>[![CI](https://img.shields.io/github/actions/workflow/status/JadenRazo/CloudCostMCP/ci.yml?branch=main&style=flat-square&label=CI)](https://github.com/JadenRazo/CloudCostMCP/actions/workflows/ci.yml) [![npm](https://img.shields.io/npm/v/%40jadenrazo%2Fcloudcost-mcp?style=flat-square&color=2ea043)](https://www.npmjs.com/package/@jadenrazo/cloudcost-mcp) | MCP server that prices Terraform plans before you apply them — multi-cloud cost analysis across AWS, Azure, and GCP. | TypeScript, MCP, SQLite |
+| **[llm-lint](https://github.com/JadenRazo/llm-lint)**<br>[![CI](https://img.shields.io/github/actions/workflow/status/JadenRazo/llm-lint/ci.yml?branch=main&style=flat-square&label=CI)](https://github.com/JadenRazo/llm-lint/actions/workflows/ci.yml) [![Release](https://img.shields.io/github/v/release/JadenRazo/llm-lint?style=flat-square&color=2ea043)](https://github.com/JadenRazo/llm-lint/releases) [![npm](https://img.shields.io/npm/v/%40jadenrazo%2Fllm-lint?style=flat-square&color=2ea043)](https://www.npmjs.com/package/@jadenrazo/llm-lint) | CI gate that catches LLM-generated artifacts: stray `CLAUDE.md`, `Co-authored-by` trailers, `.cursorrules`, and friends. Emits SARIF, ships native Go binaries through npm with zero postinstall scripts. Try it: `npx @jadenrazo/llm-lint scan` | Go, SARIF, pre-commit |
+| **[CloudCostMCP](https://github.com/JadenRazo/CloudCostMCP)**<br>[![CI](https://img.shields.io/github/actions/workflow/status/JadenRazo/CloudCostMCP/ci.yml?branch=main&style=flat-square&label=CI)](https://github.com/JadenRazo/CloudCostMCP/actions/workflows/ci.yml) [![npm](https://img.shields.io/npm/v/%40jadenrazo%2Fcloudcost-mcp?style=flat-square&color=2ea043)](https://www.npmjs.com/package/@jadenrazo/cloudcost-mcp) | MCP server that prices Terraform plans before you apply them, with multi-cloud cost analysis across AWS, Azure, and GCP. | TypeScript, MCP, SQLite |
 | **[sre-reference-app](https://github.com/JadenRazo/sre-reference-app)** | Production ECS Fargate blueprint: SLO burn-rate alarms, AWS FIS chaos drills, and OIDC-authenticated GitHub Actions deploys. | Terraform, AWS, GitHub Actions |
 | **[raizhost-architecture](https://github.com/JadenRazo/raizhost-architecture)**<br>[![CI](https://img.shields.io/github/actions/workflow/status/JadenRazo/raizhost-architecture/ci.yml?branch=main&style=flat-square&label=docs)](https://github.com/JadenRazo/raizhost-architecture/actions/workflows/ci.yml) [![Live](https://img.shields.io/badge/raizhost.com-live-2ea043?style=flat-square&logo=amazonaws&logoColor=white)](https://raizhost.com) | Public architecture record for RaizHost's production platform: ~10 CloudFront sites, 3 Lambda apps and one Graviton anchor running on AWS for ~$50/mo, with the diagram, the why behind every service choice, and the gated AI-agent ops layer that runs it. | AWS, Cloudflare, Terraform, Lambda |
-| **[llm-tracker](https://github.com/JadenRazo/llm-tracker)**<br>[![CI](https://img.shields.io/github/actions/workflow/status/JadenRazo/llm-tracker/ci.yml?branch=main&style=flat-square&label=CI)](https://github.com/JadenRazo/llm-tracker/actions/workflows/ci.yml) [![Live](https://img.shields.io/badge/llm.raizhost.com-live-2ea043?style=flat-square&logo=amazonaws&logoColor=white)](https://llm.raizhost.com) | Tracks what's shipping across Claude, OpenAI and Gemini — release feeds, model catalogs with context windows and per-token pricing, CLI version timelines, and provider status. Polls npm, GitHub, provider APIs and docs on a tiered schedule. | Next.js 15, Postgres, AWS Lambda |
+| **[llm-tracker](https://github.com/JadenRazo/llm-tracker)**<br>[![CI](https://img.shields.io/github/actions/workflow/status/JadenRazo/llm-tracker/ci.yml?branch=main&style=flat-square&label=CI)](https://github.com/JadenRazo/llm-tracker/actions/workflows/ci.yml) [![Live](https://img.shields.io/badge/llm.raizhost.com-live-2ea043?style=flat-square&logo=amazonaws&logoColor=white)](https://llm.raizhost.com) | Tracks what's shipping across Claude, OpenAI and Gemini: release feeds, model catalogs with context windows and per-token pricing, CLI version timelines, and provider status. Polls npm, GitHub, provider APIs and docs on a tiered schedule. | Next.js 15, Postgres, AWS Lambda |
 
 <details>
-<summary><strong>Full project directory</strong> — cloud &amp; SRE, tooling, web, game servers</summary>
+<summary><strong>Full project directory</strong>: cloud &amp; SRE, tooling, web, game servers</summary>
 <br>
 
 **Cloud & SRE**
@@ -61,29 +61,43 @@
 
 ## Tech stack
 
+Every icon below is backed by shipped code in the repos above; the lines-of-code table under "More stats" is the receipt.
+
 **Languages**
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=go,ts,py,java,bash&theme=dark">
-  <source media="(prefers-color-scheme: light)" srcset="https://skillicons.dev/icons?i=go,ts,py,java,bash&theme=light">
-  <img alt="Go, TypeScript, Python, Java, Bash" src="https://skillicons.dev/icons?i=go,ts,py,java,bash">
+  <source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=go,ts,js,py,java,bash,html,css,swift,lua&theme=dark">
+  <source media="(prefers-color-scheme: light)" srcset="https://skillicons.dev/icons?i=go,ts,js,py,java,bash,html,css,swift,lua&theme=light">
+  <img alt="Go, TypeScript, JavaScript, Python, Java, Bash, HTML, CSS, Swift, Lua" src="https://skillicons.dev/icons?i=go,ts,js,py,java,bash,html,css,swift,lua">
 </picture>
+<sub>Go, TypeScript, JavaScript, Python, Java, Bash, HTML, CSS, Swift, Lua</sub>
 
 **Cloud & infrastructure**
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=aws,azure,terraform,docker,kubernetes,githubactions&theme=dark">
-  <source media="(prefers-color-scheme: light)" srcset="https://skillicons.dev/icons?i=aws,azure,terraform,docker,kubernetes,githubactions&theme=light">
-  <img alt="AWS, Azure, Terraform, Docker, Kubernetes, GitHub Actions" src="https://skillicons.dev/icons?i=aws,azure,terraform,docker,kubernetes,githubactions">
+  <source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=aws,azure,gcp,cloudflare,terraform,docker,kubernetes,githubactions,linux&theme=dark">
+  <source media="(prefers-color-scheme: light)" srcset="https://skillicons.dev/icons?i=aws,azure,gcp,cloudflare,terraform,docker,kubernetes,githubactions,linux&theme=light">
+  <img alt="AWS, Azure, Google Cloud, Cloudflare, Terraform, Docker, Kubernetes, GitHub Actions, Linux" src="https://skillicons.dev/icons?i=aws,azure,gcp,cloudflare,terraform,docker,kubernetes,githubactions,linux">
 </picture>
+<sub>AWS, Azure, Google Cloud, Cloudflare, Terraform, Docker, Kubernetes, GitHub Actions, Linux</sub>
 
-**Data & web**
+**Data & storage**
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=postgres,redis,react,nextjs,nodejs&theme=dark">
-  <source media="(prefers-color-scheme: light)" srcset="https://skillicons.dev/icons?i=postgres,redis,react,nextjs,nodejs&theme=light">
-  <img alt="PostgreSQL, Redis, React, Next.js, Node.js" src="https://skillicons.dev/icons?i=postgres,redis,react,nextjs,nodejs">
+  <source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=postgres,redis,sqlite,dynamodb&theme=dark">
+  <source media="(prefers-color-scheme: light)" srcset="https://skillicons.dev/icons?i=postgres,redis,sqlite,dynamodb&theme=light">
+  <img alt="PostgreSQL, Redis, SQLite, DynamoDB" src="https://skillicons.dev/icons?i=postgres,redis,sqlite,dynamodb">
 </picture>
+<sub>PostgreSQL, Redis, SQLite, DynamoDB</sub>
+
+**Web & frameworks**
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=react,nextjs,nodejs,astro,express,vite,tailwind&theme=dark">
+  <source media="(prefers-color-scheme: light)" srcset="https://skillicons.dev/icons?i=react,nextjs,nodejs,astro,express,vite,tailwind&theme=light">
+  <img alt="React, Next.js, Node.js, Astro, Express, Vite, Tailwind CSS" src="https://skillicons.dev/icons?i=react,nextjs,nodejs,astro,express,vite,tailwind">
+</picture>
+<sub>React, Next.js, Node.js, Astro, Express, Vite, Tailwind CSS</sub>
 
 ## Stats
 
@@ -105,7 +119,7 @@
 </picture>
 
 <details>
-<summary><strong>More stats</strong> — 3D contribution graph and lines of code across all repos</summary>
+<summary><strong>More stats</strong>: 3D contribution graph and lines of code across all repos</summary>
 <br>
 
 <picture>
