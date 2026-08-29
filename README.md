@@ -87,11 +87,7 @@
 
 **Tooling**
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=git%2Cgithub%2Cnpm%2Cvscode&theme=dark">
-  <source media="(prefers-color-scheme: light)" srcset="https://skillicons.dev/icons?i=git%2Cgithub%2Cnpm%2Cvscode&theme=light">
-  <img alt="Git, GitHub, npm, VS Code" src="https://skillicons.dev/icons?i=git,github,npm,vscode">
-</picture> <img alt="Claude Code, OpenAI Codex, Gemini" height="48" src="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/generated/ai-tools.svg">
+<img alt="Git, GitHub, npm, VS Code" height="48" src="https://skillicons.dev/icons?i=git,github,npm,vscode"> <img alt="Claude Code, OpenAI Codex, Gemini" height="48" src="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/generated/ai-tools.svg">
 
 ## Stats
 
