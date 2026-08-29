@@ -61,8 +61,6 @@
 
 ## Tech stack
 
-Every icon below is backed by shipped code in the repos above; the lines-of-code table under "More stats" is the receipt.
-
 **Languages**
 
 <picture>
@@ -70,7 +68,6 @@ Every icon below is backed by shipped code in the repos above; the lines-of-code
   <source media="(prefers-color-scheme: light)" srcset="https://skillicons.dev/icons?i=go,ts,js,py,java,bash,html,css,swift,lua&theme=light">
   <img alt="Go, TypeScript, JavaScript, Python, Java, Bash, HTML, CSS, Swift, Lua" src="https://skillicons.dev/icons?i=go,ts,js,py,java,bash,html,css,swift,lua">
 </picture>
-<sub>Go, TypeScript, JavaScript, Python, Java, Bash, HTML, CSS, Swift, Lua</sub>
 
 **Cloud & infrastructure**
 
@@ -79,7 +76,6 @@ Every icon below is backed by shipped code in the repos above; the lines-of-code
   <source media="(prefers-color-scheme: light)" srcset="https://skillicons.dev/icons?i=aws,azure,gcp,cloudflare,terraform,docker,kubernetes,githubactions,linux&theme=light">
   <img alt="AWS, Azure, Google Cloud, Cloudflare, Terraform, Docker, Kubernetes, GitHub Actions, Linux" src="https://skillicons.dev/icons?i=aws,azure,gcp,cloudflare,terraform,docker,kubernetes,githubactions,linux">
 </picture>
-<sub>AWS, Azure, Google Cloud, Cloudflare, Terraform, Docker, Kubernetes, GitHub Actions, Linux</sub>
 
 **Data & storage**
 
@@ -88,7 +84,6 @@ Every icon below is backed by shipped code in the repos above; the lines-of-code
   <source media="(prefers-color-scheme: light)" srcset="https://skillicons.dev/icons?i=postgres,redis,sqlite,dynamodb&theme=light">
   <img alt="PostgreSQL, Redis, SQLite, DynamoDB" src="https://skillicons.dev/icons?i=postgres,redis,sqlite,dynamodb">
 </picture>
-<sub>PostgreSQL, Redis, SQLite, DynamoDB</sub>
 
 **Web & frameworks**
 
@@ -97,7 +92,6 @@ Every icon below is backed by shipped code in the repos above; the lines-of-code
   <source media="(prefers-color-scheme: light)" srcset="https://skillicons.dev/icons?i=react,nextjs,nodejs,astro,express,vite,tailwind&theme=light">
   <img alt="React, Next.js, Node.js, Astro, Express, Vite, Tailwind CSS" src="https://skillicons.dev/icons?i=react,nextjs,nodejs,astro,express,vite,tailwind">
 </picture>
-<sub>React, Next.js, Node.js, Astro, Express, Vite, Tailwind CSS</sub>
 
 ## Stats
 
