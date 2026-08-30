@@ -1,184 +1,36 @@
-<div align="center">
-
 # Jaden Razo
 
-**Software engineer building developer tools and cloud infrastructure. Founder of [RaizHost](https://raizhost.com), a web agency that ships fast, accessible client sites and the portal owners use to edit them.**
+Cloud & DevOps engineer building reliable, secure, cost-aware systems with AWS,
+Terraform, Go, and TypeScript.
 
-[![Website](https://img.shields.io/badge/jadenrazo.dev-portfolio-2ea043?style=flat-square&logo=googlechrome&logoColor=white)](https://jadenrazo.dev/)
-[![RaizHost](https://img.shields.io/badge/raizhost.com-agency-2ea043?style=flat-square&logo=rocket&logoColor=white)](https://raizhost.com)
-[![Email](https://img.shields.io/badge/email-jrazo17%40wgu.edu-555555?style=flat-square&logo=gmail&logoColor=white)](mailto:jrazo17@wgu.edu)
+I run [RaizHost](https://raizhost.com), a small hosting and automation business,
+and I am open to full-time cloud/DevOps roles and SRE or platform teams.
 
-</div>
+[Portfolio](https://jadenrazo.dev) · [Architecture](https://github.com/JadenRazo/raizhost-architecture) ·
+[Service status](https://status.raizhost.com) · [LinkedIn](https://linkedin.com/in/JadenRazo) ·
+[Email](mailto:contact@jadenrazo.dev)
 
-## What I'm building
+## Evidence I lead with
 
-| Project | What it does | Stack |
-|:--------|:-------------|:------|
-| **[llm-lint](https://github.com/JadenRazo/llm-lint)**<br>[![CI](https://img.shields.io/github/actions/workflow/status/JadenRazo/llm-lint/ci.yml?branch=main&style=flat-square&label=CI)](https://github.com/JadenRazo/llm-lint/actions/workflows/ci.yml) [![Release](https://img.shields.io/github/v/release/JadenRazo/llm-lint?style=flat-square&color=2ea043)](https://github.com/JadenRazo/llm-lint/releases) [![npm](https://img.shields.io/npm/v/%40jadenrazo%2Fllm-lint?style=flat-square&color=2ea043)](https://www.npmjs.com/package/@jadenrazo/llm-lint) | CI gate that catches LLM-generated artifacts: stray `CLAUDE.md`, `Co-authored-by` trailers, `.cursorrules`, and friends. Emits SARIF, ships native Go binaries through npm with zero postinstall scripts. Try it: `npx @jadenrazo/llm-lint scan` | Go, SARIF, pre-commit |
-| **[CloudCostMCP](https://github.com/JadenRazo/CloudCostMCP)**<br>[![CI](https://img.shields.io/github/actions/workflow/status/JadenRazo/CloudCostMCP/ci.yml?branch=main&style=flat-square&label=CI)](https://github.com/JadenRazo/CloudCostMCP/actions/workflows/ci.yml) [![npm](https://img.shields.io/npm/v/%40jadenrazo%2Fcloudcost-mcp?style=flat-square&color=2ea043)](https://www.npmjs.com/package/@jadenrazo/cloudcost-mcp) | MCP server that prices Terraform plans before you apply them, with multi-cloud cost analysis across AWS, Azure, and GCP. | TypeScript, MCP, SQLite |
-| **[sre-reference-app](https://github.com/JadenRazo/sre-reference-app)** | Production ECS Fargate blueprint: SLO burn-rate alarms, AWS FIS chaos drills, and OIDC-authenticated GitHub Actions deploys. | Terraform, AWS, GitHub Actions |
-| **[raizhost-architecture](https://github.com/JadenRazo/raizhost-architecture)**<br>[![CI](https://img.shields.io/github/actions/workflow/status/JadenRazo/raizhost-architecture/ci.yml?branch=main&style=flat-square&label=docs)](https://github.com/JadenRazo/raizhost-architecture/actions/workflows/ci.yml) [![Live](https://img.shields.io/badge/raizhost.com-live-2ea043?style=flat-square&logo=amazonaws&logoColor=white)](https://raizhost.com) | Public architecture record for RaizHost's production platform: ~10 CloudFront sites, 3 Lambda apps and one Graviton anchor running on AWS for ~$50/mo, with the diagram, the why behind every service choice, and the gated AI-agent ops layer that runs it. | AWS, Cloudflare, Terraform, Lambda |
-| **[llm-tracker](https://github.com/JadenRazo/llm-tracker)**<br>[![CI](https://img.shields.io/github/actions/workflow/status/JadenRazo/llm-tracker/ci.yml?branch=main&style=flat-square&label=CI)](https://github.com/JadenRazo/llm-tracker/actions/workflows/ci.yml) [![Live](https://img.shields.io/badge/llm.raizhost.com-live-2ea043?style=flat-square&logo=amazonaws&logoColor=white)](https://llm.raizhost.com) | Tracks what's shipping across Claude, OpenAI and Gemini: release feeds, model catalogs with context windows and per-token pricing, CLI version timelines, and provider status. Polls npm, GitHub, provider APIs and docs on a tiered schedule. | Next.js 15, Postgres, AWS Lambda |
+| Project | What you can inspect |
+| --- | --- |
+| [RaizHost architecture](https://github.com/JadenRazo/raizhost-architecture) | Public architecture and decision record for a one-person AWS platform documented at roughly 10 production sites and three web apps for about $50/month. The repository clearly separates public evidence from private application and Terraform source. |
+| [SRE reference app](https://github.com/JadenRazo/sre-reference-app) | Controlled ECS failure exercise with a measured 78-second recovery, no burn-rate alarm breach, a GameDay, postmortem, SLO math, runbook, Terraform, and explicit limitations. |
+| [llm-tracker](https://github.com/JadenRazo/llm-tracker) | AWS-hosted release tracker with an OIDC deployment path and documented cache and deployment failure modes. Its repository still needs stronger automated test evidence. |
+| [llm-lint](https://github.com/JadenRazo/llm-lint) | Go policy and repository-boundary scanner shipped as native binaries and an npm package, with CodeQL, SARIF, release verification, SBOMs, and signed artifacts. |
+| [CloudCostMCP](https://github.com/JadenRazo/CloudCostMCP) | Multi-IaC cost analysis for AWS, Azure, and GCP. Its [pricing-drift incident review](https://github.com/JadenRazo/CloudCostMCP/blob/main/docs/incidents/2026-08-pricing-drift.md) shows the defect, detection gap, live verification, and regression controls. |
 
-<details>
-<summary><strong>Full project directory</strong>: cloud &amp; SRE, tooling, web, game servers</summary>
-<br>
+## How I work
 
-**Cloud & SRE**
+- Use Terraform, OIDC, least-privilege workflow permissions, and repeatable CI
+  instead of long-lived deployment credentials.
+- Define the reliability target, instrument it, inject a controlled failure, and
+  keep the measurement and corrective action beside the code.
+- Treat cost, rollback, security, and operational ownership as design inputs—not
+  cleanup work after launch.
+- Publish limitations and failed hypotheses so reviewers can distinguish
+  measured evidence from architecture intent.
 
-| Repository | Description |
-|:-----------|:------------|
-| [sre-landing-zone](https://github.com/JadenRazo/sre-landing-zone) | Five-account AWS landing zone with Pilot Light DR and a CloudFront/WAF/Cognito edge, built on a $120 credit budget. |
-| [aws-supply-chain-security](https://github.com/JadenRazo/aws-supply-chain-security) | Container supply-chain stack: syft SBOMs, grype scans, keyless cosign signing via GitHub OIDC. |
-| [aws-todo-api](https://github.com/JadenRazo/aws-todo-api) | Serverless reading list on API Gateway, Lambda, DynamoDB, Cognito, WAF, and X-Ray. |
-| [azure-hub-spoke-network](https://github.com/JadenRazo/azure-hub-spoke-network) | Azure hub-and-spoke topology with VNets, peering, and NSGs, all in Terraform. |
-| [initializing-ad](https://github.com/JadenRazo/initializing-ad) | Active Directory homelab: domain controller, DNS, group policy, and a full enterprise onboarding flow. |
-
-**Developer tooling**
-
-| Repository | Description |
-|:-----------|:------------|
-| [job-scanner](https://github.com/JadenRazo/job-scanner) | 24/7 ATS scanner that scores postings with Claude and drafts cover letters. |
-
-**Web & apps**
-
-| Repository | Description |
-|:-----------|:------------|
-| [Project-Website](https://github.com/JadenRazo/Project-Website) | Portfolio behind [jadenrazo.dev](https://jadenrazo.dev/) with a URL shortener, real-time messaging, and a hidden dev panel. |
-| [TicketHacker](https://github.com/JadenRazo/TicketHacker) | Helpdesk platform unifying Discord, Telegram, email, and live chat into one ticketing system. |
-| [tts-raizhost](https://github.com/JadenRazo/tts-raizhost) | Self-hosted PDF reader-aloud on Kokoro TTS with a GPU/CPU dual-backend on k3s and circuit-breaker fallback. |
-| [EzWeb](https://github.com/JadenRazo/EzWeb) | Lightweight Docker site manager with a web dashboard (retired). |
-
-**Game servers & bots**
-
-| Repository | Description |
-|:-----------|:------------|
-| [ServerPlugins](https://github.com/JadenRazo/ServerPlugins) | 24 interconnected Paper plugins covering claims, economy, events, arcade games, and admin. |
-| [SurvivalCore](https://github.com/JadenRazo/SurvivalCore) | Paper 1.21.8 fork with async entity tracking, SIMD math, and hopper caching. |
-| [Quiz-Bot](https://github.com/JadenRazo/Quiz-Bot) | Discord bot that runs LLM-generated educational quiz games. |
-
-</details>
-
-## Tech stack
-
-**Languages**
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=go%2Cpy%2Cts%2Cjava%2Cjs%2Cbash%2Cpowershell%2Chtml%2Ccss%2Cswift%2Clua%2Cmd&theme=dark">
-  <source media="(prefers-color-scheme: light)" srcset="https://skillicons.dev/icons?i=go%2Cpy%2Cts%2Cjava%2Cjs%2Cbash%2Cpowershell%2Chtml%2Ccss%2Cswift%2Clua%2Cmd&theme=light">
-  <img alt="Go, Python, TypeScript, Java, JavaScript, Bash, PowerShell, HTML, CSS, Swift, Lua, Markdown" src="https://skillicons.dev/icons?i=go,py,ts,java,js,bash,powershell,html,css,swift,lua,md">
-</picture>
-
-**Cloud & infrastructure**
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=aws%2Cterraform%2Cdocker%2Ckubernetes%2Cgithubactions%2Clinux%2Cazure%2Cgcp%2Ccloudflare&theme=dark">
-  <source media="(prefers-color-scheme: light)" srcset="https://skillicons.dev/icons?i=aws%2Cterraform%2Cdocker%2Ckubernetes%2Cgithubactions%2Clinux%2Cazure%2Cgcp%2Ccloudflare&theme=light">
-  <img alt="AWS, Terraform, Docker, Kubernetes, GitHub Actions, Linux, Azure, Google Cloud, Cloudflare" src="https://skillicons.dev/icons?i=aws,terraform,docker,kubernetes,githubactions,linux,azure,gcp,cloudflare">
-</picture>
-
-**Data & web**
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://skillicons.dev/icons?i=postgres%2Credis%2Csqlite%2Cdynamodb%2Creact%2Cnextjs%2Cnodejs%2Castro%2Cvue%2Cexpress%2Cvite%2Ctailwind&theme=dark">
-  <source media="(prefers-color-scheme: light)" srcset="https://skillicons.dev/icons?i=postgres%2Credis%2Csqlite%2Cdynamodb%2Creact%2Cnextjs%2Cnodejs%2Castro%2Cvue%2Cexpress%2Cvite%2Ctailwind&theme=light">
-  <img alt="PostgreSQL, Redis, SQLite, DynamoDB, React, Next.js, Node.js, Astro, Vue, Express, Vite, Tailwind CSS" src="https://skillicons.dev/icons?i=postgres,redis,sqlite,dynamodb,react,nextjs,nodejs,astro,vue,express,vite,tailwind">
-</picture>
-
-**Tooling**
-
-<img alt="Git, GitHub, npm, VS Code" height="48" src="https://skillicons.dev/icons?i=git,github,npm,vscode"> <img alt="Claude Code, OpenAI Codex, Gemini" height="48" src="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/generated/ai-tools.svg">
-
-## Stats
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/generated/stats-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/generated/stats-light.svg">
-  <img alt="GitHub stats for JadenRazo" src="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/generated/stats-light.svg" height="165">
-</picture>
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/generated/top-langs-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/generated/top-langs-light.svg">
-  <img alt="Most used languages" src="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/generated/top-langs-light.svg" height="165">
-</picture>
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/generated/streak-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/generated/streak-light.svg">
-  <img alt="GitHub contribution streak" src="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/generated/streak-light.svg" height="165">
-</picture>
-
-<details>
-<summary><strong>More stats</strong>: 3D contribution graph and lines of code across all repos</summary>
-<br>
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/profile-3d-contrib/profile-night-green.svg">
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/profile-3d-contrib/profile-green.svg">
-  <img alt="3D contribution graph" src="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/profile-3d-contrib/profile-green.svg" width="720">
-</picture>
-
-<!-- LOC_START -->
-**1,144,800** lines of code across **1,385,119** total lines
-
-| Language | Lines of Code | % |
-|----------|-------------:|--:|
-| Java | 278,128 | 24.3% |
-| TypeScript | 196,378 | 17.2% |
-| JSON | 190,182 | 16.6% |
-| Go | 124,234 | 10.9% |
-| HTML | 84,614 | 7.4% |
-| Markdown | 76,256 | 6.7% |
-| YAML | 39,256 | 3.4% |
-| Python | 30,249 | 2.6% |
-| JavaScript | 25,522 | 2.2% |
-| Bourne Shell | 17,079 | 1.5% |
-| Text | 15,763 | 1.4% |
-| HCL | 13,286 | 1.2% |
-<!-- LOC_END -->
-
-*Counted daily across all source repos via [GitHub Actions](.github/workflows/loc-counter.yml).*
-
-</details>
-
-## Recent activity
-
-<!--START_SECTION:activity-->
-1. 🎉 Merged PR [#9](https://github.com/JadenRazo/JadenRazo/pull/9) in [JadenRazo/JadenRazo](https://github.com/JadenRazo/JadenRazo)
-2. 💪 Opened PR [#9](https://github.com/JadenRazo/JadenRazo/pull/9) in [JadenRazo/JadenRazo](https://github.com/JadenRazo/JadenRazo)
-3. ℹ️ Assigned issue [#41](https://github.com/JadenRazo/CloudCostMCP/issues/41) in [JadenRazo/CloudCostMCP](https://github.com/JadenRazo/CloudCostMCP)
-4. ℹ️ Labeled issue [#41](https://github.com/JadenRazo/CloudCostMCP/issues/41) in [JadenRazo/CloudCostMCP](https://github.com/JadenRazo/CloudCostMCP)
-5. ❗ Opened issue [#41](https://github.com/JadenRazo/CloudCostMCP/issues/41) in [JadenRazo/CloudCostMCP](https://github.com/JadenRazo/CloudCostMCP)
-<!--END_SECTION:activity-->
-
-## Contributions
-
-A snake eats my contribution graph, counting up my real contributions as it goes. It takes a
-different route every couple of hours.
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/JadenRazo/JadenRazo/output/github-snake-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/JadenRazo/JadenRazo/output/github-snake.svg">
-  <img alt="A snake eating my GitHub contribution graph, with a running counter of contributions consumed over the past year" src="https://raw.githubusercontent.com/JadenRazo/JadenRazo/output/github-snake.svg">
-</picture>
-
-## Production status
-
-Live uptime for the sites I run, checked every 30 minutes.
-
-<!-- DEPLOY_MONITOR_START -->
-```
-$ deploy status
-SITE                           STATE      HTTP   AVG LATENCY 
-------------------------------------------------------------
-raizhost.com                   up         200    105ms       
-app.raizhost.com               up         307    186ms       
-jadenrazo.dev                  up         200    64ms        
-llm.raizhost.com               up         200    262ms       
-showersautodetail.com          up         200    149ms       
-------------------------------------------------------------
-fleet average                                    153ms       
-
-Last check: 2026-08-30T18:02:08Z (3 probes per site, averaged)
-```
-<!-- DEPLOY_MONITOR_END -->
+Current focus: strengthening public Kubernetes/GitOps operating evidence in
+[`tts-raizhost`](https://github.com/JadenRazo/tts-raizhost) and moving from strong
+SRE practices toward sustained reliability-program evidence.
