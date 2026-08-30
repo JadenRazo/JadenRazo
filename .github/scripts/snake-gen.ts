@@ -118,9 +118,9 @@ const main = async () => {
     Math.floor(Math.random() * 0xffffffff) ||
     1;
   const rng = makeRng(seed);
-  console.log(`🎲 seed ${seed}`);
+  console.log(`[seed] ${seed}`);
 
-  console.log(`🎣 fetching contributions for ${userName}`);
+  console.log(`[fetch] contributions for ${userName}`);
   const cells = await getGithubUserContribution(userName, { githubToken });
   if (!cells.length) throw new Error("no contribution cells returned");
 
@@ -129,7 +129,7 @@ const main = async () => {
     (n: number, c: number) => n + (c > 0 ? 1 : 0),
     0,
   );
-  console.log(`📅 grid ${grid.width}x${grid.height}, ${coloured} coloured cells`);
+  console.log(`[grid] ${grid.width}x${grid.height}, ${coloured} coloured cells`);
 
   // Baseline: snk's default pose. Doubles as the length budget and the fallback.
   const defaultPose = poseAt(0, -1, 4);
@@ -137,7 +137,7 @@ const main = async () => {
   if (!baseline) throw new Error("default pose produced no route");
   const maxLength = Math.ceil(baseline.length * MAX_LENGTH_RATIO);
   console.log(
-    `📏 baseline route ${baseline.length} steps (budget ${maxLength})`,
+    `[route] baseline ${baseline.length} steps (budget ${maxLength})`,
   );
 
   let chosen = { chain: baseline, pose: { x: 0, y: -1, length: 4 } };
@@ -182,7 +182,7 @@ const main = async () => {
     if (uneaten > 0)
       throw new Error(`default route leaves ${uneaten} cells uneaten`);
     console.warn(
-      `⚠ no random pose passed validation after ${MAX_ATTEMPTS} attempts — using the default pose`,
+      `[warning] no random pose passed validation after ${MAX_ATTEMPTS} attempts — using the default pose`,
     );
   }
 
@@ -203,7 +203,7 @@ const main = async () => {
       out.animationOptions,
     );
     await fs.writeFile(path.join(outDir, out.filename), svg);
-    console.log(`🖌 wrote ${out.filename}`);
+    console.log(`[write] ${out.filename}`);
   }
 
   const meta = {
@@ -225,7 +225,7 @@ const main = async () => {
     JSON.stringify(meta),
   );
   console.log(
-    `📝 wrote snake-meta.json (${meta.cells.length} active days, ${chosen.chain.length} steps)`,
+    `[write] snake-meta.json (${meta.cells.length} active days, ${chosen.chain.length} steps)`,
   );
 };
 

@@ -376,7 +376,7 @@ const process1 = async (file, cellsPromise) => {
 
   await fs.writeFile(file, out);
   console.log(
-    `✓ ${path.basename(file)}: ${events.length} bites, total ${commas(total)}, ` +
+    `[ok] ${path.basename(file)}: ${events.length} bites, total ${commas(total)}, ` +
       `${(original.length / 1024) | 0}KB → ${(out.length / 1024) | 0}KB`,
   );
   return { events, total };
