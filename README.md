@@ -16,7 +16,7 @@ and I am open to full-time cloud/DevOps roles and SRE or platform teams.
 | --- | --- |
 | [RaizHost architecture](https://github.com/JadenRazo/raizhost-architecture) | Public architecture and decision record for a one-person AWS platform documented at roughly 10 production sites and three web apps for about $50/month. The repository clearly separates public evidence from private application and Terraform source. |
 | [SRE reference app](https://github.com/JadenRazo/sre-reference-app) | Controlled ECS failure exercise with a measured 78-second recovery, no burn-rate alarm breach, a GameDay, postmortem, SLO math, runbook, Terraform, and explicit limitations. |
-| [llm-tracker](https://github.com/JadenRazo/llm-tracker) | Live AWS application with tested CI and an OIDC deployment path, plus documented cache and deployment failure modes. |
+| [llm-tracker](https://github.com/JadenRazo/llm-tracker) | AWS-hosted release tracker with an OIDC deployment path and documented cache and deployment failure modes. Its repository still needs stronger automated test evidence. |
 | [llm-lint](https://github.com/JadenRazo/llm-lint) | Go policy and repository-boundary scanner shipped as native binaries and an npm package, with CodeQL, SARIF, release verification, SBOMs, and signed artifacts. |
 | [CloudCostMCP](https://github.com/JadenRazo/CloudCostMCP) | Multi-IaC cost analysis for AWS, Azure, and GCP. Its [pricing-drift incident review](https://github.com/JadenRazo/CloudCostMCP/blob/main/docs/incidents/2026-08-pricing-drift.md) shows the defect, detection gap, live verification, and regression controls. |
 
