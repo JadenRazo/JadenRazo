@@ -14,7 +14,7 @@ hosting and automation business. Open to full-time cloud/DevOps roles and SRE or
 </div>
 
 **Current focus:** turning the Kubernetes/GitOps setup in
-[`tts-raizhost`](https://github.com/JadenRazo/tts-raizhost) into measured operating evidence, not
+[`raizhost-architecture`](https://github.com/JadenRazo/raizhost-architecture) into measured operating evidence, not
 merely an architecture diagram.
 
 ## What I'm building
