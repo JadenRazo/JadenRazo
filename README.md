@@ -128,7 +128,7 @@ merely an architecture diagram.
 </picture>
 
 <details>
-<summary><strong>More stats</strong>: lines of code across active source repositories</summary>
+<summary><strong>More stats</strong>: lines of code across source repositories</summary>
 <br>
 
 <!-- LOC_START -->
@@ -150,7 +150,7 @@ merely an architecture diagram.
 | HCL | 13,286 | 1.2% |
 <!-- LOC_END -->
 
-*Counted daily across non-archived, non-fork source repositories, excluding this profile repository, via
+*Counted daily across non-fork source repositories, including archived projects and excluding this profile repository, via
 [GitHub Actions](.github/workflows/loc-counter.yml). A failed or incomplete scan is never published.*
 
 </details>

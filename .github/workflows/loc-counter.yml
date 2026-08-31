@@ -67,7 +67,7 @@ jobs:
               output.write(f"repo_count={count}\n")
           PY
 
-      - name: Clone every active source repository
+      - name: Clone every source repository
         id: repositories
         env:
           GH_TOKEN: ${{ secrets.LOC_COUNTER_PAT }}
@@ -79,7 +79,6 @@ jobs:
 
           if ! gh repo list JadenRazo \
             --limit 500 \
-            --no-archived \
             --source \
             --json nameWithOwner,isFork \
             --jq '.[] | select(.isFork == false and .nameWithOwner != "JadenRazo/JadenRazo") | .nameWithOwner' \
