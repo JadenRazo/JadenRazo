@@ -1,0 +1,232 @@
+name: Update LOC Count
+
+on:
+  schedule:
+    - cron: '0 6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: loc-counter
+  cancel-in-progress: true
+
+jobs:
+  count-loc:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout profile repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          ref: main
+
+      - name: Install cloc
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y cloc
+
+      - name: Verify repository access token
+        env:
+          GH_TOKEN: ${{ secrets.LOC_COUNTER_PAT }}
+        run: |
+          if [ -z "${GH_TOKEN:-}" ]; then
+            echo "::error::LOC_COUNTER_PAT is missing or empty"
+            exit 1
+          fi
+
+      - name: Read the published repository floor
+        id: published
+        run: |
+          python3 - <<'PY'
+          import os
+          import re
+          from pathlib import Path
+
+          readme = Path("README.md").read_text()
+          block = re.search(r"<!-- LOC_START -->(.*?)<!-- LOC_END -->", readme, re.DOTALL)
+          if not block:
+              raise SystemExit("LOC block is missing from README.md")
+
+          loc_match = re.search(r"\*\*([\d,]+)\*\* lines of code", block.group(1))
+          match = re.search(r"in \*\*([\d,]+)\*\* repositories", block.group(1))
+          if not loc_match or not match:
+              raise SystemExit("published LOC or repository count is missing from the LOC block")
+
+          loc_count = int(loc_match.group(1).replace(",", ""))
+          count = int(match.group(1).replace(",", ""))
+          if loc_count <= 0 or count <= 0:
+              raise SystemExit("published LOC or repository count is invalid")
+
+          with Path(os.environ["GITHUB_OUTPUT"]).open("a") as output:
+              output.write(f"loc_count={loc_count}\n")
+              output.write(f"repo_count={count}\n")
+          PY
+
+      - name: Clone every active source repository
+        id: repositories
+        env:
+          GH_TOKEN: ${{ secrets.LOC_COUNTER_PAT }}
+          PUBLISHED_REPO_COUNT: ${{ steps.published.outputs.repo_count }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir repos
+
+          if ! gh repo list JadenRazo \
+            --limit 500 \
+            --no-archived \
+            --source \
+            --json nameWithOwner,isFork \
+            --jq '.[] | select(.isFork == false and .nameWithOwner != "JadenRazo/JadenRazo") | .nameWithOwner' \
+            > repositories.txt 2> repository-discovery.log; then
+            echo "::error::Repository discovery failed; refusing to publish a partial count"
+            exit 1
+          fi
+
+          mapfile -t repositories < repositories.txt
+          repository_count=${#repositories[@]}
+          if [ "$repository_count" -lt "$PUBLISHED_REPO_COUNT" ]; then
+            echo "::error::Repository discovery returned fewer repositories than the published count"
+            exit 1
+          fi
+
+          failures=()
+          index=0
+          for repository in "${repositories[@]}"; do
+            index=$((index + 1))
+            directory=$(printf 'repos/repository-%03d' "$index")
+            cloned=false
+
+            for attempt in 1 2 3; do
+              if gh repo clone "$repository" "$directory" -- --depth 1 --quiet > clone.log 2>&1; then
+                cloned=true
+                break
+              fi
+
+              rm -rf "$directory"
+              echo "::warning::Clone failed for repository $index of $repository_count (attempt $attempt/3)"
+              sleep $((attempt * 5))
+            done
+
+            if [ "$cloned" != true ]; then
+              failures+=("$index")
+            fi
+          done
+
+          if [ "${#failures[@]}" -ne 0 ]; then
+            printf '::error::Failed to clone repository position(s) %s; refusing to publish a partial count\n' "${failures[*]}"
+            exit 1
+          fi
+
+          rm -f clone.log repository-discovery.log repositories.txt
+          echo "repo_count=$repository_count" >> "$GITHUB_OUTPUT"
+
+          if ! cloc repos --json --quiet --timeout=60 > loc-data.json 2> cloc-errors.log; then
+            echo "::error::cloc failed; refusing to publish an incomplete count"
+            exit 1
+          fi
+          if [ -s cloc-errors.log ]; then
+            echo "::error::cloc reported an incomplete scan; refusing to publish it"
+            exit 1
+          fi
+          rm -f cloc-errors.log
+
+      - name: Update README statistics
+        env:
+          PUBLISHED_LOC_COUNT: ${{ steps.published.outputs.loc_count }}
+          REPO_COUNT: ${{ steps.repositories.outputs.repo_count }}
+        run: |
+          python3 - <<'PY'
+          import json
+          import os
+          import re
+          from pathlib import Path
+
+          data = json.loads(Path("loc-data.json").read_text())
+          published_loc_count = int(os.environ["PUBLISHED_LOC_COUNT"])
+          repository_count = int(os.environ["REPO_COUNT"])
+
+          languages = []
+          for language, metrics in data.items():
+              if language in {"header", "SUM"}:
+                  continue
+              code = metrics.get("code", 0)
+              if code > 0:
+                  languages.append((language, code))
+
+          total_code = data["SUM"]["code"]
+          total_lines = sum(data["SUM"].get(key, 0) for key in ("blank", "comment", "code"))
+          if total_code <= 0 or total_lines < total_code or repository_count <= 0:
+              raise SystemExit("invalid cloc totals; refusing to update README.md")
+          if total_code < published_loc_count:
+              raise SystemExit("LOC total regressed below the published count; refusing automatic update")
+
+          languages.sort(key=lambda item: item[1], reverse=True)
+
+          generated = [
+              "<!-- LOC_START -->",
+              (
+                  f"**{total_code:,}** lines of code across **{total_lines:,}** total lines "
+                  f"in **{repository_count:,}** repositories"
+              ),
+              "",
+              "| Language | Lines of Code | Share |",
+              "| :-- | --: | --: |",
+          ]
+          for language, code in languages[:12]:
+              generated.append(f"| {language} | {code:,} | {code / total_code:.1%} |")
+          generated.append("<!-- LOC_END -->")
+
+          readme_path = Path("README.md")
+          readme = readme_path.read_text()
+          pattern = re.compile(r"<!-- LOC_START -->.*?<!-- LOC_END -->", re.DOTALL)
+          if len(pattern.findall(readme)) != 1:
+              raise SystemExit("expected exactly one LOC block in README.md")
+
+          updated = pattern.sub("\n".join(generated), readme)
+          readme_path.write_text(updated)
+          print(f"Validated {total_code:,} lines across {repository_count:,} repositories")
+          PY
+
+      - name: Validate generated block
+        run: |
+          python3 - <<'PY'
+          import re
+          from pathlib import Path
+
+          readme = Path("README.md").read_text()
+          match = re.search(r"<!-- LOC_START -->\s*\*\*([\d,]+)\*\* lines of code", readme)
+          if not match or int(match.group(1).replace(",", "")) <= 0:
+              raise SystemExit("portfolio LOC parser cannot read the generated count")
+          print(f"Portfolio parser will read {match.group(1)} lines of code")
+          PY
+
+      - name: Commit and push an updated count
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add README.md
+
+          if git diff --staged --quiet; then
+            echo "LOC count is already current"
+            exit 0
+          fi
+
+          git commit -m "chore: update LOC statistics"
+          for attempt in 1 2 3 4 5; do
+            if git pull --rebase origin main && git push origin HEAD:main; then
+              exit 0
+            fi
+
+            git rebase --abort 2>/dev/null || true
+            echo "::warning::Push lost a race (attempt $attempt/5)"
+            sleep $((attempt * 5))
+          done
+
+          echo "::error::Could not publish the updated count after five attempts"
+          exit 1

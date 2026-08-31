@@ -127,6 +127,34 @@ merely an architecture diagram.
   <img alt="GitHub contribution streak" src="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/generated/streak-light.svg" height="165">
 </picture>
 
+<details>
+<summary><strong>More stats</strong>: lines of code across active source repositories</summary>
+<br>
+
+<!-- LOC_START -->
+**1,144,800** lines of code across **1,385,119** total lines in **38** repositories
+
+| Language | Lines of Code | Share |
+| :-- | --: | --: |
+| Java | 278,128 | 24.3% |
+| TypeScript | 196,378 | 17.2% |
+| JSON | 190,182 | 16.6% |
+| Go | 124,234 | 10.9% |
+| HTML | 84,614 | 7.4% |
+| Markdown | 76,256 | 6.7% |
+| YAML | 39,256 | 3.4% |
+| Python | 30,249 | 2.6% |
+| JavaScript | 25,522 | 2.2% |
+| Bourne Shell | 17,079 | 1.5% |
+| Text | 15,763 | 1.4% |
+| HCL | 13,286 | 1.2% |
+<!-- LOC_END -->
+
+*Counted daily across non-archived, non-fork source repositories, excluding this profile repository, via
+[GitHub Actions](.github/workflows/loc-counter.yml). A failed or incomplete scan is never published.*
+
+</details>
+
 ## Contributions
 
 A snake eats my contribution graph, counting up my real contributions as it goes. Its route changes
