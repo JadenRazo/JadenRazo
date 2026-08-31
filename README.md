@@ -38,13 +38,7 @@ merely an architecture diagram.
 | [sre-landing-zone](https://github.com/JadenRazo/sre-landing-zone) | AWS landing-zone lab modeling five accounts, Pilot Light DR, CloudFront/WAF/Cognito edge controls, and cross-account auto-stop. |
 | [aws-supply-chain-security](https://github.com/JadenRazo/aws-supply-chain-security) | Container supply-chain stack with syft SBOMs, grype scans, and keyless cosign signing through GitHub OIDC. |
 | [azure-hub-spoke-network](https://github.com/JadenRazo/azure-hub-spoke-network) | Archived Azure hub-and-spoke Terraform lab retained as a code-study reference, not represented as a live environment. |
-| [initializing-ad](https://github.com/JadenRazo/initializing-ad) | Active Directory homelab documenting AD DS, DNS, user provisioning, domain join, and file sharing; Group Policy remains future work. |
-
-<strong>Developer tooling</strong>
-
-| Repository | Description |
-| :-- | :-- |
-| [job-scanner](https://github.com/JadenRazo/job-scanner) | ATS scanner and matcher with Claude-based scoring and cover-letter drafting. |
+| [initializing-ad](https://github.com/JadenRazo/initializing-ad) | Archived Active Directory homelab documenting AD DS, DNS, user provisioning, domain join, and file sharing. |
 
 <strong>Web & apps</strong>
 
@@ -53,15 +47,15 @@ merely an architecture diagram.
 | [Project-Website](https://github.com/JadenRazo/Project-Website) | The Go-powered portfolio behind [jadenrazo.dev](https://jadenrazo.dev/), including a URL shortener, messaging, and project pages. |
 | [TicketHacker](https://github.com/JadenRazo/TicketHacker) | Helpdesk platform unifying Discord, Telegram, email, and live chat into one ticketing system. |
 | [tts-raizhost](https://github.com/JadenRazo/tts-raizhost) | Self-hosted PDF reader-aloud using Kokoro TTS, Next.js, k3s, and GPU/CPU backends with circuit-breaker fallback. |
-| [EzWeb](https://github.com/JadenRazo/EzWeb) | Earlier Go-based Docker site manager for deploying and monitoring containerized websites. |
+| [EzWeb](https://github.com/JadenRazo/EzWeb) | Archived earlier Go-based Docker site manager for deploying and monitoring containerized websites. |
 
 <strong>Game servers & bots</strong>
 
 | Repository | Description |
 | :-- | :-- |
-| [ServerPlugins](https://github.com/JadenRazo/ServerPlugins) | 24 interconnected Paper plugins covering claims, economy, events, administration, backpacks, arcade games, and parkour. |
+| [ServerPlugins](https://github.com/JadenRazo/ServerPlugins) | Archived suite of 24 interconnected Paper plugins covering claims, economy, events, administration, backpacks, arcade games, and parkour. |
 | [SurvivalCore](https://github.com/JadenRazo/SurvivalCore) | Archived experimental Paper patch set: an unsupported code-study reference with no claimed verified build or benchmarks. |
-| [Quiz-Bot](https://github.com/JadenRazo/Quiz-Bot) | Discord bot that turns LLM-generated questions into educational quiz games. |
+| [Quiz-Bot](https://github.com/JadenRazo/Quiz-Bot) | Archived Discord bot that turns LLM-generated questions into educational quiz games. |
 
 </details>
 
