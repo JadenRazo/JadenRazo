@@ -13,7 +13,7 @@ hosting and automation business. Open to full-time cloud/DevOps roles and SRE or
 
 </div>
 
-**Current focus:** turning the Kubernetes/GitOps setup in
+**Current focus:** Working on many different RaizHost apps, and updating
 [`raizhost-architecture`](https://github.com/JadenRazo/raizhost-architecture) into measured operating evidence, not
 merely an architecture diagram.
 
