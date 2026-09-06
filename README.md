@@ -126,22 +126,22 @@ merely an architecture diagram.
 <br>
 
 <!-- LOC_START -->
-**1,180,756** lines of code across **1,423,945** total lines in **38** repositories
+**1,206,102** lines of code across **1,449,842** total lines in **38** repositories
 
 | Language | Lines of Code | Share |
 | :-- | --: | --: |
-| Java | 278,735 | 23.6% |
-| TypeScript | 212,863 | 18.0% |
-| JSON | 203,213 | 17.2% |
-| Go | 124,504 | 10.5% |
-| HTML | 84,552 | 7.2% |
-| Markdown | 76,895 | 6.5% |
-| YAML | 39,076 | 3.3% |
-| Python | 30,550 | 2.6% |
-| JavaScript | 27,834 | 2.4% |
-| Bourne Shell | 18,359 | 1.6% |
+| Java | 278,735 | 23.1% |
+| TypeScript | 213,946 | 17.7% |
+| JSON | 204,649 | 17.0% |
+| Go | 124,504 | 10.3% |
+| HTML | 84,552 | 7.0% |
+| Markdown | 77,744 | 6.4% |
+| YAML | 39,108 | 3.2% |
+| Python | 31,127 | 2.6% |
+| JavaScript | 28,689 | 2.4% |
+| CSV | 20,607 | 1.7% |
+| Bourne Shell | 18,359 | 1.5% |
 | Text | 15,804 | 1.3% |
-| HCL | 13,371 | 1.1% |
 <!-- LOC_END -->
 
 *Counted daily across non-fork source repositories, including archived projects and excluding this profile repository, via
