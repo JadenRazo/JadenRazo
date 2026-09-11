@@ -36,6 +36,7 @@ merely an architecture diagram.
 | Repository | Description |
 | :-- | :-- |
 | [sre-landing-zone](https://github.com/JadenRazo/sre-landing-zone) | AWS landing-zone lab modeling five accounts, Pilot Light DR, CloudFront/WAF/Cognito edge controls, and cross-account auto-stop. |
+| [ssm-access-workbench](https://github.com/JadenRazo/ssm-access-workbench) | PowerShell toolkit for MobaXterm SSH/SFTP to Linux EC2 through IAM Identity Center and Session Manager, with scoped IAM policies and console runbooks. |
 | [aws-supply-chain-security](https://github.com/JadenRazo/aws-supply-chain-security) | Container supply-chain stack with syft SBOMs, grype scans, and keyless cosign signing through GitHub OIDC. |
 | [azure-hub-spoke-network](https://github.com/JadenRazo/azure-hub-spoke-network) | Archived Azure hub-and-spoke Terraform lab retained as a code-study reference, not represented as a live environment. |
 | [initializing-ad](https://github.com/JadenRazo/initializing-ad) | Archived Active Directory homelab documenting AD DS, DNS, user provisioning, domain join, and file sharing. |
