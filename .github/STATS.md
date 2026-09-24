@@ -8,10 +8,12 @@ there was no workflow to refresh them. The contribution snake had a separate wor
 
 - **Total contributions:** sum of GitHub's daily contribution counts from account creation through
   the snapshot date. This includes the kinds of activity that GitHub counts, not just commits.
-- **Last 365 days:** the snapshot date and preceding 364 UTC dates. GitHub's default calendar
+- **Last 365 days:** the snapshot date and preceding 364 calendar dates. GitHub's default calendar
   can include extra days to align its weeks, so its heading can have a different total.
 - **Current streak:** consecutive dates with at least one contribution, ending today or yesterday.
-  An unfinished today does not reset yesterday's streak. After a full missed UTC day it is zero.
+  An unfinished today does not reset yesterday's streak. After a full missed day it is zero.
+  We use GitHub's returned calendar dates without regrouping events; GitHub assigns contributions
+  using the event's time zone. The snapshot's definition of today and its rollover use UTC.
 - **Longest streak:** the longest uninterrupted run since account creation, including across
   year boundaries. Equal lengths keep the earliest run. GitHub can revise historical counts.
 - **Public repositories and stars:** owned, non-fork, public repositories, including archives.

@@ -122,13 +122,13 @@ merely an architecture diagram.
   <img alt="Languages by bytes in public source repositories" src="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/generated/top-langs-light.svg?v=5f9c89c0855a21e0" width="400">
 </picture>
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/generated/streak-dark.svg?v=05422e55e01ff885">
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/generated/streak-light.svg?v=d57c3cf91440c965">
-  <img alt="Total contributions, current streak, and longest streak" src="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/generated/streak-light.svg?v=d57c3cf91440c965" width="690">
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/generated/streak-dark.svg?v=8fdf0c765e0c74e2">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/generated/streak-light.svg?v=b2ccc98e2381d418">
+  <img alt="Total contributions, current streak, and longest streak" src="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/generated/streak-light.svg?v=b2ccc98e2381d418" width="690">
 </picture>
 
 Counts follow GitHub’s contribution calendar; private contributions follow profile visibility.
-Streaks use consecutive UTC days, with today allowed to be unfinished. Language shares measure
+Streaks use GitHub calendar dates and a UTC cutoff, with today allowed to be unfinished. Language shares measure
 repository bytes, not authored lines or proficiency; forks are excluded and archived sources are included.
 [Live contribution calendar](https://github.com/JadenRazo?tab=overview) · [Data and definitions](.github/STATS.md)
 <!-- STATS_END -->

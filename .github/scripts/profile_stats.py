@@ -225,7 +225,7 @@ def render_cards(snapshot):
             body += text(x, 91, value, 32, "accent", "middle", 700)
             body += text(x, 119, label, 14, anchor="middle", weight=600)
             body += text(x, 143, detail, 11, "muted", "middle")
-        body += text(20, 181, f'Through {snapshot["calendar_end"]} · UTC days · today may still be in progress', 12, "muted")
+        body += text(20, 181, f'Through {snapshot["calendar_end"]} · GitHub calendar dates · UTC cutoff', 12, "muted")
         cards[f"streak-{theme}.svg"] = card(
             theme, "Contribution streaks", str(columns), body, updated, width=690)
 
@@ -266,7 +266,7 @@ def stats_block(snapshot, cards):
                       f'  <img alt="{alt}" src="{url("light")}" width="{690 if kind == "streak" else 400}">',
                       '</picture>'])
     lines.extend(['', 'Counts follow GitHub’s contribution calendar; private contributions follow profile visibility.',
-                  'Streaks use consecutive UTC days, with today allowed to be unfinished. Language shares measure',
+                  'Streaks use GitHub calendar dates and a UTC cutoff, with today allowed to be unfinished. Language shares measure',
                   'repository bytes, not authored lines or proficiency; forks are excluded and archived sources are included.',
                   f'[Live contribution calendar]({PROFILE}?tab=overview) · [Data and definitions](.github/STATS.md)', END])
     return '\n'.join(lines)
