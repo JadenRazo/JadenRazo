@@ -103,24 +103,35 @@ merely an architecture diagram.
 
 ## Stats
 
-*Snapshot captured from GitHub data on 30 August 2026 and stored in this repository.*
+<!-- STATS_START -->
+*Last successful refresh: **2026-09-24 21:07:54 UTC**. Scheduled every six hours.*
+
+[![Stats refresh](https://github.com/JadenRazo/JadenRazo/actions/workflows/profile-stats.yml/badge.svg)](https://github.com/JadenRazo/JadenRazo/actions/workflows/profile-stats.yml)
+[![Freshness checks](https://github.com/JadenRazo/JadenRazo/actions/workflows/profile-health.yml/badge.svg)](https://github.com/JadenRazo/JadenRazo/actions/workflows/profile-health.yml)
+
+**3,205 contributions since 2025-02-17** · **2 day current streak** · **54 day longest streak**
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/generated/stats-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/generated/stats-light.svg">
-  <img alt="GitHub stats for JadenRazo" src="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/generated/stats-light.svg" height="165">
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/generated/stats-dark.svg?v=a9622a259e7084ee">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/generated/stats-light.svg?v=45da1a337cce9da5">
+  <img alt="GitHub activity with explicit date ranges" src="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/generated/stats-light.svg?v=45da1a337cce9da5" width="400">
 </picture>
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/generated/top-langs-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/generated/top-langs-light.svg">
-  <img alt="Most used languages across public repositories" src="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/generated/top-langs-light.svg" height="165">
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/generated/top-langs-dark.svg?v=53d3fdac83771472">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/generated/top-langs-light.svg?v=5f9c89c0855a21e0">
+  <img alt="Languages by bytes in public source repositories" src="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/generated/top-langs-light.svg?v=5f9c89c0855a21e0" width="400">
+</picture>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/generated/streak-dark.svg?v=8fdf0c765e0c74e2">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/generated/streak-light.svg?v=b2ccc98e2381d418">
+  <img alt="Total contributions, current streak, and longest streak" src="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/generated/streak-light.svg?v=b2ccc98e2381d418" width="690">
 </picture>
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/generated/streak-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/generated/streak-light.svg">
-  <img alt="GitHub contribution streak" src="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/generated/streak-light.svg" height="165">
-</picture>
+Counts follow GitHub’s contribution calendar; private contributions follow profile visibility.
+Streaks use GitHub calendar dates and a UTC cutoff, with today allowed to be unfinished. Language shares measure
+repository bytes, not authored lines or proficiency; forks are excluded and archived sources are included.
+[Live contribution calendar](https://github.com/JadenRazo?tab=overview) · [Data and definitions](.github/STATS.md)
+<!-- STATS_END -->
 
 <details>
 <summary><strong>More stats</strong>: lines of code across source repositories</summary>
@@ -145,15 +156,19 @@ merely an architecture diagram.
 | Text | 15,867 | 1.0% |
 <!-- LOC_END -->
 
-*Counted daily across non-fork source repositories, including archived projects and excluding this profile repository, via
+[![LOC refresh](https://github.com/JadenRazo/JadenRazo/actions/workflows/loc-counter.yml/badge.svg)](https://github.com/JadenRazo/JadenRazo/actions/workflows/loc-counter.yml)
+
+*Scheduled daily across non-fork source repositories, including archived projects and excluding this profile repository, via
 [GitHub Actions](.github/workflows/loc-counter.yml). A failed or incomplete scan is never published.*
 
 </details>
 
 ## Contributions
 
-A snake eats my contribution graph, counting up my real contributions as it goes. Its route changes
-four times a day.
+A snake eats my contribution graph, counting up my real contributions as it goes. Its route is regenerated
+on a schedule that runs four times a day; updates can be delayed.
+
+[![Snake refresh](https://github.com/JadenRazo/JadenRazo/actions/workflows/snake.yml/badge.svg)](https://github.com/JadenRazo/JadenRazo/actions/workflows/snake.yml)
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/JadenRazo/JadenRazo/output/github-snake-dark.svg">

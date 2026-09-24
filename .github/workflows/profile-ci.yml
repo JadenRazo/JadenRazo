@@ -37,3 +37,9 @@ jobs:
                   raise SystemExit(f"{path} is empty")
               print(f"OK {path}")
           PY
+
+      - name: Test stats calculations and rejected inputs
+        run: python3 -m unittest discover -s .github/scripts -p 'test_*.py' -v
+
+      - name: Validate stats data, timestamps and README image versions
+        run: python3 .github/scripts/profile_stats.py --check

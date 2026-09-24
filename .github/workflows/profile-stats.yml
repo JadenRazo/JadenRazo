@@ -1,0 +1,55 @@
+name: Refresh Profile Stats
+
+on:
+  schedule:
+    - cron: '23 */6 * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/scripts/profile_stats.py'
+      - '.github/scripts/test_profile_stats.py'
+      - '.github/workflows/profile-stats.yml'
+      - 'README.md'
+
+permissions:
+  contents: write
+
+# Both writers share a lock so LOC and stats cannot overwrite one another.
+concurrency:
+  group: profile-readme-update
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout current main
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: main
+
+      - name: Test contribution calculations and failure handling
+        run: python3 -m unittest discover -s .github/scripts -p 'test_*.py' -v
+
+      - name: Refresh and validate all stats
+        env:
+          # Public data and profile-visible aggregates; no expiring PAT needed.
+          GH_TOKEN: ${{ github.token }}
+        run: python3 .github/scripts/profile_stats.py
+
+      - name: Publish validated snapshot
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add README.md generated/stats-*.svg generated/streak-*.svg generated/top-langs-*.svg generated/profile-stats.json
+          if git diff --cached --quiet; then
+            exit 0
+          fi
+          git commit -m "chore: refresh profile statistics"
+          # A conflict fails visibly; never force-push over a human edit.
+          git pull --rebase origin main
+          python3 .github/scripts/profile_stats.py --check
+          git push origin HEAD:main
