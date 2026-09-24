@@ -2,15 +2,15 @@ name: Update LOC Count
 
 on:
   schedule:
-    - cron: '0 6 * * *'
+    - cron: '41 6 * * *'
   workflow_dispatch:
 
 permissions:
   contents: write
 
 concurrency:
-  group: loc-counter
-  cancel-in-progress: true
+  group: profile-readme-update
+  cancel-in-progress: false
 
 jobs:
   count-loc:
@@ -39,46 +39,17 @@ jobs:
             exit 1
           fi
 
-      - name: Read the published repository floor
-        id: published
-        run: |
-          python3 - <<'PY'
-          import os
-          import re
-          from pathlib import Path
-
-          readme = Path("README.md").read_text()
-          block = re.search(r"<!-- LOC_START -->(.*?)<!-- LOC_END -->", readme, re.DOTALL)
-          if not block:
-              raise SystemExit("LOC block is missing from README.md")
-
-          loc_match = re.search(r"\*\*([\d,]+)\*\* lines of code", block.group(1))
-          match = re.search(r"in \*\*([\d,]+)\*\* repositories", block.group(1))
-          if not loc_match or not match:
-              raise SystemExit("published LOC or repository count is missing from the LOC block")
-
-          loc_count = int(loc_match.group(1).replace(",", ""))
-          count = int(match.group(1).replace(",", ""))
-          if loc_count <= 0 or count <= 0:
-              raise SystemExit("published LOC or repository count is invalid")
-
-          with Path(os.environ["GITHUB_OUTPUT"]).open("a") as output:
-              output.write(f"loc_count={loc_count}\n")
-              output.write(f"repo_count={count}\n")
-          PY
-
       - name: Clone every source repository
         id: repositories
         env:
           GH_TOKEN: ${{ secrets.LOC_COUNTER_PAT }}
-          PUBLISHED_REPO_COUNT: ${{ steps.published.outputs.repo_count }}
         shell: bash
         run: |
           set -euo pipefail
           mkdir repos
 
           if ! gh repo list JadenRazo \
-            --limit 500 \
+            --limit 10001 \
             --source \
             --json nameWithOwner,isFork \
             --jq '.[] | select(.isFork == false and .nameWithOwner != "JadenRazo/JadenRazo") | .nameWithOwner' \
@@ -89,8 +60,8 @@ jobs:
 
           mapfile -t repositories < repositories.txt
           repository_count=${#repositories[@]}
-          if [ "$repository_count" -lt "$PUBLISHED_REPO_COUNT" ]; then
-            echo "::error::Repository discovery returned fewer repositories than the published count"
+          if [ "$repository_count" -eq 0 ] || [ "$repository_count" -ge 10000 ]; then
+            echo "::error::Repository inventory is empty or may be truncated"
             exit 1
           fi
 
@@ -137,17 +108,16 @@ jobs:
 
       - name: Update README statistics
         env:
-          PUBLISHED_LOC_COUNT: ${{ steps.published.outputs.loc_count }}
           REPO_COUNT: ${{ steps.repositories.outputs.repo_count }}
         run: |
           python3 - <<'PY'
+          from datetime import datetime, timezone
           import json
           import os
           import re
           from pathlib import Path
 
           data = json.loads(Path("loc-data.json").read_text())
-          published_loc_count = int(os.environ["PUBLISHED_LOC_COUNT"])
           repository_count = int(os.environ["REPO_COUNT"])
 
           languages = []
@@ -162,8 +132,8 @@ jobs:
           total_lines = sum(data["SUM"].get(key, 0) for key in ("blank", "comment", "code"))
           if total_code <= 0 or total_lines < total_code or repository_count <= 0:
               raise SystemExit("invalid cloc totals; refusing to update README.md")
-          if total_code < published_loc_count:
-              raise SystemExit("LOC total regressed below the published count; refusing automatic update")
+          if sum(code for _, code in languages) != total_code:
+              raise SystemExit("language rows do not match cloc total; refusing partial data")
 
           languages.sort(key=lambda item: item[1], reverse=True)
 
@@ -179,7 +149,9 @@ jobs:
           ]
           for language, code in languages[:12]:
               generated.append(f"| {language} | {code:,} | {code / total_code:.1%} |")
-          generated.append("<!-- LOC_END -->")
+          updated_at = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+          generated.extend(["", f"*Last successful scan: {updated_at}.*",
+                            f"<!-- LOC_UPDATED: {updated_at} -->", "<!-- LOC_END -->"])
 
           readme_path = Path("README.md")
           readme = readme_path.read_text()
