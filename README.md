@@ -138,25 +138,25 @@ repository bytes, not authored lines or proficiency; forks are excluded and arch
 <br>
 
 <!-- LOC_START -->
-**1,742,206** lines of code across **1,988,638** total lines in **40** repositories
+**1,753,140** lines of code across **2,000,540** total lines in **40** repositories
 
 | Language | Lines of Code | Share |
 | :-- | --: | --: |
-| JSON | 715,989 | 41.1% |
-| Java | 278,735 | 16.0% |
-| TypeScript | 219,696 | 12.6% |
+| JSON | 716,343 | 40.9% |
+| Java | 278,735 | 15.9% |
+| TypeScript | 227,218 | 13.0% |
 | Go | 124,504 | 7.1% |
-| HTML | 84,507 | 4.9% |
-| Markdown | 84,012 | 4.8% |
-| YAML | 40,187 | 2.3% |
-| Python | 33,607 | 1.9% |
-| JavaScript | 32,590 | 1.9% |
+| Markdown | 84,697 | 4.8% |
+| HTML | 84,507 | 4.8% |
+| YAML | 40,195 | 2.3% |
+| Python | 35,296 | 2.0% |
+| JavaScript | 32,695 | 1.9% |
 | CSV | 21,044 | 1.2% |
-| Bourne Shell | 18,491 | 1.1% |
-| Text | 15,869 | 0.9% |
+| Bourne Shell | 18,467 | 1.1% |
+| Text | 15,888 | 0.9% |
 
-*Last successful scan: 2026-10-11T13:29:48Z.*
-<!-- LOC_UPDATED: 2026-10-11T13:29:48Z -->
+*Last successful scan: 2026-10-12T16:04:27Z.*
+<!-- LOC_UPDATED: 2026-10-12T16:04:27Z -->
 <!-- LOC_END -->
 
 [![LOC refresh](https://github.com/JadenRazo/JadenRazo/actions/workflows/loc-counter.yml/badge.svg)](https://github.com/JadenRazo/JadenRazo/actions/workflows/loc-counter.yml)
