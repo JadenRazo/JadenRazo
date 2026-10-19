@@ -104,7 +104,7 @@ merely an architecture diagram.
 ## Stats
 
 <!-- STATS_START -->
-*Last successful refresh: **2026-10-19 04:52:34 UTC**. Scheduled every six hours.*
+*Last successful refresh: **2026-10-19 13:35:55 UTC**. Scheduled every six hours.*
 
 [![Stats refresh](https://github.com/JadenRazo/JadenRazo/actions/workflows/profile-stats.yml/badge.svg)](https://github.com/JadenRazo/JadenRazo/actions/workflows/profile-stats.yml)
 [![Freshness checks](https://github.com/JadenRazo/JadenRazo/actions/workflows/profile-health.yml/badge.svg)](https://github.com/JadenRazo/JadenRazo/actions/workflows/profile-health.yml)
@@ -112,19 +112,19 @@ merely an architecture diagram.
 **3,394 contributions since 2025-02-17** · **0 day current streak** · **54 day longest streak**
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/generated/stats-dark.svg?v=46d5c0ebb50d6ad5">
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/generated/stats-light.svg?v=f523e85826c8f972">
-  <img alt="GitHub activity with explicit date ranges" src="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/generated/stats-light.svg?v=f523e85826c8f972" width="400">
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/generated/stats-dark.svg?v=3a04086fe8abc424">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/generated/stats-light.svg?v=f67075cfc1e79736">
+  <img alt="GitHub activity with explicit date ranges" src="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/generated/stats-light.svg?v=f67075cfc1e79736" width="400">
 </picture>
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/generated/top-langs-dark.svg?v=4eddb7389ba8d12b">
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/generated/top-langs-light.svg?v=207abcb7247db3eb">
-  <img alt="Languages by bytes in public source repositories" src="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/generated/top-langs-light.svg?v=207abcb7247db3eb" width="400">
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/generated/top-langs-dark.svg?v=2e0d3a214f82a0fa">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/generated/top-langs-light.svg?v=2f492272dabdefe5">
+  <img alt="Languages by bytes in public source repositories" src="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/generated/top-langs-light.svg?v=2f492272dabdefe5" width="400">
 </picture>
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/generated/streak-dark.svg?v=6f68c32bf45a98ec">
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/generated/streak-light.svg?v=dfff514cf61d2099">
-  <img alt="Total contributions, current streak, and longest streak" src="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/generated/streak-light.svg?v=dfff514cf61d2099" width="690">
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/generated/streak-dark.svg?v=b448533dffb3507f">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/generated/streak-light.svg?v=867532024e86aa61">
+  <img alt="Total contributions, current streak, and longest streak" src="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/generated/streak-light.svg?v=867532024e86aa61" width="690">
 </picture>
 
 Counts follow GitHub’s contribution calendar; private contributions follow profile visibility.
