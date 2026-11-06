@@ -2,7 +2,7 @@ name: Contribution Snake
 
 on:
   schedule:
-    # Fresh contribution data and a new starting side/direction every six hours.
+    # Fresh contribution data and a new winding path every six hours.
     - cron: '11 */6 * * *'
   push:
     branches: [main]

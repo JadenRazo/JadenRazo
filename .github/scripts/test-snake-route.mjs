@@ -29,3 +29,26 @@ test("seeded routes reproduce and vary without moving the start onto food", () =
   assert.ok(starts.size > 1);
   assert.throws(() => createSnakeRoute(3, 7, 12, 1), /dimensions/);
 });
+
+test("routes mix all four directions inside the calendar and change their layout", () => {
+  const layouts = new Set();
+  for (let seed = 1; seed <= 24; seed++) {
+    const { poses } = createSnakeRoute(53, 7, 12, seed);
+    const directions = { left: 0, right: 0, up: 0, down: 0 };
+    const edges = [];
+    for (let i = 1; i < poses.length; i++) {
+      const a = poses[i - 1][0], b = poses[i][0];
+      // The outside return row must not disguise a vertical-only calendar path.
+      if ([a, b].some(p => p.x < 0 || p.x >= 53 || p.y < 0 || p.y >= 7)) continue;
+      directions[b.x < a.x ? "left" : b.x > a.x ? "right" : b.y < a.y ? "up" : "down"]++;
+      edges.push([`${a.x},${a.y}`, `${b.x},${b.y}`].sort().join("/"));
+    }
+    const horizontal = (directions.left + directions.right) / edges.length;
+    assert.ok(horizontal >= 0.35 && horizontal <= 0.7, `seed ${seed}: balanced axes`);
+    for (const [direction, moves] of Object.entries(directions))
+      assert.ok(moves >= 40, `seed ${seed}: enough ${direction} movement inside the grid`);
+    layouts.add(edges.sort().join(";"));
+  }
+  // Rotation of the starting pose alone cannot satisfy this layout comparison.
+  assert.equal(layouts.size, 24);
+});
