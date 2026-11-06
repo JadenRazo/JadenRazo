@@ -1,7 +1,7 @@
 /**
  * Render a growing contribution snake from one GitHub calendar snapshot.
  * A seeded winding path covers every cell on a bounded, collision-free loop. snk still
- * supplies the palettes, SVG movement, calendar cells and progress bars.
+ * supplies SVG movement, calendar cells and progress bars.
  * Executed inside its pinned generate-snake-animation package by Bun.
  */
 import * as fs from "node:fs/promises";
@@ -28,8 +28,11 @@ export const generateSnake = (cells: Cell[], seed: number) => {
   console.log(`[route] seed ${seed}, ${grid.width}x${grid.height}, ${active.length} occupied cells, ${chain.length} steps, capacity ${capacity}`);
 
   const outputs = parseOutputsOption([
-    "github-snake.svg",
-    "github-snake-dark.svg?palette=github-dark",
+    // Every occupied shade must remain distinct from empty cells, including
+    // one-contribution days. Six-digit colors are fully opaque. Keep the green
+    // activity scale and purple snake, with a brighter snake on dark surfaces.
+    'github-snake.svg {"color_dots":["#ebedf0","#44935a","#318248","#1e6937","#0f5028"]}',
+    'github-snake-dark.svg {"palette":"github-dark","color_dots":["#161b22","#2d8a51","#34aa5d","#46cc72","#78ec9e"],"color_snake":"#c084fc"}',
   ]).map(out => {
     if (!out) throw new Error("invalid SVG output option");
     const rendered = createSvg(grid, cells, chain, out.drawOptions, out.animationOptions);

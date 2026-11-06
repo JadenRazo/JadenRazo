@@ -71,6 +71,12 @@ dense calendars. Growth uses the same printed bite percentages as the counter an
 opacity wrappers that preserve movement.
 Reduced-motion mode shows the short, stationary snake, complete grid, and final total.
 
+Occupied cells use fully opaque green shades with at least 3:1 contrast against empty
+cells and the theme background. Low-activity days stay visible until eaten, while four
+distinct shades retain the activity scale. The dark-theme snake uses a brighter purple.
+Browser checks measure rendered contrast and opacity, inspect a low-activity bite before
+arrival and after the tail clears it, and verify that cells return when the loop resets.
+
 The pinned snk SVG packages need no external runtime dependencies. `prepare-snake.mjs`
 links only those packages; it does not install the upstream web or GIF toolchains.
 If generation or validation fails, publication stops and the last successful SVGs remain
