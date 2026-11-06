@@ -86,7 +86,8 @@ jobs:
         if: github.event_name == 'pull_request'
         run: |
           npm install --prefix "$RUNNER_TEMP/snake-browser" --ignore-scripts --no-audit --no-fund playwright@1.61.1
-          "$RUNNER_TEMP/snake-browser/node_modules/.bin/playwright" install --with-deps chromium
+          # Use the runner's existing browser libraries and Latin fonts.
+          "$RUNNER_TEMP/snake-browser/node_modules/.bin/playwright" install chromium
           node .github/scripts/check-snake-animation.mjs "$RUNNER_TEMP/snake-preview" "$RUNNER_TEMP/snake-browser/node_modules/playwright" "$RUNNER_TEMP/snake-frames"
 
       - name: Save snake preview and verification frames
