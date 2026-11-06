@@ -36,6 +36,11 @@ jobs:
               if path.stat().st_size == 0:
                   raise SystemExit(f"{path} is empty")
               print(f"OK {path}")
+          for path in sorted(Path("assets/badges").glob("*.svg")):
+              root = ElementTree.parse(path).getroot()
+              if root.find(".//{http://www.w3.org/2000/svg}image") is None:
+                  raise SystemExit(f"{path} is missing its embedded logo")
+              print(f"OK {path}")
           PY
 
       - name: Test stats calculations and rejected inputs
