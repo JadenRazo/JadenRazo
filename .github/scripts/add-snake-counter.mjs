@@ -148,7 +148,6 @@ const parseSvg = (svg) => {
     /@keyframes (c[0-9a-z]+)\{([\d.]+)%\{fill:var\(--c[0-4]\)\}/g,
   ))
     eatAt.set(m[1], m[2]);
-  if (!eatAt.size) bail("no cell keyframes found");
 
   // class -> grid position, via the rect that carries it
   const rects = [...svg.matchAll(/<rect class="c(?: (c[0-9a-z]+))?" x="([\d.]+)" y="([\d.]+)"/g)];
@@ -172,7 +171,6 @@ const parseSvg = (svg) => {
     if (at === undefined) bail(`cell ${r[1]} has no keyframe`);
     placed.push({ gx, gy, at });
   }
-  if (!placed.length) bail("no eaten cells");
 
   return { root, rootEnd, vx, vy, vw, vh, dur, ce, rightEdge, styleEnd, placed };
 };
@@ -207,13 +205,15 @@ const buildEvents = (placed, cells) => {
     if (!(cell.count > 0)) bail(`cell ${gx},${gy} is eaten but has no contributions`);
     return { at, n: Number(at), count: cell.count, date: cell.date };
   });
+  if (events.length !== cells.filter((c) => c.count > 0).length)
+    bail("animation does not cover every occupied contribution cell");
 
   events.sort((a, b) => a.n - b.n);
   for (let i = 1; i < events.length; i++)
     if (events[i].n <= events[i - 1].n)
       bail(`non-monotonic eat times at ${events[i].at}%`);
-  if (events[0].n <= 0) bail("first eat time is not positive");
-  if (events[events.length - 1].n >= 100) bail("last eat time is not below 100%");
+  if (events.length && events[0].n <= 0) bail("first eat time is not positive");
+  if (events.length && events[events.length - 1].n >= 100) bail("last eat time is not below 100%");
 
   let running = 0;
   for (const e of events) e.running = running += e.count;
@@ -348,7 +348,7 @@ const process1 = async (file, cellsPromise) => {
   const cells = await cellsPromise;
   const events = buildEvents(p.placed, cells);
   const bursts = buildBursts(events, p.dur);
-  const total = events[events.length - 1].running;
+  const total = events.at(-1)?.running ?? 0;
   const lastOffset = events.length * ROW_PITCH;
 
   const top = p.vy - BAND_TOP;
@@ -415,7 +415,7 @@ const main = async () => {
     const raw = await fs.readFile(metaPath, "utf8").catch(() => null);
     if (raw) {
       const meta = JSON.parse(raw);
-      if (!meta?.cells?.length) bail("snake-meta.json has no cells");
+      if (!Array.isArray(meta?.cells)) bail("snake-meta.json has no cells array");
       console.log(
         `[counter] using snake-meta.json (seed ${meta.seed}, ${meta.cells.length} active days)`,
       );

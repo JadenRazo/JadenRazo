@@ -34,10 +34,12 @@ import {
   setColorEmpty,
   type Grid,
 } from "@snk/types/grid";
-import { createSnakeFromCells, getHeadX, getHeadY } from "@snk/types/snake";
+import { createSnakeFromCells, getHeadX, getHeadY, snakeToCells } from "@snk/types/snake";
 import type { Snake } from "@snk/types/snake";
 import { cellsToGrid } from "./cellsToGrid";
 import { parseOutputsOption } from "./outputsOptions";
+import { addSnakeGrowth, growthCapacity, INITIAL_LENGTH, CELLS_PER_SEGMENT } from "./snake-growth.mjs";
+import type { Cell } from "@snk/github-user-contribution";
 
 /** How many random poses to try before giving up and using snk's default. */
 const MAX_ATTEMPTS = 12;
@@ -47,7 +49,6 @@ const MAX_ATTEMPTS = 12;
  * several minutes.
  */
 const MAX_LENGTH_RATIO = 1.6;
-const SNAKE_LENGTHS = [3, 4, 5];
 
 /** mulberry32 — small seeded PRNG so a run can be reproduced from its logged seed. */
 const makeRng = (seed: number) => () => {
@@ -104,24 +105,22 @@ const countUneaten = (grid0: Grid, chain: Snake[]) => {
   return grid.data.reduce((n: number, c: number) => n + (c > 0 ? 1 : 0), 0);
 };
 
-const main = async () => {
-  const outDir = process.argv[2];
-  const userName = process.env.SNAKE_USER;
-  const githubToken = process.env.GITHUB_TOKEN;
+const validateRoute = (grid: Grid, chain: Snake[], length: number) => {
+  for (const snake of chain) {
+    const body = snakeToCells(snake);
+    if (body.length !== length || new Set(body.map(p => `${p.x},${p.y}`)).size !== length)
+      throw new Error("snake route contains an invalid body or self-collision");
+    if (body.some(p => p.x < -1 || p.x > grid.width || p.y < -2 || p.y > grid.height + 2))
+      throw new Error("snake route leaves the SVG canvas");
+  }
+  if (chain[0].some((value, i) => value !== chain.at(-1)![i]))
+    throw new Error("snake route does not close its loop");
+  if (countUneaten(grid, chain)) throw new Error("snake route leaves occupied cells behind");
+};
 
-  if (!outDir) throw new Error("usage: bun run snake-gen.ts <outDir>");
-  if (!userName) throw new Error("SNAKE_USER is required");
-  if (!githubToken) throw new Error("GITHUB_TOKEN is required");
-
-  const seed =
-    Number(process.env.SNAKE_SEED) ||
-    Math.floor(Math.random() * 0xffffffff) ||
-    1;
+export const generateSnake = (cells: Cell[], seed: number) => {
   const rng = makeRng(seed);
   console.log(`[seed] ${seed}`);
-
-  console.log(`[fetch] contributions for ${userName}`);
-  const cells = await getGithubUserContribution(userName, { githubToken });
   if (!cells.length) throw new Error("no contribution cells returned");
 
   const grid = cellsToGrid(cells);
@@ -131,8 +130,11 @@ const main = async () => {
   );
   console.log(`[grid] ${grid.width}x${grid.height}, ${coloured} coloured cells`);
 
-  // Baseline: snk's default pose. Doubles as the length budget and the fallback.
-  const defaultPose = poseAt(0, -1, 4);
+  // Plan for the entire final body, including the initially hidden tail, so
+  // revealing new segments cannot introduce self-collisions.
+  const length = growthCapacity(coloured);
+  if (grid.width < length) throw new Error("calendar too narrow for the planned body");
+  const defaultPose = poseAt(0, -1, length);
   const baseline = routeFor(grid, defaultPose);
   if (!baseline) throw new Error("default pose produced no route");
   const maxLength = Math.ceil(baseline.length * MAX_LENGTH_RATIO);
@@ -140,11 +142,10 @@ const main = async () => {
     `[route] baseline ${baseline.length} steps (budget ${maxLength})`,
   );
 
-  let chosen = { chain: baseline, pose: { x: 0, y: -1, length: 4 } };
+  let chosen = { chain: baseline, pose: { x: 0, y: -1, length } };
   let randomised = false;
 
   for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
-    const length = SNAKE_LENGTHS[Math.floor(rng() * SNAKE_LENGTHS.length)];
     // The snake starts outside the grid: the row above it, or the row below.
     const y = rng() < 0.5 ? -1 : grid.height;
     const x = Math.floor(rng() * (grid.width - length + 1));
@@ -186,13 +187,13 @@ const main = async () => {
     );
   }
 
+  validateRoute(grid, chosen.chain, length);
   const outputs = parseOutputsOption([
     "github-snake.svg",
     "github-snake-dark.svg?palette=github-dark",
   ]);
 
-  await fs.mkdir(outDir, { recursive: true });
-
+  const rendered = [];
   for (const out of outputs) {
     if (!out) continue;
     const svg = createSvg(
@@ -202,8 +203,8 @@ const main = async () => {
       out.drawOptions,
       out.animationOptions,
     );
-    await fs.writeFile(path.join(outDir, out.filename), svg);
-    console.log(`[write] ${out.filename}`);
+    const grown = addSnakeGrowth(svg);
+    rendered.push({ filename: out.filename, svg: grown.svg });
   }
 
   const meta = {
@@ -214,22 +215,40 @@ const main = async () => {
     durationMs: chosen.chain.length * 100,
     gridWidth: grid.width,
     gridHeight: grid.height,
+    growth: { initialLength: INITIAL_LENGTH, capacity: length, cellsPerSegment: CELLS_PER_SEGMENT },
     // Only cells with contributions matter to the counter, and dropping the
     // ~250 empty ones keeps the file small.
     cells: cells
       .filter((c) => c.count > 0)
       .map(({ x, y, date, count }) => ({ x, y, date, count })),
   };
-  await fs.writeFile(
-    path.join(outDir, "snake-meta.json"),
-    JSON.stringify(meta),
-  );
+  return { outputs: rendered, meta, chain: chosen.chain };
+};
+
+const main = async () => {
+  const outDir = process.argv[2];
+  const userName = process.env.SNAKE_USER;
+  const githubToken = process.env.GITHUB_TOKEN;
+  if (!outDir) throw new Error("usage: bun run snake-gen.ts <outDir>");
+  if (!userName) throw new Error("SNAKE_USER is required");
+  if (!githubToken) throw new Error("GITHUB_TOKEN is required");
+  const seed = Number(process.env.SNAKE_SEED) || Math.floor(Math.random() * 0xffffffff) || 1;
+  console.log(`[fetch] contributions for ${userName}`);
+  const cells = await getGithubUserContribution(userName, { githubToken });
+  const { outputs, meta } = generateSnake(cells, seed);
+  // Both palettes and their growth schedules validate before any file is written.
+  await fs.mkdir(outDir, { recursive: true });
+  for (const out of outputs) {
+    await fs.writeFile(path.join(outDir, out.filename), out.svg);
+    console.log(`[write] ${out.filename}`);
+  }
+  await fs.writeFile(path.join(outDir, "snake-meta.json"), JSON.stringify(meta));
   console.log(
-    `[write] snake-meta.json (${meta.cells.length} active days, ${chosen.chain.length} steps)`,
+    `[write] snake-meta.json (${meta.cells.length} active days, ${meta.steps} steps)`,
   );
 };
 
-main().catch((err) => {
+if (import.meta.main) main().catch((err) => {
   console.error("✗ snake-gen failed:", err?.message ?? err);
   process.exit(1);
 });

@@ -32,8 +32,7 @@ jobs:
       # snk is vendored rather than used via its action because the action
       # exposes no way to vary the route: getBestRoute() has no randomness and
       # the CLI always seeds it with a fixed start pose. snake-gen.ts calls the
-      # solver directly so it can randomize that pose. Pinned to the same SHA
-      # the fallback action below uses.
+      # solver directly so it can randomize that pose. Pinned to a reviewed upstream revision.
       - name: Checkout Platane/snk
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -44,73 +43,29 @@ jobs:
       - name: Setup bun
         uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
 
-      # --ignore-scripts skips gifsicle's native build, which is only needed for
-      # GIF output and fails on some architectures.
-      #
-      # bun intermittently dies with `Fail extracting tarball for "wrangler"` —
-      # a dependency of snk's web workspace that this job never touches. Retry
-      # on a clean cache, and treat a persistent failure as a reason to use the
-      # stock action below rather than as a reason to fail the run.
-      - name: Install snk dependencies
-        id: deps
-        continue-on-error: true
-        working-directory: .snk
-        run: |
-          for attempt in 1 2 3; do
-            if bun install --frozen-lockfile --ignore-scripts; then
-              exit 0
-            fi
-            echo "::warning::bun install failed (attempt $attempt/3), retrying on a clean cache"
-            rm -rf node_modules
-            bun pm cache rm || true
-            sleep 10
-          done
-          exit 1
-
-      - name: Generate snake SVGs with a randomized route
-        id: gen
-        if: steps.deps.outcome == 'success'
-        continue-on-error: true
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          # Run from inside the workspace package so the relative and @snk/*
-          # imports resolve.
-          cp .github/scripts/snake-gen.ts .snk/packages/generate-snake-animation/
-          cd .snk/packages/generate-snake-animation
-          bun run snake-gen.ts "$GITHUB_WORKSPACE/dist"
-
-      # A failed generator may have left a partial dist/ behind, including a
-      # snake-meta.json that no longer describes the SVGs the fallback writes.
-      # `!= 'success'` rather than `== 'failure'` so a generator that was skipped
-      # because the install never completed also reaches the fallback.
-      - name: Discard partial output before falling back
-        if: steps.gen.outcome != 'success'
-        run: rm -rf dist
-
-      # snk's internals are not a stability contract, so if the vendored
-      # generator ever breaks the stock action still produces a working (if
-      # deterministic) snake. The profile never shows a broken image.
-      - name: Fall back to the stock snk action
-        if: steps.gen.outcome != 'success'
-        uses: Platane/snk/svg-only@d8f6715049803e982ee5ff501b6b9b7d5deeb09b # v3.5.0
-        with:
-          github_user_name: ${{ env.SNAKE_USER }}
-          outputs: |
-            dist/github-snake.svg
-            dist/github-snake-dark.svg?palette=github-dark
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Setup Node
         uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.0.0
         with:
           node-version: 22
 
-      # Overlays the running contribution counter. Exits 0 on any problem and
-      # leaves the SVGs untouched, so a bad counter can never break the snake.
+      - name: Prepare dependency-free SVG workspace
+        run: node .github/scripts/prepare-snake.mjs .snk
+
+      - name: Test growth and route invariants
+        run: |
+          node --test .github/scripts/test-snake-*.mjs
+          bun test ./.snk/packages/generate-snake-animation/snake.integration.test.ts
+
+      # Failure preserves the last verified output instead of publishing a
+      # degraded stock animation without growth or an exact counter.
+      - name: Generate growing snake SVGs with a randomized route
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: bun run .snk/packages/generate-snake-animation/snake-gen.ts "$GITHUB_WORKSPACE/dist"
+
+      # The overlay fails safely; the publication gate below rejects an absent
+      # counter or growth schedule and preserves the previous good output.
       - name: Overlay contribution counter
-        continue-on-error: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: node .github/scripts/add-snake-counter.mjs dist
@@ -120,6 +75,8 @@ jobs:
           for f in dist/github-snake.svg dist/github-snake-dark.svg; do
             test -s "$f" || { echo "::error::$f is missing or empty"; exit 1; }
             grep -q '</svg>' "$f" || { echo "::error::$f is truncated"; exit 1; }
+            grep -q '<!--snk-growth v1-->' "$f" || { echo "::error::$f has no growth"; exit 1; }
+            grep -q '<!--snk-counter v1-->' "$f" || { echo "::error::$f has no exact counter"; exit 1; }
           done
           # snake-meta.json is a build artifact, not something to publish.
           rm -f dist/snake-meta.json

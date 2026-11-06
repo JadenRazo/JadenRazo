@@ -48,3 +48,54 @@ jobs:
 
       - name: Validate stats data, timestamps and README image versions
         run: python3 .github/scripts/profile_stats.py --check
+
+      - name: Setup Node
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.0.0
+        with:
+          node-version: 22
+
+      - name: Test snake growth and counter boundaries
+        run: node --test .github/scripts/test-snake-*.mjs
+
+      - name: Checkout pinned snake renderer
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: Platane/snk
+          ref: d8f6715049803e982ee5ff501b6b9b7d5deeb09b # v3.5.0
+          path: .snk
+
+      - name: Setup bun
+        uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
+
+      - name: Test routes and both rendered palettes without GitHub API access
+        run: |
+          node .github/scripts/prepare-snake.mjs .snk
+          bun test ./.snk/packages/generate-snake-animation/snake.integration.test.ts
+
+      - name: Generate a real-calendar preview
+        if: github.event_name == 'pull_request'
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          SNAKE_USER: JadenRazo
+          SNAKE_SEED: 1701
+        run: |
+          bun run .snk/packages/generate-snake-animation/snake-gen.ts "$RUNNER_TEMP/snake-preview"
+          node .github/scripts/add-snake-counter.mjs "$RUNNER_TEMP/snake-preview"
+
+      - name: Verify animation timing in Chromium
+        if: github.event_name == 'pull_request'
+        run: |
+          npm install --prefix "$RUNNER_TEMP/snake-browser" --ignore-scripts --no-audit --no-fund playwright@1.61.1
+          "$RUNNER_TEMP/snake-browser/node_modules/.bin/playwright" install --with-deps chromium
+          node .github/scripts/check-snake-animation.mjs "$RUNNER_TEMP/snake-preview" "$RUNNER_TEMP/snake-browser/node_modules/playwright" "$RUNNER_TEMP/snake-frames"
+
+      - name: Save snake preview and verification frames
+        if: always() && github.event_name == 'pull_request'
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: snake-preview
+          path: |
+            ${{ runner.temp }}/snake-preview
+            ${{ runner.temp }}/snake-frames
+          retention-days: 7
+          if-no-files-found: ignore

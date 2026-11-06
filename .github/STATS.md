@@ -56,6 +56,28 @@ does not get a new timestamp. Complete LOC scans may decrease; incomplete scans 
 The snake keeps its separate output branch; its README wording and status badge distinguish
 its own refresh schedule from the contribution cards.
 
+## Snake growth
+
+The snake starts with four visible segments and adds one after every eight occupied
+calendar cells, up to twelve segments. An occupied day is one bite regardless of its
+contribution count; the counter still adds the full count for that day. Sparse calendars
+may finish below the cap. Body length resets with the grid and counter on each loop.
+
+The route is planned for the final body length before animation, so newly revealed tail
+segments follow a collision-free route. Growth uses the same printed bite percentages
+as the counter and separate opacity wrappers that preserve the movement animation.
+Reduced-motion mode shows the short, stationary snake, complete grid, and final total.
+
+The pinned snk SVG packages need no external runtime dependencies. `prepare-snake.mjs`
+links only those packages; it does not install the upstream web or GIF toolchains.
+If generation or validation fails, publication stops and the last successful SVGs remain
+on `output`. The freshness monitor exposes stale output; no stock animation silently
+replaces the growing version.
+
+Run `node --test .github/scripts/test-snake-*.mjs` for growth and counter boundary tests.
+Profile CI also checks sparse and dense calendar routes against the pinned renderer,
+including body collisions, complete consumption, loop closure, and matching palettes.
+
 ## Verify or recover
 
 ```sh
