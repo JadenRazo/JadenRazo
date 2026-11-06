@@ -63,10 +63,12 @@ calendar cells, up to twelve segments. An occupied day is one bite regardless of
 contribution count; the counter still adds the full count for that day. Sparse calendars
 may finish below the cap. Body length resets with the grid and counter on each loop.
 
-The snake sweeps the calendar on a bounded loop, with a seeded starting side and direction.
-The full body follows that loop before its tail becomes visible, preventing self-collisions
-and keeping generation fast for dense calendars. Growth uses the same printed bite
-percentages as the counter and separate opacity wrappers that preserve movement.
+The snake follows a winding loop with a new layout, starting side and direction each run.
+Joining small loops along a randomized tree mixes horizontal runs, vertical runs and turns
+throughout the grid while visiting every cell exactly once. The full body follows that loop
+before its tail becomes visible, preventing self-collisions and keeping generation fast for
+dense calendars. Growth uses the same printed bite percentages as the counter and separate
+opacity wrappers that preserve movement.
 Reduced-motion mode shows the short, stationary snake, complete grid, and final total.
 
 The pinned snk SVG packages need no external runtime dependencies. `prepare-snake.mjs`

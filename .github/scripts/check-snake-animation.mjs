@@ -50,6 +50,10 @@ try {
       await sample(time - 1, `growth-${i + 1}-before`);
       await sample(time + 1, `growth-${i + 1}-after`, i === 0 || i === growth.growth.length - 1);
     }
+    // Inspect the route throughout the loop, not just while the first tail
+    // segments appear. These frames show the varied bends at full length too.
+    for (const percent of [10, 20, 30, 40, 50, 60, 70, 80, 90])
+      await sample(growth.durationMs * percent / 100, `path-${percent}`, true);
     await sample(growth.durationMs - 1, "end", true);
     await sample(growth.durationMs + 1, "reset", true);
     await page.emulateMedia({ reducedMotion: "reduce" });

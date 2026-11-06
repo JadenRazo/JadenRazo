@@ -1,6 +1,6 @@
 /**
  * Render a growing contribution snake from one GitHub calendar snapshot.
- * A seeded sweep covers every cell on a bounded, collision-free loop. snk still
+ * A seeded winding path covers every cell on a bounded, collision-free loop. snk still
  * supplies the palettes, SVG movement, calendar cells and progress bars.
  * Executed inside its pinned generate-snake-animation package by Bun.
  */

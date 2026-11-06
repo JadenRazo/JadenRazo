@@ -47,7 +47,7 @@ export const addSnakeGrowth = (svg) => {
   css += "@media (prefers-reduced-motion:reduce){.sg{animation:none;opacity:0}}";
 
   // Opacity belongs to a wrapper so it cannot override snk's transform
-  // animation. The solver has already accounted for the full, hidden body.
+  // animation. The route already accounts for the full, hidden body.
   const body = svg.replace(/<rect class="s s(\d+)"[^>]*\/>/g, (rect, index) =>
     Number(index) < INITIAL_LENGTH ? rect : `<g class="sg sg${index}">${rect}</g>`);
   const metadata = { initialLength: INITIAL_LENGTH, capacity, cellsPerSegment: CELLS_PER_SEGMENT,
