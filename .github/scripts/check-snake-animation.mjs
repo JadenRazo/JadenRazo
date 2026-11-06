@@ -22,7 +22,11 @@ const contrast = (a, b) => {
   const [low, high] = [luminance(a), luminance(b)].sort((a, b) => a - b);
   return (high + 0.05) / (low + 0.05);
 };
-const rgb = color => color.match(/[\d.]+/g).slice(0, 3).map(Number);
+const rgb = color => {
+  const channels = color.match(/[\d.]+/g).map(Number);
+  if (channels.length === 4) assert.equal(channels[3], 1, `opaque fill: ${color}`);
+  return channels.slice(0, 3);
+};
 const browser = await chromium.launch({ headless: true, args: ["--no-sandbox", "--disable-dev-shm-usage"] });
 const observations = [];
 try {
