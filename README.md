@@ -209,7 +209,7 @@ repository bytes, not authored lines or proficiency; forks are excluded and arch
 [Live contribution calendar](https://github.com/JadenRazo?tab=overview) · [Data and definitions](.github/STATS.md)
 <!-- STATS_END -->
 
-**Repository line counts**
+### Repository line counts
 
 <!-- LOC_START -->
 **1,847,764** lines of code across **2,111,786** total lines in **41** repositories
