@@ -63,9 +63,10 @@ calendar cells, up to twelve segments. An occupied day is one bite regardless of
 contribution count; the counter still adds the full count for that day. Sparse calendars
 may finish below the cap. Body length resets with the grid and counter on each loop.
 
-The route is planned for the final body length before animation, so newly revealed tail
-segments follow a collision-free route. Growth uses the same printed bite percentages
-as the counter and separate opacity wrappers that preserve the movement animation.
+The snake sweeps the calendar on a bounded loop, with a seeded starting side and direction.
+The full body follows that loop before its tail becomes visible, preventing self-collisions
+and keeping generation fast for dense calendars. Growth uses the same printed bite
+percentages as the counter and separate opacity wrappers that preserve movement.
 Reduced-motion mode shows the short, stationary snake, complete grid, and final total.
 
 The pinned snk SVG packages need no external runtime dependencies. `prepare-snake.mjs`
@@ -74,9 +75,11 @@ If generation or validation fails, publication stops and the last successful SVG
 on `output`. The freshness monitor exposes stale output; no stock animation silently
 replaces the growing version.
 
-Run `node --test .github/scripts/test-snake-*.mjs` for growth and counter boundary tests.
+Run `node --test .github/scripts/test-snake-*.mjs` for growth, route and counter boundary tests.
 Profile CI also checks sparse and dense calendar routes against the pinned renderer,
 including body collisions, complete consumption, loop closure, and matching palettes.
+Pull requests include a browser check of growth timing, exact counts, resets, and reduced
+motion in both themes. The preview SVGs and sampled frames are saved as a CI artifact.
 
 ## Verify or recover
 

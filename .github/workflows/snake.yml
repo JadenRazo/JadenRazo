@@ -2,9 +2,7 @@ name: Contribution Snake
 
 on:
   schedule:
-    # Every 6 hours. snk's solver is deterministic, so the route only changes
-    # when the grid does; regenerating often is what makes the animation differ
-    # between visits rather than being frozen for a whole day.
+    # Fresh contribution data and a new starting side/direction every six hours.
     - cron: '11 */6 * * *'
   push:
     branches: [main]
@@ -29,10 +27,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-      # snk is vendored rather than used via its action because the action
-      # exposes no way to vary the route: getBestRoute() has no randomness and
-      # the CLI always seeds it with a fixed start pose. snake-gen.ts calls the
-      # solver directly so it can randomize that pose. Pinned to a reviewed upstream revision.
+      # Reuse the pinned renderer and palettes with our bounded growing route.
       - name: Checkout Platane/snk
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:

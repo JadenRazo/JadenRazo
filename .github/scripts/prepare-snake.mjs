@@ -7,7 +7,7 @@ const checkout = resolve(process.argv[2] || ".snk");
 const scripts = dirname(fileURLToPath(import.meta.url));
 const scope = join(checkout, "node_modules/@snk");
 await mkdir(scope, { recursive: true });
-for (const name of ["types", "solver", "svg-creator", "github-user-contribution"]) {
+for (const name of ["types", "svg-creator", "github-user-contribution"]) {
   const target = await realpath(join(checkout, "packages", name));
   const link = join(scope, name);
   try {
@@ -16,7 +16,7 @@ for (const name of ["types", "solver", "svg-creator", "github-user-contribution"
     if (error.code !== "EEXIST" || await realpath(link) !== target) throw error;
   }
 }
-for (const name of ["snake-gen.ts", "snake-growth.mjs", "snake.integration.test.ts"]) {
+for (const name of ["snake-gen.ts", "snake-growth.mjs", "snake-route.mjs", "snake.integration.test.ts"]) {
   await copyFile(join(scripts, name), join(checkout, "packages/generate-snake-animation", name));
 }
 console.log("Prepared pinned snk SVG sources without installing dependencies.");
