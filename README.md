@@ -243,7 +243,8 @@ These counts inventory repository contents; they are not lines I personally auth
 
 </details>
 
-A snake eats my contribution graph, counting contributions as it goes.
+A snake eats my contribution graph, counting contributions as it goes. It starts with four
+segments, grows every eight occupied cells up to twelve, and resets when the animation loops.
 Its route is regenerated four times a day; updates can be delayed.
 
 <picture>
