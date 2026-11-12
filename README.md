@@ -180,27 +180,27 @@ I'm also open to full-time cloud/DevOps roles and SRE or platform teams.
 <summary><strong>Activity and stats</strong>: contributions, languages, streaks, and repository line counts</summary>
 
 <!-- STATS_START -->
-*Last successful refresh: **2026-11-11 19:42:51 UTC**. Scheduled every six hours.*
+*Last successful refresh: **2026-11-12 07:23:50 UTC**. Scheduled every six hours.*
 
 [![Stats refresh](https://github.com/JadenRazo/JadenRazo/actions/workflows/profile-stats.yml/badge.svg)](https://github.com/JadenRazo/JadenRazo/actions/workflows/profile-stats.yml)
 [![Freshness checks](https://github.com/JadenRazo/JadenRazo/actions/workflows/profile-health.yml/badge.svg)](https://github.com/JadenRazo/JadenRazo/actions/workflows/profile-health.yml)
 
-**3,434 contributions since 2025-02-17** · **1 day current streak** · **54 day longest streak**
+**3,434 contributions since 2025-02-17** · **0 day current streak** · **54 day longest streak**
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/generated/stats-dark.svg?v=93497382cb177b6a">
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/generated/stats-light.svg?v=35a01aba0c527d20">
-  <img alt="GitHub activity with explicit date ranges" src="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/generated/stats-light.svg?v=35a01aba0c527d20" width="400">
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/generated/stats-dark.svg?v=c72f1976875d792a">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/generated/stats-light.svg?v=3245fefc28091081">
+  <img alt="GitHub activity with explicit date ranges" src="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/generated/stats-light.svg?v=3245fefc28091081" width="400">
 </picture>
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/generated/top-langs-dark.svg?v=824a68c9b9dd32a3">
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/generated/top-langs-light.svg?v=5ce8de882c3f7303">
-  <img alt="Languages by bytes in public source repositories" src="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/generated/top-langs-light.svg?v=5ce8de882c3f7303" width="400">
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/generated/top-langs-dark.svg?v=7b360d194dee6bd4">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/generated/top-langs-light.svg?v=68cb8aee02f1d7e4">
+  <img alt="Languages by bytes in public source repositories" src="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/generated/top-langs-light.svg?v=68cb8aee02f1d7e4" width="400">
 </picture>
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/generated/streak-dark.svg?v=75e3d4117f6a9dae">
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/generated/streak-light.svg?v=aeafc2b5ac647017">
-  <img alt="Total contributions, current streak, and longest streak" src="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/generated/streak-light.svg?v=aeafc2b5ac647017" width="690">
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/generated/streak-dark.svg?v=01651d9737773a78">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/generated/streak-light.svg?v=e4864bc93d6b8d13">
+  <img alt="Total contributions, current streak, and longest streak" src="https://raw.githubusercontent.com/JadenRazo/JadenRazo/main/generated/streak-light.svg?v=e4864bc93d6b8d13" width="690">
 </picture>
 
 Counts follow GitHub’s contribution calendar; private contributions follow profile visibility.
