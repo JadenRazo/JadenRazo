@@ -212,7 +212,7 @@ repository bytes, not authored lines or proficiency; forks are excluded and arch
 ### Repository line counts
 
 <!-- LOC_START -->
-**1,849,088** lines of code across **2,113,400** total lines in **42** repositories
+**1,849,138** lines of code across **2,113,459** total lines in **42** repositories
 
 | Language | Lines of Code | Share |
 | :-- | --: | --: |
@@ -223,14 +223,14 @@ repository bytes, not authored lines or proficiency; forks are excluded and arch
 | Markdown | 90,462 | 4.9% |
 | HTML | 84,782 | 4.6% |
 | YAML | 40,604 | 2.2% |
-| Python | 39,074 | 2.1% |
+| Python | 39,124 | 2.1% |
 | JavaScript | 36,624 | 2.0% |
 | Luau | 36,115 | 2.0% |
 | CSV | 21,044 | 1.1% |
 | Astro | 20,157 | 1.1% |
 
-*Last successful scan: 2026-11-10T15:13:44Z.*
-<!-- LOC_UPDATED: 2026-11-10T15:13:44Z -->
+*Last successful scan: 2026-11-12T15:35:14Z.*
+<!-- LOC_UPDATED: 2026-11-12T15:35:14Z -->
 <!-- LOC_END -->
 
 [![LOC refresh](https://github.com/JadenRazo/JadenRazo/actions/workflows/loc-counter.yml/badge.svg)](https://github.com/JadenRazo/JadenRazo/actions/workflows/loc-counter.yml)
